@@ -1,6 +1,5 @@
 { config, pkgs, home-manager, nixpkgs, ... }:
 {
-        services.polybar.config = ./dotfiles/polybar/config;
 
         nixpkgs.overlays = [
         (import (builtins.fetchTarball {
@@ -16,8 +15,8 @@
         source = ./dotfiles/nvim;
         recursive = true;
         };
-        xdg.configFile.".config/polybar/config" = {
-        source = ./dotfiles/polybar/config;
+        xdg.configFile."polybar" = {
+        source = ./dotfiles/polybar;
         recursive = true;
         };
         xdg.configFile."kitty" = {
@@ -48,6 +47,6 @@
         home.packages = with pkgs; [
             discord pavucontrol autorandr 
             texlive.combined.scheme-full
-            zathura polybar
+            zathura 
             ];
     }
