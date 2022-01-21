@@ -1,11 +1,8 @@
 { config, pkgs, home-manager, nixpkgs, ... }:
+let 
+    polybarConfig = builtins.readFile ./dotfiles/polybar/config;
+in
 {
-    imports = [
-        (import "${home-manager}/nixos")
-      ];
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-    home-manager.users.david = {
 
         nixpkgs.overlays = [
         (import (builtins.fetchTarball {
@@ -17,28 +14,25 @@
         programs.neovim = {
         enable = true;
         };
-       # xdg.configFile."nvim" = {
-       # source = "${home-manager}/dotfiles/nvim";
-       # recursive = true;
-       # };
-        xdg.configFile."polybar" = {
-        source = "${home-manager}/dotfiles/polybar";
+        xdg.configFile."nvim" = {
+        source = /home/david/dotfiles/nvim;
         recursive = true;
         };
+        home.file.".config/polybar/config".text = "${polybarConfig}";
         xdg.configFile."kitty" = {
-        source = "${home-manager}/dotfiles/kitty";
+        source = /home/david/dotfiles/kitty;
         recursive = true;
         };
         xdg.configFile."rofi" = {
-        source = "${home-manager}/dotfiles/rofi";
+        source = /home/david/dotfiles/rofi;
         recursive = true;
         };
         xdg.configFile."i3" = {
-        source = "${home-manager}/dotfiles/i3";
+        source = /home/david/dotfiles/i3;
         recursive = true;
         };
         xdg.configFile."zathura" = {
-        source = "${home-manager}/dotfiles/zathura";
+        source = /home/david/dotfiles/zathura;
         recursive = true;
         };
 
@@ -55,5 +49,4 @@
             texlive.combined.scheme-full
             zathura
             ];
-        };
     }
