@@ -39,6 +39,7 @@
   networking.interfaces.wlp82s0.useDHCP = true;
   hardware.acpilight.enable = true;
   services.acpid.enable = true;
+  networking.dhcpcd.enable = false;
 
   # window manager config
   nixpkgs.config.allowUnfree = true;

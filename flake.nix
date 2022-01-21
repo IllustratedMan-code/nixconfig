@@ -4,8 +4,6 @@
     inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    dotfile
-    # nix-darwin.url = "github:lnl7/nix-darwin";
     };
 
     outputs = inputs@{ home-manager, nixpkgs, ... }: {

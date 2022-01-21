@@ -1,8 +1,6 @@
 { config, pkgs, home-manager, nixpkgs, ... }:
-let 
-    polybarConfig = builtins.readFile ./dotfiles/polybar/config;
-in
 {
+        services.polybar.config = ./dotfiles/polybar/config;
 
         nixpkgs.overlays = [
         (import (builtins.fetchTarball {
@@ -15,24 +13,27 @@ in
         enable = true;
         };
         xdg.configFile."nvim" = {
-        source = /home/david/dotfiles/nvim;
+        source = ./dotfiles/nvim;
         recursive = true;
         };
-        home.file.".config/polybar/config".text = "${polybarConfig}";
+        xdg.configFile.".config/polybar/config" = {
+        source = ./dotfiles/polybar/config;
+        recursive = true;
+        };
         xdg.configFile."kitty" = {
-        source = /home/david/dotfiles/kitty;
+        source = ./dotfiles/kitty;
         recursive = true;
         };
         xdg.configFile."rofi" = {
-        source = /home/david/dotfiles/rofi;
+        source = ./dotfiles/rofi;
         recursive = true;
         };
         xdg.configFile."i3" = {
-        source = /home/david/dotfiles/i3;
+        source = ./dotfiles/i3;
         recursive = true;
         };
         xdg.configFile."zathura" = {
-        source = /home/david/dotfiles/zathura;
+        source = ./dotfiles/zathura;
         recursive = true;
         };
 
@@ -47,6 +48,6 @@ in
         home.packages = with pkgs; [
             discord pavucontrol autorandr 
             texlive.combined.scheme-full
-            zathura
+            zathura polybar
             ];
     }
