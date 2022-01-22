@@ -39,7 +39,7 @@ This is will be included in .bashrc regardless of linux install.
 #+end_src
 ** set vi keybinds
 #+begin_src sh
-set -o vi
+# set -o vi
 #+end_src
 ** aliases
 #+begin_src sh

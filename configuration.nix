@@ -124,7 +124,10 @@
      flameshot
      zsh
      gcc
-     emacsGcc
+
+    ((emacsPackagesNgGen emacs).emacsWithPackages (epkgs: [
+          epkgs.vterm
+        ]))
      hunspell
      python39
      xorg.xbacklight
@@ -134,6 +137,10 @@
      libnotify
      gnupg
      pinentry
+     cmake
+     gnumake
+     libtool
+     binutils
    ];
   programs.zsh.enable = true;
   # fonts

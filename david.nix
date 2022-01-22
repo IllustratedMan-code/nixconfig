@@ -15,6 +15,9 @@
         source = ./dotfiles/nvim;
         recursive = true;
         };
+        xdg.configFile."autorandr/postswitch" = {
+        source = ./dotfiles/autorandr-postswitch.sh;
+        };
         xdg.configFile."polybar" = {
         source = ./dotfiles/polybar;
         recursive = true;
@@ -47,6 +50,6 @@
         home.packages = with pkgs; [
             discord pavucontrol autorandr 
             texlive.combined.scheme-full
-            zathura 
+            zathura conda
             ];
     }

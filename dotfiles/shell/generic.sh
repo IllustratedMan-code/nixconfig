@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-set -o vi
+# set -o vi
 
 alias pm='paru'
 alias ls='ls --color=auto'
