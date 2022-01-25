@@ -4,6 +4,8 @@
     inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
+    neovim.url = "github:neovim/neovim?dir=contrib";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     };
 
     outputs = inputs@{ home-manager, nixpkgs, ... }: {

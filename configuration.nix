@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, emacs-overlay,... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -17,9 +17,18 @@
     '';
    };
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.useOSProber = true;
+  boot.loader = {
+    grub = {
+        enable = true;
+        version = 2;
+        efiSupport = true;
+        device = "nodev";
+        useOSProber = true;
+        splashImage = ./dotfiles/i3/atp.png;
+        };
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    };
   networking.networkmanager.enable = true;
   users.users.david = {
     isNormalUser = true;
@@ -57,9 +66,18 @@
       xterm.enable = false;
     };
    
-    displayManager.lightdm.enable = true;
+    
     displayManager = {
         defaultSession = "none+i3";
+        lightdm = {
+            enable = true;
+            background = ./dotfiles/i3/atp.png;
+            greeters.gtk = {
+                enable = true;
+                theme.name = "Nordic";
+                theme.package = pkgs.nordic;
+            };
+        };
     };
 
     windowManager.i3 = {
@@ -98,11 +116,7 @@
 
   services.emacs.package = pkgs.emacsGcc;
   nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-      sha256 = "0qwsx9dslmc1zqqv03m6pd9lylvw1mg8ijjfh8jdsll6jk27812f";
-
-    }))
+    emacs-overlay.overlay
   ];
   nixpkgs.config = {
       packageOverrides = pkgs: rec {
@@ -125,7 +139,7 @@
      zsh
      gcc
 
-    ((emacsPackagesNgGen emacs).emacsWithPackages (epkgs: [
+    ((emacsPackagesNgGen emacsGcc).emacsWithPackages (epkgs: [
           epkgs.vterm
         ]))
      hunspell

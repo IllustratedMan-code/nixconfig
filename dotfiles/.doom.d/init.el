@@ -80,14 +80,14 @@
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
-       (spell +hunspell) ; tasing you for misspelling mispelling
+       ;;(spell +hunspell) ; tasing you for misspelling mispelling
        grammar           ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
        biblio
        (debugger +lsp)         ; FIXME stepping through code, to help you add bugs
-       ;;direnv
+       direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ein               ; tame Jupyter notebooks with emacs
