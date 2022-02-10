@@ -25,7 +25,7 @@ wk.register({
 		p = {
 				name = "projects",
 				c = {"<cmd>cd %:p:h<cr>", "change wd to cd"},
-				f = {telescope.find_files, "find file"},
+				f = {function() require('telescope').extensions.file_browser.file_browser{} end, "find file"},
 				b = {telescope.buffers, "list buffers"},
 				p = {function () require('telescope').extensions.project.project{} end, "list projects"},
 				g = {

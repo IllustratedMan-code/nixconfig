@@ -198,6 +198,7 @@ This block changes the default term type for png file types
   (setq! org-cite-export-processors '(t csl))
   (setq! org-cite-global-bibliography (list"~/Dropbox/org/citations/citations.json"))
   (setq! yas/triggers-in-field t)
+  (setq! org-xournalpp-image-type 'png)
   (setq! org-export-allow-bind-keywords t))
 (with-eval-after-load 'ox-latex
   (add-to-list 'org-latex-classes '("apa" "\\documentclass[11pt]{apa7}"
@@ -271,11 +272,12 @@ This block changes the default term type for png file types
 
 #+RESULTS:
 : ((header-args:latex . :results output file graphics :imagemagick yes :headers '("\\usepackage{tikz}\\usepackage{siunitx}") :fit yes :iminoptions -density 600) (header-args . :pandoc t))
-** org-krita
+** org-xournalpp
 #+begin_src elisp
-(use-package! org-krita
+(use-package! org-xournalpp
   :config
-  (add-hook 'org-mode-hook 'org-krita-mode))
+  (add-hook 'org-mode-hook 'org-xournalpp-mode))
+
 #+end_src
 #+RESULTS:
 | er/add-org-mode-expansions | edraw-org-link-image-mode | org-fragtog-mode | +lookup--init-org-mode-handlers-h | (closure (t) (&rest _) (add-hook 'before-save-hook 'org-encrypt-entries nil t)) | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | doom-disable-show-paren-mode-h | doom-disable-show-trailing-whitespace-h | +org-enable-auto-reformat-tables-h | +org-enable-auto-update-cookies-h | +org-make-last-point-visible-h | org-fancy-priorities-mode | org-superstar-mode | evil-org-mode | toc-org-enable | writegood-mode | embrace-org-mode-hook | org-eldoc-load | +literate-enable-recompile-h |
@@ -287,6 +289,38 @@ This block changes the default term type for png file types
 #+end_src
 
 #+RESULTS:
+** Org pomodoro
+#+begin_src elisp
+(setq alert-user-configuration (quote ((((:category . "org-pomodoro")) libnotify nil))))
+(defun david/org-pomodoro-time ()
+  "Return the remaining pomodoro time"
+  (if (boundp 'org-pomodoro-active)
+  (if (org-pomodoro-active-p)
+      (cl-case org-pomodoro-state
+        (:pomodoro
+           (format "Pomo: %d minutes - %s" (/ (org-pomodoro-remaining-seconds) 60) org-clock-heading))
+        (:short-break
+         (format "Short break time: %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+        (:long-break
+         (format "Long break time: %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+        (:overtime
+         (format "Overtime! %d minutes" (/ (org-pomodoro-remaining-seconds) 60))))
+    "No active pomo")) "no active pomo")
+#+end_src
+
+#+RESULTS:
+: david/org-pomodoro-time
+
+** nix hack
+Org mode (latex export) has the wrong time. Not sure how to fix. This does not work.
+#+begin_src elisp
+(add-hook 'org-export-before-processing-hook (lambda (arg) (setenv "SOURCE_DATE_EPOCH" (shell-command-to-string "date +%s") )))
+(setenv "SOURCE_DATE_EPOCH" (shell-command-to-string "date +%s"))
+
+#+end_src
+
+#+RESULTS:
+: 1643676254
 
 * Latex setup
 ** Use LuaTex
@@ -324,6 +358,12 @@ This block changes the default term type for png file types
 ** Anaconda directory
 #+begin_src elisp
 (setq conda-anaconda-home "~/opt/anaconda")
+#+end_src
+** LSP nix
+#+begin_src elisp
+(after! lsp-python-ms
+  (setq lsp-python-ms-executable (executable-find "python-language-server"))
+  (set-lsp-priority! 'mspyls 1))
 #+end_src
 
 * R setup

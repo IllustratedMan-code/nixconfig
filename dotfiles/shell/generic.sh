@@ -37,5 +37,6 @@ pdfinterleavebend ()
 
 export PATH=$PATH:~/.emacs.d/bin
 export PATH=$PATH:~/.ghcup/bin
-export PATH=$PATH:./node_modules/.bin
+export PATH=$PATH:~/node_modules/.bin
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.npm-global/bin

@@ -26,9 +26,10 @@
         useOSProber = true;
         splashImage = ./dotfiles/i3/atp.png;
         };
-    systemd-boot.enable = true;
+    #systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
     };
+  boot.supportedFilesystems = [ "ntfs" ];
   networking.networkmanager.enable = true;
   users.users.david = {
     isNormalUser = true;
@@ -53,15 +54,10 @@
   # window manager config
   nixpkgs.config.allowUnfree = true;
   hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.prime = {
-    sync.enable = true;
-    nvidiaBusId = "PCI:1:0:0";
-    intelBusId = "PCI:0:2:0";
-    };
   services.xserver = {
     enable = true;
+    dpi = 96;
     videoDrivers = [ "nvidia" ];
-
     desktopManager = {
       xterm.enable = false;
     };
@@ -113,7 +109,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-
+  services.emacs.enable = true;
   services.emacs.package = pkgs.emacsGcc;
   nixpkgs.overlays = [
     emacs-overlay.overlay
@@ -138,11 +134,15 @@
      flameshot
      zsh
      gcc
-
+     nodejs
+     unzip
     ((emacsPackagesNgGen emacsGcc).emacsWithPackages (epkgs: [
           epkgs.vterm
         ]))
+
+    (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
      hunspell
+     hunspellDicts.en_US
      python39
      xorg.xbacklight
      pamixer
@@ -155,6 +155,13 @@
      gnumake
      libtool
      binutils
+     gotop
+     coreutils
+     fd
+     clang
+     ripgrep
+     alsa-utils
+     polkit_gnome
    ];
   programs.zsh.enable = true;
   # fonts
