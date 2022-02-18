@@ -10,7 +10,7 @@ let
 in
 {
   environment.systemPackages = [ nvidia-offload ];
-
+  hardware.nvidia.modesetting.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.prime = {
     offload.enable = true;
@@ -21,11 +21,17 @@ in
     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
     nvidiaBusId = "PCI:1:0:0";
   };
+  services.xserver.screenSection = ''
+    Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
+    Option         "AllowIndirectGLXProtocol" "off"
+    Option         "TripleBuffer" "on"
+  '';
   specialisation = {
       external-display.configuration = {
         system.nixos.tags = [ "external-display" ];
         hardware.nvidia.prime.offload.enable = lib.mkForce false;
         hardware.nvidia.powerManagement.enable = lib.mkForce false;
+        hardware.nvidia.prime.sync.enable = lib.mkForce true;
       };
     };
 }

@@ -294,7 +294,7 @@ This block changes the default term type for png file types
 (setq alert-user-configuration (quote ((((:category . "org-pomodoro")) libnotify nil))))
 (defun david/org-pomodoro-time ()
   "Return the remaining pomodoro time"
-  (if (boundp 'org-pomodoro-active)
+  (if (fboundp 'org-pomodoro-active-p)
   (if (org-pomodoro-active-p)
       (cl-case org-pomodoro-state
         (:pomodoro
@@ -305,7 +305,7 @@ This block changes the default term type for png file types
          (format "Long break time: %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
         (:overtime
          (format "Overtime! %d minutes" (/ (org-pomodoro-remaining-seconds) 60))))
-    "No active pomo")) "no active pomo")
+    "No active pomo") "no active pomo"))
 #+end_src
 
 #+RESULTS:

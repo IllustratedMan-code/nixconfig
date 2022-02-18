@@ -6,6 +6,8 @@ require('nvim-tree').setup{
 			},
 }
 
+require("sidebar-nvim").setup({open = true})
+
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 
 parser_configs.norg = {

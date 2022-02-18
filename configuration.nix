@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, emacs-overlay,... }:
+{ config, pkgs, inputs,... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -53,11 +53,9 @@
 
   # window manager config
   nixpkgs.config.allowUnfree = true;
-  hardware.nvidia.modesetting.enable = true;
   services.xserver = {
     enable = true;
     dpi = 96;
-    videoDrivers = [ "nvidia" ];
     desktopManager = {
       xterm.enable = false;
     };
@@ -112,7 +110,7 @@
   services.emacs.enable = true;
   services.emacs.package = pkgs.emacsGcc;
   nixpkgs.overlays = [
-    emacs-overlay.overlay
+    inputs.emacs-overlay.overlay
   ];
   nixpkgs.config = {
       packageOverrides = pkgs: rec {

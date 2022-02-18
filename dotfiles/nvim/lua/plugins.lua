@@ -9,6 +9,8 @@ return require('packer').startup(function(use)
   	use {'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim'}
   	use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-project.nvim', 'IllustratedMan-code/telescope-conda.nvim', 'nvim-telescope/telescope-file-browser.nvim'}}
   	use {'kyazdani42/nvim-tree.lua',requires = 'kyazdani42/nvim-web-devicons'}
+    use {'sidebar-nvim/sidebar.nvim'}
+
   	use {'kristijanhusak/orgmode.nvim', requires = 'akinsho/org-bullets.nvim'}
   	use 'neovim/nvim-lspconfig'
 	use {'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim'}

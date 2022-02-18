@@ -74,6 +74,6 @@
         texlive.combined.scheme-full
         zathura conda zotero vlc dropbox
         sox ocrmypdf shared-mime-info inkscape
-        xournalpp
+        xournalpp libreoffice
         ];
 }
