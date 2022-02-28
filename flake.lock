@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "base16-gruvbox-scheme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1547401068,
+        "narHash": "sha256-txrHQzlwtx2GIaPum+Z+cncAyOI/5YdHB3OGUziI7wY=",
+        "owner": "dawikur",
+        "repo": "base16-gruvbox-scheme",
+        "rev": "2def6ef77c1f562ff298d61da6845289bfd9f569",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dawikur",
+        "repo": "base16-gruvbox-scheme",
+        "type": "github"
+      }
+    },
     "base16-nord-scheme": {
       "flake": false,
       "locked": {
@@ -49,6 +65,22 @@
       "original": {
         "owner": "haozeke",
         "repo": "base16-zathura",
+        "type": "github"
+      }
+    },
+    "doom-emacs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1645229288,
+        "narHash": "sha256-JEzbetI8s/bv9SM1rQ+/RtYIvzrR3pcEijQ8e/kDOn8=",
+        "owner": "hlissner",
+        "repo": "doom-emacs",
+        "rev": "849672691dd5d1214d6c72167ae84c03e8d9c8e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hlissner",
+        "repo": "doom-emacs",
         "type": "github"
       }
     },
@@ -169,11 +201,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1644420267,
-        "narHash": "sha256-rFJuctggkjM412OC6OGPdXogFp7czGDW05ueWqpJbj8=",
+        "lastModified": 1645334861,
+        "narHash": "sha256-We9ECiMglthzbZ5S6Myqqf+RHzBFZPoM2qL5/jDkUjs=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "98bb5b77c8c6666824a4c13d23befa1e07210ef1",
+        "rev": "d5f237872975e6fb6f76eef1368b5634ffcd266f",
         "type": "github"
       },
       "original": {
@@ -186,8 +218,10 @@
     "root": {
       "inputs": {
         "base16": "base16",
+        "base16-gruvbox-scheme": "base16-gruvbox-scheme",
         "base16-nord-scheme": "base16-nord-scheme",
         "base16-zathura": "base16-zathura",
+        "doom-emacs": "doom-emacs",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "neovim": "neovim",

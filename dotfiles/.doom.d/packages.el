@@ -60,3 +60,4 @@
   :recipe (:host gitlab
            :repo "vherrmann/org-xournalpp"
            :files ("resources" "*.el")))
+(package! org-drill)

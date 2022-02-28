@@ -1,14 +1,17 @@
-{ config, pkgs, home-manager, nixpkgs,neovim, ... }:
+{ inputs,config, pkgs, home-manager, nixpkgs,neovim, doom-emacs, emacs, ... }:
 {
     nixpkgs.overlays = [
        # (import (builtins.fetchTarball { url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
        #   sha256 = "0hwidvyi95g67hssfp0yja9p8k7aankbv53xydq974yjm6dr1rq1";
        # }))
         neovim.overlay
+        emacs.overlay
     ];
     programs.neovim = {
     enable = true;
     };
+    programs.emacs.enable = true;
+    programs.zathura.enable = true;
     xdg.configFile."nvim" = {
         source = ./dotfiles/nvim;
         recursive = true;
@@ -32,10 +35,10 @@
         source = ./dotfiles/i3;
         recursive = true;
     };
-    xdg.configFile."zathura" = {
-        source = ./dotfiles/zathura;
-        recursive = true;
-    };
+    #xdg.configFile."zathura" = {
+    #    source = ./dotfiles/zathura;
+    #    recursive = true;
+    #};
     xdg.configFile."dunst" = {
         source = ./dotfiles/dunst;
         recursive = true;
@@ -43,6 +46,7 @@
     home.file.".doom.d" = {
         source = ./dotfiles/.doom.d;
         recursive = true;
+        onChange = "~/.emacs.d/bin/doom sync";
     };
 
     xdg.mimeApps = {
@@ -74,6 +78,7 @@
         texlive.combined.scheme-full
         zathura conda zotero vlc dropbox
         sox ocrmypdf shared-mime-info inkscape
-        xournalpp libreoffice
+        xournalpp libreoffice godot blender onlyoffice-bin
+        lilypond libxpdf soundfont-fluid
         ];
 }

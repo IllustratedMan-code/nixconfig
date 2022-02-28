@@ -306,6 +306,14 @@ This block changes the default term type for png file types
         (:overtime
          (format "Overtime! %d minutes" (/ (org-pomodoro-remaining-seconds) 60))))
     "No active pomo") "no active pomo"))
+(use-package org-pomodoro
+  :ensure t
+  :commands (org-pomodoro)
+  :config
+  (setq
+   org-pomodoro-length 50
+   org-pomodoro-short-break-length 10
+   ))
 #+end_src
 
 #+RESULTS:
@@ -314,8 +322,6 @@ This block changes the default term type for png file types
 ** nix hack
 Org mode (latex export) has the wrong time. Not sure how to fix. This does not work.
 #+begin_src elisp
-(add-hook 'org-export-before-processing-hook (lambda (arg) (setenv "SOURCE_DATE_EPOCH" (shell-command-to-string "date +%s") )))
-(setenv "SOURCE_DATE_EPOCH" (shell-command-to-string "date +%s"))
 
 #+end_src
 

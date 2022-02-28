@@ -43,6 +43,7 @@
   time.timeZone = "America/New_York";
 
   hardware.bluetooth.enable = true;
+  hardware.opengl.enable = true;
 
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = true;
@@ -181,13 +182,11 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-  # If you want to use JACK applications, uncomment this
-  #jack.enable = true;
-
-  # use the example session manager (no others are packaged yet so this is enabled by default,
-  # no need to redefine it in your config for now)
-  #media-session.enable = true;
     };
+    services.printing.enable = true;
+    services.printing.drivers = [pkgs.hplip];
+    services.avahi.enable = true;
+    services.avahi.nssmdns = true;
 
   services.autorandr.enable = true;
   # Some programs need SUID wrappers, can be configured further or are

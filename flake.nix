@@ -13,8 +13,16 @@
         url = github:ada-lovecraft/base16-nord-scheme;
         flake = false;
     };
+    base16-gruvbox-scheme = {
+        url = github:dawikur/base16-gruvbox-scheme;
+        flake = false;
+    };
     base16-zathura = {
         url = github:haozeke/base16-zathura;
+        flake = false;
+    };
+    doom-emacs = {
+        url = github:hlissner/doom-emacs;
         flake = false;
     };
 };
@@ -29,15 +37,16 @@
           ./configuration.nix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-extreme-gen2
           base16.nixosModule
-          home-manager.nixosModules.home-manager
+          {scheme = "${inputs.base16-gruvbox-scheme}/gruvbox-dark-soft.yaml";}
+          #{scheme = "${inputs.base16-nord-scheme}/nord.yaml";}
           ./nvidia.nix
-          {scheme = "${inputs.base16-nord-scheme}/nord.yaml";}
-          ./theming.nix
+          home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.david = import ./david.nix;
           }
+          ./theming.nix
         ];
       };
     };

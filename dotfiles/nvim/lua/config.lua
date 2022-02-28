@@ -6,7 +6,10 @@ require('nvim-tree').setup{
 			},
 }
 
-require("sidebar-nvim").setup({open = true})
+require("sidebar-nvim").setup({
+    open = false,
+    sections = {"files", "git", "todos", "diagnostics"}
+})
 
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 
