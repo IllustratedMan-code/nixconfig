@@ -327,6 +327,10 @@ Org mode (latex export) has the wrong time. Not sure how to fix. This does not w
 
 #+RESULTS:
 : 1643676254
+** plantuml
+#+begin_src elisp
+(after! org (setq! org-plantuml-exec-mode 'plantuml))
+#+end_src
 
 * Latex setup
 ** Use LuaTex

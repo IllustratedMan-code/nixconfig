@@ -1,6 +1,7 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
+    use 'github/copilot.vim'
   	use 'wbthomason/packer.nvim'
 	use 'karb94/neoscroll.nvim'
   	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -23,6 +24,7 @@ return require('packer').startup(function(use)
   	use {'tpope/vim-dispatch', opt = true, cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
   	use {'andymass/vim-matchup'}
   	use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+    use {'turbio/bracey.vim', run = 'npm install --prefix server'}
   	use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
   	use { 'nvim-lualine/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
   	use {

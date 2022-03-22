@@ -1,16 +1,16 @@
-{ inputs,config, pkgs, home-manager, nixpkgs,neovim, doom-emacs, emacs, ... }:
+{ inputs,config, pkgs, home-manager, nixpkgs,neovim, doom-emacs, emacs-overlay, ... }:
 {
-    nixpkgs.overlays = [
-       # (import (builtins.fetchTarball { url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-       #   sha256 = "0hwidvyi95g67hssfp0yja9p8k7aankbv53xydq974yjm6dr1rq1";
-       # }))
-        neovim.overlay
-        emacs.overlay
-    ];
+    # I have to manage the overlays in configuration.nix, it doesn't seem to work here.
     programs.neovim = {
     enable = true;
     };
-    programs.emacs.enable = true;
+    programs.emacs = {
+        enable = true;
+        package = pkgs.emacsGcc;
+        extraPackages = (epkgs: [ epkgs.vterm ] );
+      };
+    services.emacs.enable = true;
+    services.emacs.package = pkgs.emacsGcc;
     programs.zathura.enable = true;
     xdg.configFile."nvim" = {
         source = ./dotfiles/nvim;
@@ -35,10 +35,9 @@
         source = ./dotfiles/i3;
         recursive = true;
     };
-    #xdg.configFile."zathura" = {
-    #    source = ./dotfiles/zathura;
-    #    recursive = true;
-    #};
+   # xdg.configFile."zathura/zathurarc" = {
+   #     source = ./dotfiles/zathura/zathurarc;
+   # };
     xdg.configFile."dunst" = {
         source = ./dotfiles/dunst;
         recursive = true;
@@ -79,6 +78,7 @@
         zathura conda zotero vlc dropbox
         sox ocrmypdf shared-mime-info inkscape
         xournalpp libreoffice godot blender onlyoffice-bin
-        lilypond libxpdf soundfont-fluid
+        lilypond libxpdf soundfont-fluid sumneko-lua-language-server
+        haskellPackages.pandoc plantuml rnix-lsp 
         ];
 }

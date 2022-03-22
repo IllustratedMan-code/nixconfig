@@ -61,7 +61,7 @@
       xterm.enable = false;
     };
    
-    
+   screenSection = ''Option "FlatPanelProperties" "Dithering=Disabled"'';
     displayManager = {
         defaultSession = "none+i3";
         lightdm = {
@@ -108,11 +108,6 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  services.emacs.enable = true;
-  services.emacs.package = pkgs.emacsGcc;
-  nixpkgs.overlays = [
-    inputs.emacs-overlay.overlay
-  ];
   nixpkgs.config = {
       packageOverrides = pkgs: rec {
         polybar = pkgs.polybar.override {
@@ -135,9 +130,6 @@
      gcc
      nodejs
      unzip
-    ((emacsPackagesNgGen emacsGcc).emacsWithPackages (epkgs: [
-          epkgs.vterm
-        ]))
 
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
      hunspell
@@ -159,6 +151,7 @@
      fd
      clang
      ripgrep
+     ripgrep-all
      alsa-utils
      polkit_gnome
    ];
@@ -187,8 +180,10 @@
     services.printing.drivers = [pkgs.hplip];
     services.avahi.enable = true;
     services.avahi.nssmdns = true;
+    services.flatpak.enable = true;
 
   services.autorandr.enable = true;
+  nixpkgs.overlays = [inputs.emacs-overlay.overlay inputs.neovim.overlay];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

@@ -18,6 +18,7 @@ lua require ('lsp')
 lua require ('keymap')
 lua require ('line')
 
+
 colorscheme nord
 
 au VimEnter * highlight link WhichKeyValue Question

@@ -4,7 +4,8 @@
     inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    neovim.url = "github:neovim/neovim?dir=contrib";
+    neovim.url = "github:nix-community/neovim-nightly-overlay";
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     base16.url = "github:SenchoPens/base16.nix";
@@ -44,7 +45,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.david = import ./david.nix;
+            home-manager.users.david.imports = [./david.nix ./david-build-tools.nix];
           }
           ./theming.nix
         ];
