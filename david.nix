@@ -47,6 +47,9 @@
         recursive = true;
         onChange = "~/.emacs.d/bin/doom sync";
     };
+    home.file."texmf/tex/latex/custom/mla.cls" = {
+        source = ./dotfiles/mla.cls;
+    };
 
     xdg.mimeApps = {
         enable = true;
@@ -79,6 +82,6 @@
         sox ocrmypdf shared-mime-info inkscape
         xournalpp libreoffice godot blender onlyoffice-bin
         lilypond libxpdf soundfont-fluid sumneko-lua-language-server
-        haskellPackages.pandoc plantuml rnix-lsp 
+        haskellPackages.pandoc plantuml rnix-lsp imagemagick
         ];
 }

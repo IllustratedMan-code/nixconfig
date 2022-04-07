@@ -5,6 +5,10 @@
 (setq user-full-name "David Lewis"
       user-mail-address "davidalewis00@gmail.com")
 #+END_SRC
+* Doom config
+#+begin_src elisp
+(setq! doom-private-dir "~/nixos/dotfiles/.doom.d/")
+#+end_src
 * Build information
 #+begin_src sh :tangle no
 ./configure -with-json -with-imagemagick --with-xpm=ifavailable --with-native-compilation
@@ -207,10 +211,25 @@ This block changes the default term type for png file types
                                     ("\\section{%s}" . "\\section*{%s}")
                                     ("\\subsection{%s}" . "\\subsection*{%s}")
                                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-classes '("mla" "\\documentclass{mla}"
+                                    ("\\part{%s}" . "\\part*{%s}")
+                                    ("\\chapter{%s}" . "\\chapter*{%s}")
+                                    ("\\section{%s}" . "\\section*{%s}")
+                                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
 #+end_src
 
 #+RESULTS:
-: t
+| mla     | \documentclass{mla}                                      | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
+| mla     | \documentclass{article} \usepackage{~/.doom.d/mla13.sty} | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
+| mla     | \documentclass[11pt]{mla}                                | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
+| beamer  | \documentclass[presentation]{beamer}                     | (\section{%s} . \section*{%s}) | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |                                      |                                            |
+| apa     | \documentclass[11pt]{apa7}                               | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
+| article | \documentclass[11pt]{article}                            | (\section{%s} . \section*{%s}) | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) | (\paragraph{%s} . \paragraph*{%s})   | (\subparagraph{%s} . \subparagraph*{%s})   |
+| report  | \documentclass[11pt]{report}                             | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
+| book    | \documentclass[11pt]{book}                               | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
+
 ** citations
 #+begin_src elisp
 (use-package! bibtex-completion
@@ -336,7 +355,7 @@ Org mode (latex export) has the wrong time. Not sure how to fix. This does not w
 ** Use LuaTex
 #+begin_src elisp
 (setq! TeX-engine 'luatex)
-(setq! org-latex-pdf-process '("lualatex -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"))
+(setq! org-latex-pdf-process '("PDFLATEX=lualatex LATEX=lualatex texi2dvi --pdf --clean --verbose --batch %f"))
 #+end_src
 
 #+RESULTS:

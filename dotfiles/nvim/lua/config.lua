@@ -11,6 +11,7 @@ require("sidebar-nvim").setup({
     sections = {"files", "git", "todos", "diagnostics"}
 })
 
+
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 
 parser_configs.norg = {
@@ -57,13 +58,14 @@ require("org-bullets").setup {
 	symbols = { "◉", "○", "✸", "✿" }
 }
 require('telescope').setup{
-	pickers = {
+	extensions = {
 		file_browser = {
 			theme = "ivy"
 		}
 	}
 }
 require'telescope'.load_extension('project')
+require'telescope'.load_extension('file_browser')
 require('neogit').setup{}
 vim.o.completeopt = 'menuone,noselect,noinsert'
 vim.o.showmode = false

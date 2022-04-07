@@ -2,33 +2,36 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs,... }:
+{ config, pkgs, inputs, ... }:
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       #./david.nix
     ];
   # nixos unstable
   nix = {
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
+    settings.trusted-public-keys = [  "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="];
+    settings.substituters = [ "http://hydra.iohk.io" ];
     extraOptions = ''
-      experimental-features = nix-command flakes
+            experimental-features = nix-command flakes
     '';
-   };
+  };
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
     grub = {
-        enable = true;
-        version = 2;
-        efiSupport = true;
-        device = "nodev";
-        useOSProber = true;
-        splashImage = ./dotfiles/i3/atp.png;
-        };
+      enable = true;
+      version = 2;
+      efiSupport = true;
+      device = "nodev";
+      useOSProber = true;
+      splashImage = ./dotfiles/i3/atp.png;
+    };
     #systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-    };
+  };
   boot.supportedFilesystems = [ "ntfs" ];
   networking.networkmanager.enable = true;
   users.users.david = {
@@ -36,18 +39,23 @@
     home = "/home/david";
     shell = pkgs.zsh;
     description = "David Lewis";
-    extraGroups = [ "wheel" "networkmanager" "audio" "video"];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" ];
   };
-  
+
   networking.hostName = "nixos"; # Define your hostname.
   time.timeZone = "America/New_York";
 
   hardware.bluetooth.enable = true;
+
+  # needed for some apps
   hardware.opengl.enable = true;
 
+  # disables DHCP
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = true;
   networking.interfaces.wlp82s0.useDHCP = true;
+
+  # networking
   hardware.acpilight.enable = true;
   services.acpid.enable = true;
   networking.dhcpcd.enable = false;
@@ -60,19 +68,19 @@
     desktopManager = {
       xterm.enable = false;
     };
-   
-   screenSection = ''Option "FlatPanelProperties" "Dithering=Disabled"'';
+
+    screenSection = ''Option "FlatPanelProperties" "Dithering=Disabled"'';
     displayManager = {
-        defaultSession = "none+i3";
-        lightdm = {
-            enable = true;
-            background = ./dotfiles/i3/atp.png;
-            greeters.gtk = {
-                enable = true;
-                theme.name = "Nordic";
-                theme.package = pkgs.nordic;
-            };
+      defaultSession = "none+i3";
+      lightdm = {
+        enable = true;
+        background = ./dotfiles/i3/atp.png;
+        greeters.gtk = {
+          enable = true;
+          theme.name = "Nordic";
+          theme.package = pkgs.nordic;
         };
+      };
     };
 
     windowManager.i3 = {
@@ -81,8 +89,8 @@
     };
     desktopManager.gnome.enable = true;
   };
-  environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour  pkgs.gnome.geary ];
-   services.udev.extraRules = ''
+  environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour pkgs.gnome.geary ];
+  services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
 
@@ -109,58 +117,60 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config = {
-      packageOverrides = pkgs: rec {
-        polybar = pkgs.polybar.override {
-          pulseSupport = true;
-          i3GapsSupport = true;
-        };
+    packageOverrides = pkgs: rec {
+      polybar = pkgs.polybar.override {
+        pulseSupport = true;
+        i3GapsSupport = true;
       };
     };
+  };
   environment.systemPackages = with pkgs; [
-     vim
-     wget
-     firefox
-     git
-     kitty
-     feh
-     polybar
-     rofi
-     flameshot
-     zsh
-     gcc
-     nodejs
-     unzip
+    vim
+    wget
+    firefox
+    git
+    kitty
+    feh
+    polybar
+    rofi
+    flameshot
+    zsh
+    gcc
+    nodejs
+    unzip
 
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
-     hunspell
-     hunspellDicts.en_US
-     python39
-     xorg.xbacklight
-     pamixer
-     acpid
-     dunst
-     libnotify
-     gnupg
-     pinentry
-     cmake
-     gnumake
-     libtool
-     binutils
-     gotop
-     coreutils
-     fd
-     clang
-     ripgrep
-     ripgrep-all
-     alsa-utils
-     polkit_gnome
-   ];
+    hunspell
+    hunspellDicts.en_US
+    python39
+    xorg.xbacklight
+    pamixer
+    acpid
+    dunst
+    libnotify
+    gnupg
+    pinentry
+    cmake
+    gnumake
+    libtool
+    binutils
+    gotop
+    coreutils
+    fd
+    clang
+    ripgrep
+    ripgrep-all
+    alsa-utils
+    polkit_gnome
+  ];
   programs.zsh.enable = true;
   # fonts
   fonts.enableDefaultFonts = true;
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
-  siji ];
+    siji
+    corefonts
+  ];
   fonts.fontconfig = {
     defaultFonts = {
       serif = [ "JetBrainsMono" ];
@@ -168,22 +178,22 @@
       monospace = [ "JetBrainsMono" ];
     };
   };
-  
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-    services.printing.enable = true;
-    services.printing.drivers = [pkgs.hplip];
-    services.avahi.enable = true;
-    services.avahi.nssmdns = true;
-    services.flatpak.enable = true;
+
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+  services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplip ];
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+  services.flatpak.enable = true;
 
   services.autorandr.enable = true;
-  nixpkgs.overlays = [inputs.emacs-overlay.overlay inputs.neovim.overlay];
+  nixpkgs.overlays = [ inputs.emacs-overlay.overlay inputs.neovim.overlay ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
