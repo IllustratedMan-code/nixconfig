@@ -39,7 +39,7 @@
     home = "/home/david";
     shell = pkgs.zsh;
     description = "David Lewis";
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker"];
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -142,7 +142,6 @@
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
     hunspell
     hunspellDicts.en_US
-    python39
     xorg.xbacklight
     pamixer
     acpid
@@ -186,11 +185,12 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.hplip ];
+  #services.printing.enable = true;
+  #services.printing.drivers = [ pkgs.hplip ];
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
   services.flatpak.enable = true;
+  virtualisation.docker.enable = true;
 
   services.autorandr.enable = true;
   nixpkgs.overlays = [ inputs.emacs-overlay.overlay inputs.neovim.overlay ];

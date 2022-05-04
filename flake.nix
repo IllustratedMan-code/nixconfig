@@ -26,6 +26,10 @@
         url = github:hlissner/doom-emacs;
         flake = false;
     };
+    dotfiles = { 
+        url = "github:IllustratedMan-code/dotfiles";
+        flake = false;
+    };
 };
 
 

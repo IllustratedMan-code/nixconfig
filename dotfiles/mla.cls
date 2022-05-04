@@ -225,6 +225,10 @@
     \get{title}
   \end{centered}%
 }
+\def\maketitle{
+  \makeheader
+  \indent
+}
 
 \newcommand*{\makeworkscited}{%
   \if@workscitedclearpage%

@@ -1,41 +1,19 @@
-#+TITLE: Doom configuration
-#+STARTUP: overview
-* Identity information
-#+BEGIN_SRC elisp
 (setq user-full-name "David Lewis"
       user-mail-address "davidalewis00@gmail.com")
-#+END_SRC
-* Doom config
-#+begin_src elisp
+
 (setq! doom-private-dir "~/nixos/dotfiles/.doom.d/")
-#+end_src
-* Build information
-#+begin_src sh :tangle no
-./configure -with-json -with-imagemagick --with-xpm=ifavailable --with-native-compilation
-#+end_src
-* Theme
-set theme with doom-theme or load theme with load-theme
-#+BEGIN_SRC elisp
+
 (setq doom-theme 'doom-nord)
 (setq doom-themes-treemacs-theme "doom-colors")
 (add-hook 'pdf-tools-enabled-hook 'pdf-view-themed-minor-mode)
-#+END_SRC
-* Org Setup
-** Org Directory
-#+BEGIN_SRC elisp
+
 (setq org-directory "~/Dropbox/org/")
-#+END_SRC
-** Hide emphasis markers
-#+BEGIN_SRC elisp
+
 (setq org-hide-emphasis-markers 't)
-#+END_SRC
-** Org Tab behaviour
-  #+BEGIN_SRC elisp
+
   (after! evil-org
     (setq org-tab-first-hook nil))
-  #+END_SRC
-** org code blocks
-#+begin_src elisp
+
 (defun insert-jupyter-python-block ()
   "Inserts a python code block"
   (interactive)
@@ -87,10 +65,7 @@ set theme with doom-theme or load theme with load-theme
   (cl-loop repeat x
            do (message "hello"))
   (message "done"))
-#+end_src
 
-** Functions
-#+begin_src elisp
 (defun cache-address ()
  (interactive)
  (progn
@@ -100,16 +75,10 @@ set theme with doom-theme or load theme with load-theme
        (message "true"))
  )
  )
-#+end_src
 
-** Org default image size
-#+begin_src elisp
 (after! evil-org
 (setq org-image-actual-width 400))
-#+end_src
 
-** org keymap
-#+begin_src elisp
 (map! (:after org
        :map org-mode-map
        :nvi "S-<return>" #'copy-down-x
@@ -120,81 +89,32 @@ set theme with doom-theme or load theme with load-theme
         :desc "elisp" "e" #'insert-elisp-block
         :desc "gnuplot" "g" #'insert-gnuplot-block
         :desc "generic" "b" #'insert-generic-block)))
-#+end_src
 
-** org headline
-#+begin_src elisp
 (setq org-fontify-todo-headline t)
-#+end_src
-** org-fancy-priorities-mode work around
-#+begin_src elisp
+
 (defadvice! +org-dont-fontify-my-thangs-a (orig-fn &rest args)
   :around '(org-superstar-mode org-fancy-priorities-mode)
   (letf! ((#'font-lock-ensure #'ignore)
           (#'font-lock-flush #'ignore)
           (#'font-lock-fontify-buffer #'ignore))
     (apply orig-fn args)))
-#+end_src
-** org-safe-variables
-*** html export
-#+begin_src elisp
+
 (add-to-list 'safe-local-eval-forms '(add-hook 'after-save-hook 'org-html-export-to-html t t))
 (add-to-list 'safe-local-eval-forms '(add-hook 'after-save-hook 'org-re-reveal-export-to-html t t))
-#+end_src
 
-#+RESULTS:
-| add-hook | 'after-save-hook      | 'org-re-reveal-export-to-html | t   | t |
-| add-hook | 'after-save-hook      | 'org-html-export-to-html      | t   | t |
-| add-hook | 'write-file-hooks     | 'time-stamp                   |     |   |
-| add-hook | 'write-file-functions | 'time-stamp                   |     |   |
-| add-hook | 'before-save-hook     | 'time-stamp                   | nil | t |
-| add-hook | 'before-save-hook     | 'delete-trailing-whitespace   | nil | t |
-*** Latex Export
-#+begin_src elisp
 (add-to-list 'safe-local-eval-forms '(add-hook 'after-save-hook 'org-latex-export-to-pdf t t))
-#+end_src
-*** Org-babel
-#+begin_src elisp
+
 (add-to-list 'safe-local-eval-forms '(add-hook 'after-save-hook 'org-babel-tangle t t))
-#+end_src
 
-#+RESULTS:
-| add-hook | 'org-export-before-parsing-hook | '(delete-matching-lines begin_export) |     |   |
-| add-hook | 'org-export-before-parsing-hook | '(delete-matching-lines end_export)   |     |   |
-| add-hook | 'org-export-before-parsing-hook | (delete-matching-lines begin_export)  |     |   |
-| add-hook | 'org-export-before-parsing-hook | (delete-matching-lines end_export)    |     |   |
-| add-hook | 'after-save-hook                | 'org-babel-tangle                     | t   | t |
-| add-hook | 'after-save-hook                | 'org-re-reveal-export-to-html         | t   | t |
-| add-hook | 'after-save-hook                | 'org-html-export-to-html              | t   | t |
-| add-hook | 'write-file-hooks               | 'time-stamp                           |     |   |
-| add-hook | 'write-file-functions           | 'time-stamp                           |     |   |
-| add-hook | 'before-save-hook               | 'time-stamp                           | nil | t |
-| add-hook | 'before-save-hook               | 'delete-trailing-whitespace           | nil | t |
-** format all error
-#+begin_src elisp
 (add-to-list '+format-on-save-enabled-modes 'web-mode 1)
-#+end_src
 
-#+RESULTS:
-| not | emacs-lisp-mode | sql-mode | tex-mode | latex-mode | org-msg-edit-mode | web-mode |
-** gnuplot
-This block changes the default term type for png file types
-#+begin_src elisp
 (after! gnuplot (add-to-list '*org-babel-gnuplot-terms* '(png . "pngcairo transparent")))
-#+end_src
 
-#+RESULTS:
-: ((png . pngcairo transparent) (eps . postscript eps))
-** org-fragtog
-#+begin_src elisp
 (use-package! org-fragtog
   :after org
   :hook (org-mode . org-fragtog-mode)
   :config)
-#+end_src
-** ispell
-** Startup
-#+begin_src elisp
+
 (after! org
   (setq! org-startup-with-latex-preview t)
   (setq! org-startup-with-inline-images t)
@@ -218,20 +138,7 @@ This block changes the default term type for png file types
                                     ("\\section{%s}" . "\\section*{%s}")
                                     ("\\subsection{%s}" . "\\subsection*{%s}")
                                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
-#+end_src
 
-#+RESULTS:
-| mla     | \documentclass{mla}                                      | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
-| mla     | \documentclass{article} \usepackage{~/.doom.d/mla13.sty} | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
-| mla     | \documentclass[11pt]{mla}                                | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
-| beamer  | \documentclass[presentation]{beamer}                     | (\section{%s} . \section*{%s}) | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |                                      |                                            |
-| apa     | \documentclass[11pt]{apa7}                               | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
-| article | \documentclass[11pt]{article}                            | (\section{%s} . \section*{%s}) | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) | (\paragraph{%s} . \paragraph*{%s})   | (\subparagraph{%s} . \subparagraph*{%s})   |
-| report  | \documentclass[11pt]{report}                             | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
-| book    | \documentclass[11pt]{book}                               | (\part{%s} . \part*{%s})       | (\chapter{%s} . \chapter*{%s})       | (\section{%s} . \section*{%s})             | (\subsection{%s} . \subsection*{%s}) | (\subsubsection{%s} . \subsubsection*{%s}) |
-
-** citations
-#+begin_src elisp
 (use-package! bibtex-completion
   :defer t
   :config
@@ -281,35 +188,18 @@ This block changes the default term type for png file types
 
 (use-package! oc-natbib
   :after oc)
-#+end_src
 
-** set header args
-#+begin_src elisp
 (setq! org-global-properties '(("header-args:latex" . ":results output file graphics :imagemagick yes :headers '(\"\\\\usepackage{tikz}\ \\\\usepackage{siunitx}\ \\\\usepackage{gensymb}\") :fit yes :iminoptions -density 600")
                                ("header-args" . ":pandoc t")))
-#+end_src
 
-#+RESULTS:
-: ((header-args:latex . :results output file graphics :imagemagick yes :headers '("\\usepackage{tikz}\\usepackage{siunitx}") :fit yes :iminoptions -density 600) (header-args . :pandoc t))
-** org-xournalpp
-#+begin_src elisp
-;;(use-package! org-xournalpp
-;;  :config
-;;  (add-hook 'org-mode-hook 'org-xournalpp-mode))
+(use-package! org-xournalpp
+  :config
+  (add-hook 'org-mode-hook 'org-xournalpp-mode))
 
-#+end_src
-#+RESULTS:
-| er/add-org-mode-expansions | edraw-org-link-image-mode | org-fragtog-mode | +lookup--init-org-mode-handlers-h | (closure (t) (&rest _) (add-hook 'before-save-hook 'org-encrypt-entries nil t)) | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | doom-disable-show-paren-mode-h | doom-disable-show-trailing-whitespace-h | +org-enable-auto-reformat-tables-h | +org-enable-auto-update-cookies-h | +org-make-last-point-visible-h | org-fancy-priorities-mode | org-superstar-mode | evil-org-mode | toc-org-enable | writegood-mode | embrace-org-mode-hook | org-eldoc-load | +literate-enable-recompile-h |
-** Disable Line wrapping
-#+begin_src elisp
 (after! org
   (setq! org-startup-truncated 'nil)
   )
-#+end_src
 
-#+RESULTS:
-** Org pomodoro
-#+begin_src elisp
 (setq alert-user-configuration (quote ((((:category . "org-pomodoro")) libnotify nil))))
 (defun david/org-pomodoro-time ()
   "Return the remaining pomodoro time"
@@ -333,27 +223,11 @@ This block changes the default term type for png file types
    org-pomodoro-length 50
    org-pomodoro-short-break-length 10
    ))
-#+end_src
 
-#+RESULTS:
-: david/org-pomodoro-time
 
-** nix hack
-Org mode (latex export) has the wrong time. Not sure how to fix. This does not work.
-#+begin_src elisp
 
-#+end_src
-
-#+RESULTS:
-: 1643676254
-** plantuml
-#+begin_src elisp
 (after! org (setq! org-plantuml-exec-mode 'plantuml))
-#+end_src
 
-* Latex setup
-** Use LuaTex
-#+begin_src elisp
 (setq! TeX-engine 'luatex)
 (after! org
   (setq! org-latex-pdf-process '("PDFLATEX=lualatex LATEX=lualatex texi2dvi --pdf --clean --verbose --batch --shell-escape %f")))
@@ -367,61 +241,30 @@ Org mode (latex export) has the wrong time. Not sure how to fix. This does not w
              ("fontsize" "\\scriptsize")
              )
                 ))
-#+end_src
 
-#+RESULTS:
-| frame    | lines       |
-| fontsize | \scriptsize |
-
-** Keymap
-#+begin_src elisp
 (map!  (:after auctext
        :map LaTeX-mode-map
        :leader
        :desc "compile" "c" #'TeX-command-master))
-#+end_src
 
-#+RESULTS:
-
-* Spell setup
-** Personal Dictionary
-#+begin_src elisp
 (setq! ispell-personal-dictionary "~/.config/spell/dict.txt")
-#+end_src
-** Fix hunspell bug
-#+begin_src elisp
+
 (setq ispell-program-name "hunspell")
 (ispell-check-version)
-#+end_src
 
-* Python setup
-
-** Anaconda directory
-#+begin_src elisp
 (setq conda-anaconda-home "~/opt/anaconda")
-#+end_src
-** LSP nix
-#+begin_src elisp
+
 (after! lsp-python-ms
   (setq lsp-python-ms-executable (executable-find "python-language-server"))
   (set-lsp-priority! 'mspyls 1))
-#+end_src
 
-* R setup
-** keymap
-#+begin_src elisp
 (map! (:after ess-mode
        :map ess-mode-map
        :nvi "C-<return>" #'ess-eval-line-and-step
        :nvi "M-e" #'insert-R-assign
        )
       )
-#+end_src
 
-#+RESULTS:
-** Font lock keywords
-*** R-major-mode
-#+begin_src elisp
 (setq ess-R-font-lock-keywords '(
  (ess-R-fl-keyword:keywords . t)
  (ess-R-fl-keyword:constants . t)
@@ -437,13 +280,7 @@ Org mode (latex export) has the wrong time. Not sure how to fix. This does not w
  (ess-R-fl-keyword:F&T . t)
  )
 )
-#+end_src
 
-#+RESULTS:
-: ((ess-R-fl-keyword:keywords . t) (ess-R-fl-keyword:constants . t) (ess-R-fl-keyword:modifiers . t) (ess-R-fl-keyword:fun-defs . t) (ess-R-fl-keyword:assign-ops . t) (ess-R-fl-keyword:%op% . t) (ess-fl-keyword:fun-calls . t) (ess-fl-keyword:numbers . t) (ess-fl-keyword:operators . t) (ess-fl-keyword:delimiters . t) (ess-fl-keyword:= . t) (ess-R-fl-keyword:F&T . t))
-
-*** R-inferior-mode
-#+begin_src elisp
 (setq inferior-ess-r-font-lock-keywords '(
  (ess-R-fl-keyword:keywords . t)
  (ess-R-fl-keyword:constants . t)
@@ -459,33 +296,17 @@ Org mode (latex export) has the wrong time. Not sure how to fix. This does not w
  (ess-R-fl-keyword:F&T . t)
  )
 )
-#+end_src
 
-#+RESULTS:
-: ((ess-R-fl-keyword:keywords . t) (ess-R-fl-keyword:constants . t) (ess-R-fl-keyword:modifiers . t) (ess-R-fl-keyword:fun-defs . t) (ess-R-fl-keyword:assign-ops . t) (ess-R-fl-keyword:%op% . t) (ess-fl-keyword:fun-calls . t) (ess-fl-keyword:numbers . t) (ess-fl-keyword:operators . t) (ess-fl-keyword:delimiters . t) (ess-fl-keyword:= . t) (ess-R-fl-keyword:F&T . t))
-** Custom Functions
-#+begin_src elisp
 (defun insert-R-assign ()
   "Inserts the assign statement in R <-"
   (interactive)
   (insert "<-")
   )
-#+end_src
 
-#+RESULTS:
-: insert-R-assign
-
-* General configuration
-** remove line numbers
-#+Begin_SRC elisp
 (setq display-line-numbers-type nil)
-#+END_SRC
-** Fix treemacs ace-window bug
-#+BEGIN_SRC elisp
+
 (require 'ace-window)
-#+END_SRC
-** deletes compilation buffer if successful (ignores python buffers)
-#+BEGIN_SRC elisp
+
 (add-hook 'compilation-finish-functions
           (lambda(buffer string)
             (if (and (null (string-match ".*exited abnormally.*" string))
@@ -497,34 +318,18 @@ Org mode (latex export) has the wrong time. Not sure how to fix. This does not w
                    (get-buffer-create "*compilation*"))
                   (print major-mode)
                   (message "Compilation finished successfully")))))
-#+END_SRC
-** ligatures
-#+begin_src elisp
+
 (setq +ligatures-extras-in-modes '(org-mode))
-#+end_src
 
-#+RESULTS:
-| org-mode |
-** ispell dictionary
-#+begin_src elisp
 (setq! ispell-dictionary "en_US")
-#+end_src
 
-#+RESULTS:
-: en_US
-
-* Key Map
-** General Buffers
-#+BEGIN_SRC elisp
 (map! :leader
       :desc "treemacs" "0" #'treemacs
       :desc "last-buffer" "l" #'evil-switch-to-windows-last-buffer
       :nv "`" nil
       (:prefix ("w")
        :desc "ace-window" "a" #'ace-window))
-#+END_SRC
-** Python mode map
-#+BEGIN_SRC elisp
+
 (map!  (:map python-mode-map
         :localleader
         :desc "repl" "'" #'+python/open-ipython-repl
@@ -533,47 +338,26 @@ Org mode (latex export) has the wrong time. Not sure how to fix. This does not w
          :desc "function" "f" #'python-shell-send-defun
          :desc "region" "r" #'python-shell-send-region
          :desc "statement" "s" #'python-shell-send-statement)))
-#+END_SRC
-** prolog map
-#+BEGIN_SRC elisp
+
 (map!  (:map prolog-mode-map
         :localleader
         :desc "repl" "'" #'run-prolog
         :desc "file" "f" #'prolog-consult-buffer
         :desc "region" "r" #'prolog-consult-region
         :desc "predicate" "p" #'prolog-consult-region))
-#+END_SRC
 
-** Doc-view mode map
-#+BEGIN_SRC elisp
 (map! (:map doc-view-mode-map
        :nv "l" #'doc-view-next-page
        :nv "h" #'doc-view-previous-page))
-#+END_SRC
-** mips mode map
-#+BEGIN_SRC elisp
+
 (map! (:map mips-mode-map
        :localleader
        (:prefix ("s" . "send")
         :desc "file" "f" #'mips-run-file
         :desc "region" "r" #'mips-run-region
         :desc "buffer" "b" #'mips-run-region)))
-#+END_SRC
-** haskell map
-#+BEGIN_SRC elisp
+
 (map! (:map haskell-mode-map
        :localleader
        :desc "send-file" "f" #'haskell-process-load-file
        :desc "open-haskell" "'" #'run-haskell))
-#+END_SRC
-* Helpful info
-** Font variables
-+ doom-font (normal font)
-+ doom-variable-pitch-font (easy reading font)
-+ doom-big-font (doom-big-font-mode for presentations)
-** Useful customization functions
-+ load! (load external .el files)
-+ use-package! (for configuring packages)
-+ after! (runs config after packages has loaded)
-+ add-load-path! (adds directories to load-path variable)
-+ map! (binds keys)

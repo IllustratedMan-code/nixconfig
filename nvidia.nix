@@ -34,21 +34,20 @@ in
       hardware.nvidia.powerManagement.enable = pkgs.lib.mkForce false;
       services.xserver.config = pkgs.lib.mkOverride 0
         ''
-        Section "ServerLayout"
-            Identifier     "layout"
-            Screen      0  "nvidia" 0 0
-            Inactive       "intel"
-        EndSection
 
-        Section "Monitor"
-            Identifier     "Monitor0"
-        EndSection
 
         Section "Device"
             Identifier     "intel"
             Driver         "modesetting"
             Option         "AccelMethod" "none"
             BusID          "PCI:0:2:0"
+        EndSection
+
+        Section "Device"
+            Identifier     "nvidia-internal"
+            Driver         "nvidia"
+            VendorName     "NVIDIA Corporation"
+            BusID          "PCI:1:0:0"
         EndSection
 
         Section "Device"
@@ -62,9 +61,12 @@ in
         EndSection
 
         Section "Screen"
-            Identifier     "nvidia"
+            Identifier     "egpu"
             Device         "nvidia"
-            Monitor        "Monitor0"
+        EndSection
+        Section "Screen"
+            Identifier     "internal"
+            Device         "nvidia-internal"
         EndSection
 
         '';
