@@ -8,6 +8,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./nvidia.nix
       #./david.nix
     ];
   # nixos unstable
@@ -34,13 +35,6 @@
   };
   boot.supportedFilesystems = [ "ntfs" ];
   networking.networkmanager.enable = true;
-  users.users.david = {
-    isNormalUser = true;
-    home = "/home/david";
-    shell = pkgs.zsh;
-    description = "David Lewis";
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker"];
-  };
 
   networking.hostName = "nixos"; # Define your hostname.
   time.timeZone = "America/New_York";
@@ -193,7 +187,10 @@
   virtualisation.docker.enable = true;
 
   services.autorandr.enable = true;
-  nixpkgs.overlays = [ inputs.emacs-overlay.overlay inputs.neovim.overlay ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+                "electron-12.2.3"
+              ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

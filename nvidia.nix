@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
@@ -29,6 +29,23 @@ in
   '';
   specialisation = {
     egpu.configuration = {
+
+      # tv
+      services.logind.lidSwitch = pkgs.lib.mkForce "ignore";
+      services.xserver.dpi = pkgs.lib.mkForce 180;
+      environment.variables = pkgs.lib.mkForce {
+        GDK_SCALE = "2";
+        GDK_DPI_SCALE = "0.5";
+        _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+      };
+      hardware.video.hidpi.enable = pkgs.lib.mkForce true;
+      services.xserver.displayManager.sessionCommands = pkgs.lib.mkForce ''
+        ${pkgs.xorg.xrdb}/bin/xrdb -merge <<EOF
+           Xft.dpi: 192
+        EOF
+      '';
+
+
       hardware.nvidia.modesetting.enable = pkgs.lib.mkForce false;
       hardware.nvidia.prime.offload.enable = pkgs.lib.mkForce false;
       hardware.nvidia.powerManagement.enable = pkgs.lib.mkForce false;
