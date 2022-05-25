@@ -122,9 +122,7 @@
         xournalpp
         libreoffice
         godot
-        blender
         onlyoffice-bin
-        lilypond
         libxpdf
         soundfont-fluid
         sumneko-lua-language-server
@@ -133,8 +131,7 @@
         rnix-lsp
         imagemagick
         mysql
-        krita
-        etcher
+        sshfs-fuse
       ];
     };
 }

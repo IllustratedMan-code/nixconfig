@@ -13,8 +13,8 @@
   # nixos unstable
   nix = {
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
-    settings.trusted-public-keys = [  "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="];
-    settings.substituters = [ "http://hydra.iohk.io" ];
+    #settings.trusted-public-keys = [  "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="];
+    #settings.substituters = [ "http://hydra.iohk.io" ];
     extraOptions = ''
             experimental-features = nix-command flakes
     '';
