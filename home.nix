@@ -14,12 +14,24 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.david =
-    { config, pkgs, ... }:
-    let
+    { config, pkgs, ... }: let
       inherit inputs;
     in
     {
       imports = [ ./build-tools.nix ];
+
+      programs.direnv.enable = true;
+      programs.direnv.nix-direnv.enable = true;
+      services.lorri.enable = true;
+    
+      #needed for firefox
+      home.stateVersion = "22.05";
+      programs.firefox = {
+        enable = true;
+        package = pkgs.wrapFirefox pkgs.firefox-esr-unwrapped {
+            extraPolicies = { ImportEnterpriseRoots = true;};
+        };
+      };
 
       programs.neovim = {
         enable = true;
@@ -36,6 +48,7 @@
         source = "${inputs.dotfiles}/nvim";
         recursive = true;
       };
+      
       xdg.configFile."autorandr/postswitch" = {
         source = "${inputs.dotfiles}/autorandr-postswitch.sh";
       };
@@ -80,6 +93,15 @@
         source = "${inputs.dotfiles}/shell";
         recursive = true;
       };
+      home.file.".mozilla/certificates/CCHMCIssuingCA.crt" = {
+        source = ./CCHMCIssuingCA.crt;
+      };
+      home.file.".mozilla/certificates/CCHMCRootCA.crt" = {
+        source = ./CCHMCRootCA.crt;
+      };
+      home.file."dotfiles" = {
+        source = "${inputs.dotfiles}";
+      };
 
       xdg.mimeApps = {
         enable = true;
@@ -94,9 +116,6 @@
           "application/pdf" = [ "org.pwmt.zathura.desktop" ];
         };
       };
-      programs.direnv.enable = true;
-      programs.direnv.nix-direnv.enable = true;
-      services.lorri.enable = true;
 
       gtk = {
         enable = true;
@@ -105,6 +124,9 @@
           package = pkgs.nordic;
         };
       };
+
+      
+
       home.packages = with pkgs; [
         discord
         pavucontrol
