@@ -7,6 +7,10 @@
     neovim.url = "github:nix-community/neovim-nightly-overlay";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    doom-emacs = {
+        url = "github:doomemacs/doomemacs";
+        flake = false;
+        };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     base16.url = "github:SenchoPens/base16.nix";
     base16.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,10 +24,6 @@
     };
     base16-zathura = {
       url = github:haozeke/base16-zathura;
-      flake = false;
-    };
-    doom-emacs = {
-      url = github:hlissner/doom-emacs;
       flake = false;
     };
     dotfiles = {

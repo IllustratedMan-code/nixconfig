@@ -48,7 +48,6 @@
         source = "${inputs.dotfiles}/nvim";
         recursive = true;
       };
-      
       xdg.configFile."autorandr/postswitch" = {
         source = "${inputs.dotfiles}/autorandr-postswitch.sh";
       };
@@ -74,6 +73,9 @@
       xdg.configFile."dunst" = {
         source = "${inputs.dotfiles}/dunst";
         recursive = true;
+      };
+      xdg.configFile."flameshot/flameshot.ini" = {
+        source = "${inputs.dotfiles}/flameshot.ini";
       };
       home.file.".doom.d" = {
         source = "${inputs.dotfiles}/.doom.d";
@@ -102,6 +104,8 @@
       home.file."dotfiles" = {
         source = "${inputs.dotfiles}";
       };
+
+
 
       xdg.mimeApps = {
         enable = true;
