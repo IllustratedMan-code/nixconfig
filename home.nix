@@ -80,7 +80,7 @@
       home.file.".doom.d" = {
         source = "${inputs.dotfiles}/.doom.d";
         recursive = true;
-        onChange = "~/.emacs.d/bin/doom sync";
+        #onChange = "~/.emacs.d/bin/doom sync";
       };
       home.file."texmf/tex/latex/custom/mla.cls" = {
         source = "${inputs.dotfiles}/mla.cls";
@@ -158,6 +158,10 @@
         imagemagick
         mysql
         sshfs-fuse
+        dunst
+        polybar
+        rofi
+        flameshot
       ];
     };
 }

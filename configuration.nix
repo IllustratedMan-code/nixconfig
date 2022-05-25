@@ -34,6 +34,7 @@
   };
   boot.supportedFilesystems = [ "ntfs" ];
   networking.networkmanager.enable = true;
+  services.samba.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   time.timeZone = "America/New_York";
@@ -124,9 +125,6 @@
     git
     kitty
     feh
-    polybar
-    rofi
-    flameshot
     zsh
     gcc
     nodejs
@@ -138,7 +136,6 @@
     xorg.xbacklight
     pamixer
     acpid
-    dunst
     libnotify
     gnupg
     pinentry
