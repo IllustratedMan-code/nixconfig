@@ -6,20 +6,10 @@
 {
   imports =
     [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./nvidia.nix
-      #./david.nix
     ];
   # nixos unstable
-  nix = {
-    package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
-    settings.trusted-public-keys = [  "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="];
-    settings.substituters = [ "http://hydra.iohk.io" ];
-    extraOptions = ''
-            experimental-features = nix-command flakes
-    '';
-  };
+  nix.package = pkgs.nixUnstable;
+  nix.extraOptions = "experimental-features = nix-command flakes";
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
     grub = {
@@ -28,15 +18,15 @@
       efiSupport = true;
       device = "nodev";
       useOSProber = true;
-      splashImage = ./dotfiles/i3/atp.png;
+      splashImage = "${inputs.dotfiles}/i3/atp.png";
     };
     #systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
   boot.supportedFilesystems = [ "ntfs" ];
   networking.networkmanager.enable = true;
+  services.samba.enable = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
   time.timeZone = "America/New_York";
 
   hardware.bluetooth.enable = true;
@@ -68,7 +58,7 @@
       defaultSession = "none+i3";
       lightdm = {
         enable = true;
-        background = ./dotfiles/i3/atp.png;
+        background = "${inputs.dotfiles}/i3/atp.png";
         greeters.gtk = {
           enable = true;
           theme.name = "Nordic";
@@ -125,9 +115,6 @@
     git
     kitty
     feh
-    polybar
-    rofi
-    flameshot
     zsh
     gcc
     nodejs
@@ -139,7 +126,6 @@
     xorg.xbacklight
     pamixer
     acpid
-    dunst
     libnotify
     gnupg
     pinentry
