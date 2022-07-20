@@ -1,97 +1,13 @@
 {
   "nodes": {
-    "base16": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1658255652,
-        "narHash": "sha256-Uzb9wmFfKTcv12UjPNA+qUxpMrkJt1GLjZ4ZMyCZqgE=",
-        "owner": "SenchoPens",
-        "repo": "base16.nix",
-        "rev": "4b57d524bbcbc3cdb0ee3de3f0c025dbc861732c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "SenchoPens",
-        "repo": "base16.nix",
-        "type": "github"
-      }
-    },
-    "base16-gruvbox-scheme": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1547401068,
-        "narHash": "sha256-txrHQzlwtx2GIaPum+Z+cncAyOI/5YdHB3OGUziI7wY=",
-        "owner": "dawikur",
-        "repo": "base16-gruvbox-scheme",
-        "rev": "2def6ef77c1f562ff298d61da6845289bfd9f569",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dawikur",
-        "repo": "base16-gruvbox-scheme",
-        "type": "github"
-      }
-    },
-    "base16-nord-scheme": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1484903186,
-        "narHash": "sha256-8U4oKcG9V1VmPrynC3at7KLcURQHu1UBDu8KNeV+9Hs=",
-        "owner": "ada-lovecraft",
-        "repo": "base16-nord-scheme",
-        "rev": "2c19622fe9c346d27989d3db2ffb876875d1209a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ada-lovecraft",
-        "repo": "base16-nord-scheme",
-        "type": "github"
-      }
-    },
-    "base16-zathura": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1643130739,
-        "narHash": "sha256-nVJoygnytYN40VHXpAFwO7ruVbaSydeR547MU45VSuY=",
-        "owner": "haozeke",
-        "repo": "base16-zathura",
-        "rev": "9f148b4001dc67d399e645919225943d47e50125",
-        "type": "github"
-      },
-      "original": {
-        "owner": "haozeke",
-        "repo": "base16-zathura",
-        "type": "github"
-      }
-    },
-    "doom-emacs": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1657393840,
-        "narHash": "sha256-ISaIbqCNKKz9DhrTVKvDS40CzZiqICb2eDepGUdwYQA=",
-        "owner": "doomemacs",
-        "repo": "doomemacs",
-        "rev": "33c5f3721a704c72e49efc5960be3785d1a80b81",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doomemacs",
-        "repo": "doomemacs",
-        "type": "github"
-      }
-    },
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1657202056,
-        "narHash": "sha256-g35nfwknDhX+xDZKgBJv68pLJBC8AV4b8nVFDJZE8CY=",
+        "lastModified": 1658345781,
+        "narHash": "sha256-3WTlZKUjjCVMR57OaPmkL8o3fmwHUPACfxBox3amkKM=",
         "owner": "IllustratedMan-code",
         "repo": "dotfiles",
-        "rev": "5fa0fedb1b23cab1bb9d698571039aae594ae73a",
+        "rev": "2079d1241efb2739ec3efaf616186a348ec7e6bc",
         "type": "github"
       },
       "original": {
@@ -308,11 +224,6 @@
     },
     "root": {
       "inputs": {
-        "base16": "base16",
-        "base16-gruvbox-scheme": "base16-gruvbox-scheme",
-        "base16-nord-scheme": "base16-nord-scheme",
-        "base16-zathura": "base16-zathura",
-        "doom-emacs": "doom-emacs",
         "dotfiles": "dotfiles",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",

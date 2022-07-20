@@ -6,9 +6,6 @@
 {
   imports =
     [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      #./david.nix
     ];
   # nixos unstable
   nix.package = pkgs.nixUnstable;
@@ -21,7 +18,7 @@
       efiSupport = true;
       device = "nodev";
       useOSProber = true;
-      splashImage = ./dotfiles/i3/atp.png;
+      splashImage = "${inputs.dotfiles}/i3/atp.png";
     };
     #systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
@@ -30,7 +27,6 @@
   networking.networkmanager.enable = true;
   services.samba.enable = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
   time.timeZone = "America/New_York";
 
   hardware.bluetooth.enable = true;
@@ -62,7 +58,7 @@
       defaultSession = "none+i3";
       lightdm = {
         enable = true;
-        background = ./dotfiles/i3/atp.png;
+        background = "${inputs.dotfiles}/i3/atp.png";
         greeters.gtk = {
           enable = true;
           theme.name = "Nordic";

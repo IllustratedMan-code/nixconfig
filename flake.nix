@@ -16,17 +16,39 @@
 
   outputs = inputs@{ self, nixpkgs, ... }:
     let
-      mkSystemConfig = extra_modules: nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+      mkSystemConfig = hostname: extra_modules: nixpkgs.lib.nixosSystem {
+        inherit system;
         specialArgs = { inherit inputs; };
-        modules = [ ./configuration.nix ./home.nix ] ++ extra_modules;
+        modules = [
+          ./configuration.nix
+          { networking.hostName = hostname; }
+          ./users/users.nix
+        ] ++ extra_modules;
       };
     in
     {
       nixosConfigurations = {
-        work_laptop = mkSystemConfig [ ./work-hardware.nix ];
-        personal_laptop = mkSystemConfig [ ./personal-hardware.nix ];
+        work = mkSystemConfig "work" [ ./work/hardware.nix ];
+        personal = mkSystemConfig "personal" [ ./personal/hardware.nix ];
       };
-
+      packages."${system}" = with pkgs;
+        let
+          install = install_script: stdenv.mkDerivation {
+            name = "install";
+            src = self;
+            installPhase = ''
+              mkdir $out/bin
+              echo "nixos-install --flake $src" >> $out/bin/install
+              cat ${install_script} >> $out/bin/install
+              chmod +x $out/bin/install
+            '';
+          };
+        in
+        {
+          work_laptop = install ./install/install.sh;
+          personal_laptop = install ./install/install.sh;
+        };
     };
 }
