@@ -115,6 +115,7 @@
           "text/x-csrc" = [ "emacsclient.desktop" ];
           "application/x-7z-compressed" = [ "org.gnome.FileRoller.desktop" ];
           "application/zip" = [ "org.gnome.FileRoller.desktop" ];
+          "inode/directory" = ["kitty-open.desktop"];
         };
         defaultApplications = {
           "application/pdf" = [ "org.pwmt.zathura.desktop" ];
@@ -162,6 +163,7 @@
         polybar
         rofi
         flameshot
+        zip
       ];
     };
 }
