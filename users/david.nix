@@ -1,6 +1,10 @@
 {inputs, config, pkgs, ... }:
+let 
+in
 {
-  imports = [ ./home.nix ];
+  imports = [ ./home.nix
+              ./programs
+            ];
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
@@ -16,8 +20,11 @@
     extraPackages = (epkgs: [ epkgs.vterm ]);
   };
   services.emacs.enable = true;
-  services.emacs.package = pkgs.emacsNativeComp;
-  programs.zathura.enable = true;
+  services.emacs.package = pkgs.emacsPgtkNativeComp;
+  programs.zathura = {
+    enable = true;
+    package = pkgs.stable.zathura;
+    };
   xdg.configFile."nvim" = {
     source = "${inputs.dotfiles}/nvim";
     recursive = true;
@@ -27,10 +34,6 @@
   };
   xdg.configFile."polybar" = {
     source = "${inputs.dotfiles}/polybar";
-    recursive = true;
-  };
-  xdg.configFile."kitty" = {
-    source = "${inputs.dotfiles}/kitty";
     recursive = true;
   };
   xdg.configFile."rofi" = {
@@ -96,15 +99,22 @@
     };
   };
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Nordic";
-      package = pkgs.nordic;
-    };
-  };
+  #gtk = {
+  #  enable = true;
+  #  theme = {
+  #    name = "Nordic";
+  #    package = pkgs.nordic;
+  #  };
+  #};
   home.packages = with pkgs; [
     discord
+    inputs.eww.packages.x86_64-linux.eww-wayland
+    hyprpaper
+    nyxt
+    grim
+    slurp
+    gum
+    sass
   ];
 
 }

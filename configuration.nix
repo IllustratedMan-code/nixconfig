@@ -37,7 +37,7 @@
   # disables DHCP
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = true;
-  networking.interfaces.wlp82s0.useDHCP = true;
+  #networking.interfaces.wlp82s0.useDHCP = true;
 
   # networking
   hardware.acpilight.enable = true;
@@ -55,9 +55,9 @@
 
     screenSection = ''Option "FlatPanelProperties" "Dithering=Disabled"'';
     displayManager = {
-      defaultSession = "none+i3";
+      defaultSession = "hyprland";
       lightdm = {
-        enable = true;
+        #enable = true;
         background = "${inputs.dotfiles}/i3/atp.png";
         greeters.gtk = {
           enable = true;
@@ -65,14 +65,23 @@
           theme.package = pkgs.nordic;
         };
       };
+      gdm.enable = true;
     };
 
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
     };
-    desktopManager.gnome.enable = true;
+    desktopManager = {
+      gnome.enable = true;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
+    };
   };
+  #services.autorandr.enable = true;
   environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour pkgs.gnome.geary ];
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
@@ -119,6 +128,7 @@
     gcc
     nodejs
     unzip
+    socat
 
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
     hunspell
@@ -141,6 +151,7 @@
     ripgrep-all
     alsa-utils
     polkit_gnome
+    gum
   ];
   programs.zsh.enable = true;
   # fonts
@@ -172,11 +183,10 @@
   services.flatpak.enable = true;
   virtualisation.docker.enable = true;
 
-  services.autorandr.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [
-                "electron-12.2.3"
-              ];
+    "electron-12.2.3"
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
