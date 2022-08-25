@@ -1,9 +1,12 @@
-{inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 {
-  imports = [ ./build-tools.nix ];
+  imports = [ ./build-tools.nix inputs.hyprland.homeManagerModules.default ];
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+  # this isn't working right now
+  nixpkgs.config.allowUnfree = true;
+  # temporary solution
 
   #needed for firefox
   home.stateVersion = "22.05";
@@ -13,12 +16,11 @@
       extraPolicies = { ImportEnterpriseRoots = true; };
     };
   };
-
   home.packages = with pkgs; [
+    wofi
     pavucontrol
     autorandr
     texlive.combined.scheme-full
-    zathura
     conda
     zotero
     vlc
@@ -45,5 +47,7 @@
     rofi
     flameshot
     zip
+    go
+    stalonetray
   ];
 }
