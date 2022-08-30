@@ -16,6 +16,7 @@
       extraPolicies = { ImportEnterpriseRoots = true; };
     };
   };
+  services.status-notifier-watcher.enable = true;
   home.packages = with pkgs; [
     wofi
     pavucontrol
@@ -49,5 +50,6 @@
     zip
     go
     stalonetray
+    haskellPackages.gtk-sni-tray
   ];
 }

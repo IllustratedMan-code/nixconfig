@@ -1,0 +1,5 @@
+
+* Setup
+This directory houses home manager configurations for all of the programs that I have themed with base16.
+
+Everything here is called through the `default.nix` file. So to include all of these configurations, simply add `./programs` to the imports.

@@ -21,11 +21,11 @@
     "base16-schemes": {
       "flake": false,
       "locked": {
-        "lastModified": 1660877451,
-        "narHash": "sha256-ofdYnOcYm56ezS+zpKtb2OZntXATImONw40PEWzLyEI=",
+        "lastModified": 1661486203,
+        "narHash": "sha256-6Z8WhNjCIUITM+d7R8NY4XMCLO+NTDRSFwny716w4aA=",
         "owner": "base16-project",
         "repo": "base16-schemes",
-        "rev": "1330777f6b29c921805224b043ce46438dec5d30",
+        "rev": "00377807d8ec0cdd1cefe26391c656e51ac5e4b6",
         "type": "github"
       },
       "original": {
@@ -37,11 +37,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1659747138,
-        "narHash": "sha256-79nJPydwK8UWUlivnKuEE1kEJYaFTwxI0LRTXcesyBg=",
+        "lastModified": 1661785995,
+        "narHash": "sha256-WNM1n2VknNQ1B3O3CuduVdmuh3yMSjHOMRmj2WxWPg8=",
         "owner": "IllustratedMan-code",
         "repo": "dotfiles",
-        "rev": "262d1cd8203a71c664755cb86d8d71da6ee87c40",
+        "rev": "0459ec246fa762dec5b98bd4f829de0602beafa0",
         "type": "github"
       },
       "original": {

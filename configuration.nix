@@ -152,6 +152,9 @@
     alsa-utils
     polkit_gnome
     gum
+    xdg-desktop-portal-gtk
+    xdg-utils
+    exfat
   ];
   programs.zsh.enable = true;
   # fonts
