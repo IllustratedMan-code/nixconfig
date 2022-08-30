@@ -14,6 +14,6 @@ in
   };
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = specialArgs // { scheme = config.scheme; };
+  home-manager.extraSpecialArgs = specialArgs // { scheme = config.scheme;};
   home-manager.users.david.imports = [./david.nix ];
 }

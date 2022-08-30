@@ -25,7 +25,7 @@
 
   outputs = inputs@{ self, nixpkgs, ... }:
     let
-      colorscheme = "nord";
+      colorscheme = "everforest";
       system = "x86_64-linux";
       stable-pkgs = import inputs.stable-nixpkgs { inherit system; overlays = [ ]; };
       pkgs = import inputs.nixpkgs { inherit system; overlays = [ (final: prev: { stable = stable-pkgs; }) ]; };
@@ -45,7 +45,7 @@
     in
     {
       nixosConfigurations = {
-        work = mkSystemConfig "work" [ ./work/hardware.nix ];
+        work = mkSystemConfig "work" [ ./work ];
         personal = mkSystemConfig "personal" [ ./personal/hardware.nix ];
       };
       packages."${system}" = with pkgs;

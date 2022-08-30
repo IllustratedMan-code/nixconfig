@@ -21,7 +21,7 @@ let
     '';
     base16gtk = pkgs.stdenv.mkDerivation {
       name = "base16gtk";
-      src = ./base16-gtk;
+      src = ./.;
       nativeBuildInputs = [ pkgs.sass ];
       propagatedUserEnvPkgs = [ pkgs.gtk-engine-murrine ];
 
@@ -44,6 +44,14 @@ in
     theme = {
       name = "base16";
       package = base16gtk;
+    };
+    iconTheme = {
+      name = "papyrus-icon-theme";
+      package = pkgs.papirus-icon-theme;
+    };
+    cursorTheme = {
+      name = "phinger-cursors";
+      package = pkgs.phinger-cursors;
     };
   };
 }

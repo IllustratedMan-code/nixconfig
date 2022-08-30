@@ -9,55 +9,11 @@ in
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  #needed for firefox
-
-  programs.neovim = {
-    enable = true;
-  };
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacsNativeComp;
-    extraPackages = (epkgs: [ epkgs.vterm ]);
-  };
-  services.emacs.enable = true;
-  services.emacs.package = pkgs.emacsPgtkNativeComp;
-  programs.zathura = {
-    enable = true;
-    package = pkgs.stable.zathura;
-    };
-  xdg.configFile."nvim" = {
-    source = "${inputs.dotfiles}/nvim";
-    recursive = true;
-  };
   xdg.configFile."autorandr/postswitch" = {
     source = "${inputs.dotfiles}/autorandr-postswitch.sh";
   };
-  xdg.configFile."polybar" = {
-    source = "${inputs.dotfiles}/polybar";
-    recursive = true;
-  };
-  xdg.configFile."rofi" = {
-    source = "${inputs.dotfiles}/rofi";
-    recursive = true;
-  };
-  xdg.configFile."i3" = {
-    source = "${inputs.dotfiles}/i3";
-    recursive = true;
-  };
-  # xdg.configFile."zathura/zathurarc" = {
-  #     source = ./dotfiles/zathura/zathurarc;
-  # };
-  xdg.configFile."dunst" = {
-    source = "${inputs.dotfiles}/dunst";
-    recursive = true;
-  };
   xdg.configFile."flameshot/flameshot.ini" = {
     source = "${inputs.dotfiles}/flameshot.ini";
-  };
-  home.file.".doom.d" = {
-    source = "${inputs.dotfiles}/.doom.d";
-    recursive = true;
-    #onChange = "~/.emacs.d/bin/doom sync";
   };
   home.file."texmf/tex/latex/custom/mla.cls" = {
     source = "${inputs.dotfiles}/mla.cls";
@@ -65,9 +21,6 @@ in
   home.file.".zshrc" = {
     source = "${inputs.dotfiles}/.zshrc";
   };
-  #home.file.".bashrc" = {
-  #  source = "${inputs.dotfiles}/.bashrc";
-  #};
   xdg.configFile."shell" = {
     source = "${inputs.dotfiles}/shell";
     recursive = true;
@@ -77,9 +30,6 @@ in
   };
   home.file.".mozilla/certificates/CCHMCRootCA.crt" = {
     source = ../work/CCHMCRootCA.crt;
-  };
-  home.file."dotfiles" = {
-    source = "${inputs.dotfiles}";
   };
 
 
@@ -107,7 +57,6 @@ in
   #  };
   #};
   home.packages = with pkgs; [
-    discord
     inputs.eww.packages.x86_64-linux.eww-wayland
     hyprpaper
     nyxt
@@ -115,6 +64,7 @@ in
     slurp
     gum
     sass
+    stable.zathura
   ];
 
 }

@@ -1,0 +1,28 @@
+
+* =work= directory
+Everything that is work specific should go in this directory. This is a public repo, so no sensitive data should go there (passwords, etc)
+
+Specifically, this should house system configs for the work laptop.
+* =personal= directory
+The same as the work directory, but for my personal laptop.
+
+* =users= directory
+configurations pertaining to each user specifically.
++ User packages
++ configurations
+* =install= directory
+This is where install scripts for Nixos should go to facilitate system setup. The only reason this directory is even nessesary is because some programs
+cannot be managed easily within nix.
+** Unmanageable programs
++ Emacs: Doom emacs cannot be installed by nixos in its most functional form
++ Neovim: This is mainly becuase I am lazy (need to convert to nix), packer must be installed.
+*** Flatpak
+All flatpak programs cannot be managed by nix, so must be installed manually. This is generally a good thing as
+programs do not need to be locked to a particular version. I don't have to update all of nixpkgs to update discord for example.
+This is particularly useful for programs that are proprietary.
++ Discord
++ Microsoft teams
+* =configuration.nix=
+This is where computer non-specific, system-wide configurations should go. This file may eventually be converted to a module (directory).
+* =flake.nix=
+This can be thought of as the orchestrator of everything. It creates the system and installation derivations and manages all dependencies.
