@@ -39,16 +39,16 @@ let
         "A dark theme inspired by Base16."
         ;; name        default   256       16
         ((bg         '("${base00}" nil       nil            ))
-        (bg-alt     '("#272C36" nil       nil            ))
-        (base0      '("#191C25" "black"   "black"        ))
-        (base1      '("#242832" "#1e1e1e" "brightblack"  ))
-        (base2      '("#2C333F" "#2e2e2e" "brightblack"  ))
-        (base3      '("#373E4C" "#262626" "brightblack"  ))
+        (bg-alt     '("${base01}" nil       nil            ))
+        (base0      '("${base00}" "black"   "black"        ))
+        (base1      '("${base01}" "#1e1e1e" "brightblack"  ))
+        (base2      '("${base02}" "#2e2e2e" "brightblack"  ))
+        (base3      '("${base01}" "#262626" "brightblack"  ))
         (base4      '("${base02}" "#3f3f3f" "brightblack"  ))
-        (base5      '("${base03}" "#525252" "brightblack"  ))
-        (base6      '("#9099AB" "#6b6b6b" "brightblack"  ))
+        (base5      '("${base01}" "#525252" "brightblack"  ))
+        (base6      '("${base05}" "#6b6b6b" "brightblack"  ))
         (base7      '("${base04}" "#979797" "brightblack"  ))
-        (base8      '("#F0F4FC" "#dfdfdf" "white"        ))
+        (base8      '("${base08}" "#dfdfdf" "white"        ))
         (fg         '("${base06}" "#ECECEC" "white"        ))
         (fg-alt     '("${base05}" "#bfbfbf" "brightwhite"  ))
 
@@ -61,9 +61,9 @@ let
         (blue       '("${base0D}" "#51afef" "brightblue"   )) ;; Base169
         (dark-blue  '("${base0F}" "#2257A0" "blue"         )) ;; Base1610
         (magenta    '("${base0E}" "#c678dd" "magenta"      )) ;; Base1615
-        (violet     '("#5D80AE" "#a9a1e1" "brightmagenta")) ;; ??
+        (violet     '("${base08}" "#a9a1e1" "brightmagenta")) ;; ??
         (cyan       '("${base0C}" "#46D9FF" "brightcyan"   )) ;; Base168
-        (dark-cyan  '("#507681" "#5699AF" "cyan"         )) ;; ??
+        (dark-cyan  '("${base09}" "#5699AF" "cyan"         )) ;; ??
 
         ;; face categories -- required for all themes
         (highlight      blue)
@@ -156,7 +156,7 @@ let
         ;;;; markdown-mode
         (markdown-markup-face :foreground base5)
         (markdown-header-face :inherit 'bold :foreground red)
-        ((markdown-code-face &override) :background (doom-lighten base3 0.05))
+        ((markdown-code-face &override) :background (doom-lighten bg-alt 0.05))
         ;;;; mic-paren
         ((paren-face-match &override) :foreground bg :background teal :weight 'ultra-bold)
         ((paren-face-mismatch &override) :foreground base7 :background red :weight 'ultra-bold)

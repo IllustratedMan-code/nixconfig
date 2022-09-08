@@ -21,3 +21,8 @@ nixosConfigurations = {
 ...
 
 #+end_src
+* Screenshots
+[[file:assets/fetch.png]]
+[[file:assets/gnuplot.png]]
+[[file:assets/shell.png]]
+[[file:assets/wofi.png]]

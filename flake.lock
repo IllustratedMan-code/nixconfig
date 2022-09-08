@@ -37,11 +37,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1661785995,
-        "narHash": "sha256-WNM1n2VknNQ1B3O3CuduVdmuh3yMSjHOMRmj2WxWPg8=",
+        "lastModified": 1662656514,
+        "narHash": "sha256-MusXvbwQvKU6xzA/m5WvatuNRwl00MEZaEgLNUfeyqY=",
         "owner": "IllustratedMan-code",
         "repo": "dotfiles",
-        "rev": "0459ec246fa762dec5b98bd4f829de0602beafa0",
+        "rev": "b42b81b2a9fc71722cec016b410038a895474e26",
         "type": "github"
       },
       "original": {

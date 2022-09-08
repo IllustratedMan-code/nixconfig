@@ -22,8 +22,6 @@ let
     set completion-highlight-bg     "${base0D}"
     set recolor-lightcolor          "${base00}"
     set recolor-darkcolor           "${base06}"
-    set recolor                     "false"
-    set recolor-keephue             "false"
   '';
 in
 {
