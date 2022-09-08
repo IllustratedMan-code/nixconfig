@@ -4,6 +4,9 @@
 During a normal Nixos install, run =nix --experimental-features nix-command run https://github.com/IllustratedMan-code/nixconfig#hostname=. =hostname= refers to the derivation you want to install. Currently, two are available =work_laptop= and =personal_laptop=.
 
 ** You aren't me?
+#+begin_quote
+This is untested, use at your own risk.
+#+end_quote
 A new =hardware-configuration.nix= is needed, fork the github repository and run =nixos-generate-config --show-hardware-config > hardware-configuration.nix=.
 
 Add the line =my_host_name = mkSystemConfig [ ./hardware-configuration.nix ]= to =nixosConfigurations= in =flake.nix= like so:
