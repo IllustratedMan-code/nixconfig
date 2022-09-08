@@ -17,7 +17,6 @@
     };
   };
   home.packages = with pkgs; [
-    pick-colour-picker
     haskellPackages.gtk-sni-tray
     haskellPackages.status-notifier-item
     wofi
@@ -52,5 +51,6 @@
     zip
     go
     stalonetray
+    gnuplot
   ];
 }
