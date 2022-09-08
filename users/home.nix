@@ -16,8 +16,10 @@
       extraPolicies = { ImportEnterpriseRoots = true; };
     };
   };
-  services.status-notifier-watcher.enable = true;
   home.packages = with pkgs; [
+    pick-colour-picker
+    haskellPackages.gtk-sni-tray
+    haskellPackages.status-notifier-item
     wofi
     pavucontrol
     autorandr
@@ -50,6 +52,5 @@
     zip
     go
     stalonetray
-    haskellPackages.gtk-sni-tray
   ];
 }

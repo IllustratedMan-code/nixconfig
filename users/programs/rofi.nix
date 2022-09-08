@@ -4,15 +4,15 @@ let
   theme = ''
     * {
       al: #00000000;
-      bg: ${base00}
-      se: ${base0C}
-      fg: ${base06}
-      ac: ${base0C}
+      bg: ${base00};
+      se: ${base0C};
+      fg: ${base06};
+      ac: ${base0C};
     }
   '';
 in
 {
   xdg.configFile."rofi/config.rasi".source = "${inputs.dotfiles}/rofi/config.rasi";
   xdg.configFile."rofi/theme.rasi".source = "${inputs.dotfiles}/rofi/theme.rasi";
-  xdg.configFile."roif/colors.rasi".text = theme;
+  xdg.configFile."rofi/colors.rasi".text = theme;
 }

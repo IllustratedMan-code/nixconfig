@@ -16,5 +16,8 @@ in
               ./i3.nix
               ./wallpapers
               ./gtk
+              ./waybar.nix
+              ./zsh.nix
+              ./shellPrograms
             ];
 }
