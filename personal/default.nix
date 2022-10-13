@@ -1,5 +1,5 @@
 { config, pkgs, inputs, ... }:
 {
-  imports = [ ];
+  imports = [ nvidia.nix ];
   boot.loader.grub.useOSProber = true;
 }
