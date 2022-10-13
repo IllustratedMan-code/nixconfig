@@ -21,8 +21,15 @@ let
     '';
 in
 {
-  xdg.configFile."hypr/hyprland.conf".source = "${inputs.dotfiles}/hypr/hyprland.conf";
+  imports = [inputs.hyprland.homeManagerModules.default];
+  xdg.configFile."hypr/hyprland_config.conf".source = "${inputs.dotfiles}/hypr/hyprland.conf";
   xdg.configFile."hypr/colors.conf".text = theme;
   xdg.configFile."hypr/hyprpaper.conf".source = "${inputs.dotfiles}/hypr/hyprpaper.conf";
   home.packages = with pkgs; [wl-clipboard];
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = ''
+      source=~/.config/hypr/hyprland_config.conf
+    '';
+  };
 }

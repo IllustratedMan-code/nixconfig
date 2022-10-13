@@ -1,6 +1,7 @@
 {inputs, config, pkgs, scheme, ... }:
     with scheme.withHashtag;
 let
+    emacspkg = pkgs.emacsNativeComp;
     theme =  ''
       (require 'doom-themes)
       (defgroup doom-base16-theme nil
@@ -192,9 +193,14 @@ in
   home.file.".doom.d/themes/doom-base16-theme.el".text = theme;
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsPgtkNativeComp;
+    package = emacspkg;
     extraPackages = (epkgs: [ epkgs.vterm ]);
   };
+  home.packages = with pkgs; [
+    (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
+    hunspell
+    hunspellDicts.en_US
+  ];
   services.emacs.enable = true;
-  services.emacs.package = pkgs.emacsPgtkNativeComp;
+  services.emacs.package = emacspkg;
 }

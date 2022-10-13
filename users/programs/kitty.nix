@@ -41,4 +41,5 @@ in
 {
    xdg.configFile."kitty/kitty.conf".text = config;
    xdg.configFile."kitty/theme.conf".text = theme;
+   home.packages = with pkgs; [ kitty ];
 }

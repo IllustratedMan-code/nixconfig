@@ -31,7 +31,10 @@ in
   home.file.".mozilla/certificates/CCHMCRootCA.crt" = {
     source = ../work/CCHMCRootCA.crt;
   };
-
+  xdg.configFile."snippets" = {
+    source = "${inputs.dotfiles}/snippets";
+    recursive = true;
+  };
 
 
   xdg.mimeApps = {

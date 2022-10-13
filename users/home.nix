@@ -1,6 +1,6 @@
 { inputs, config, pkgs, ... }:
 {
-  imports = [ ./build-tools.nix inputs.hyprland.homeManagerModules.default ];
+  imports = [ ./build-tools.nix  ];
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
@@ -12,11 +12,15 @@
   home.stateVersion = "22.05";
   programs.firefox = {
     enable = true;
-    package = pkgs.wrapFirefox pkgs.firefox-esr-unwrapped {
-      extraPolicies = { ImportEnterpriseRoots = true; };
-    };
+    package = pkgs.firefox-wayland;
   };
   home.packages = with pkgs; [
+    gnome.nautilus
+    google-chrome-beta
+    tree-sitter
+    kate
+    mdbook
+    nextflow
     haskellPackages.gtk-sni-tray
     haskellPackages.status-notifier-item
     wofi
@@ -42,7 +46,6 @@
     plantuml
     rnix-lsp
     imagemagick
-    mysql
     sshfs-fuse
     dunst
     polybar
@@ -50,7 +53,6 @@
     flameshot
     zip
     go
-    stalonetray
     gnuplot
   ];
 }

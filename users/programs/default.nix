@@ -11,7 +11,7 @@ in
               ./zathura.nix
               ./polybar.nix
               ./rofi.nix
-              ./nvim.nix
+              ./nvim
               ./dunst.nix
               ./i3.nix
               ./wallpapers

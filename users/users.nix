@@ -3,7 +3,7 @@ let
   stable = final: prev: { stable = import inputs.stable-nixpkgs {system = "${prev.system}";};};
 in
 {
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
+  imports = [ inputs.home-manager.nixosModules.home-manager];
   nixpkgs.overlays = [ inputs.neovim.overlay inputs.emacs-overlay.overlay stable];
   users.users.david = {
     isNormalUser = true;
@@ -15,5 +15,5 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = specialArgs // { scheme = config.scheme;};
-  home-manager.users.david.imports = [./david.nix ];
+  home-manager.users.david.imports = [./david.nix];
 }

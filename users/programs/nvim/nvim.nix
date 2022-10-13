@@ -11,6 +11,7 @@ let
             \ base0C = '#${base0C}', base0D = '#${base0D}', base0E = '#${base0E}', base0F = '#${base0F}'
             \})
     '';
+
     colors = ''
         return {
                 base00="${base00}",
@@ -33,6 +34,7 @@ let
     '';
 in
 {
+
     xdg.configFile."nvim/init.vim".source = "${inputs.dotfiles}/nvim/init.vim";
     xdg.configFile."nvim/lua" = {
      source = "${inputs.dotfiles}/nvim/lua";

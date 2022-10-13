@@ -10,6 +10,12 @@
   # nixos unstable
   nix.package = pkgs.nixUnstable;
   nix.extraOptions = "experimental-features = nix-command flakes";
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
     grub = {
@@ -17,7 +23,6 @@
       version = 2;
       efiSupport = true;
       device = "nodev";
-      useOSProber = true;
       splashImage = "${inputs.dotfiles}/i3/atp.png";
     };
     #systemd-boot.enable = true;
@@ -73,7 +78,7 @@
       package = pkgs.i3-gaps;
     };
     desktopManager = {
-      gnome.enable = true;
+      gnome.enable = false;
       xfce = {
         enable = true;
         noDesktop = true;
@@ -87,28 +92,7 @@
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
 
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  #sound.enable = false;
   hardware.pulseaudio.enable = false;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.jane = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  # };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   nixpkgs.config = {
     packageOverrides = pkgs: rec {
       polybar = pkgs.polybar.override {
@@ -119,6 +103,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    xdg-desktop-portal-gtk
     vim
     wget
     firefox
@@ -152,7 +137,6 @@
     alsa-utils
     polkit_gnome
     gum
-    xdg-desktop-portal-gtk
     xdg-utils
     exfat
   ];
@@ -163,6 +147,7 @@
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
     siji
     corefonts
+    emacs-all-the-icons-fonts
   ];
   fonts.fontconfig = {
     defaultFonts = {
@@ -179,43 +164,26 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
   #services.printing.enable = true;
   #services.printing.drivers = [ pkgs.hplip ];
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
   services.flatpak.enable = true;
   virtualisation.docker.enable = true;
+  hardware.opentabletdriver.enable = true;
+  hardware.opentabletdriver.daemon.enable = true;
+  services.gvfs.enable = true;
 
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-12.2.3"
   ];
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "22.11"; # Did you read the comment?
 
 }
-
