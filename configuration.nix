@@ -30,11 +30,20 @@
   };
   boot.supportedFilesystems = [ "ntfs" ];
   networking.networkmanager.enable = true;
+  programs.nm-applet =
+    {
+      enable = true;
+      indicator = true;
+    };
   services.samba.enable = true;
 
   time.timeZone = "America/New_York";
 
   hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+  services.gnome.at-spi2-core.enable = true;
+
+  xdg.icons.enable = true;
 
   # needed for some apps
   hardware.opengl.enable = true;
@@ -103,7 +112,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    xdg-desktop-portal-gtk
+    gnome-icon-theme
+    papirus-icon-theme
     vim
     wget
     firefox
@@ -168,7 +178,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    #extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
   #services.printing.enable = true;
   #services.printing.drivers = [ pkgs.hplip ];

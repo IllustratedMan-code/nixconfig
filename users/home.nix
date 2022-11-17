@@ -1,6 +1,6 @@
 { inputs, config, pkgs, ... }:
 {
-  imports = [ ./build-tools.nix  ];
+  imports = [ ./build-tools.nix ];
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
@@ -15,6 +15,8 @@
     package = pkgs.firefox-wayland;
   };
   home.packages = with pkgs; [
+    element-desktop-wayland
+    krita
     gnome.nautilus
     google-chrome-beta
     tree-sitter

@@ -19,9 +19,8 @@
       url = "github:base16-project/base16-schemes";
       flake = false;
     };
-
+    image-factory.url = "github:IllustratedMan-code/Image-Factory";
   };
-
 
   outputs = inputs@{ self, nixpkgs, ... }:
     let
@@ -39,7 +38,7 @@
           { networking.hostName = hostname; }
           ./users/users.nix
           inputs.hyprland.nixosModules.default
-          { programs.hyprland = {enable = true;}; }
+          { programs.hyprland = { enable = true; }; }
         ] ++ extra_modules;
       };
     in

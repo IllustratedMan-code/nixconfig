@@ -54,6 +54,7 @@ in
       telescope-nvim
       telescope-file-browser-nvim
       telescope-project-nvim
+      direnv-vim
       {
         plugin = which-key-nvim;
         type = "lua";
@@ -78,16 +79,22 @@ in
         config = dotfile "plugins/luasnip.lua";
       }
       cmp_luasnip
+      cmp-rg
+      cmp-emoji
       neogit
+      nvim-code-action-menu
       {
         plugin = nvim-tree-lua;
         type = "lua";
         config = dotfile "plugins/tree.lua";
       }
       nvim-web-devicons
+      vimtex
+      neoformat
     ];
     extraPackages = with pkgs; [
       sumneko-lua-language-server
+      nodePackages.prettier
       nodePackages.pyright
       haskell-language-server
       nodePackages.bash-language-server
@@ -98,6 +105,11 @@ in
       nodePackages.eslint
       nodePackages.vscode-langservers-extracted
       ltex-ls
+      python310Packages.python-lsp-server
+      black
+      python310Packages.autopep8
+      python310Packages.flake8
+      yapf
     ];
     withPython3 = true;
     withNodeJs = true;
