@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 export BORDER="rounded"
+
 address="lew2mz@bmiclusterp.chmcres.cchmc.org"
 
 gum style 'Cluster actions'
