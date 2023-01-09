@@ -45,7 +45,7 @@
     {
       nixosConfigurations = {
         work = mkSystemConfig "work" [ ./work ];
-        personal = mkSystemConfig "personal" [ ./personal/hardware.nix ];
+        personal = mkSystemConfig "personal" [ ./personal ];
       };
       packages."${system}" = with pkgs;
         let

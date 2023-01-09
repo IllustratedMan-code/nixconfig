@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, scheme, vimUtils, lib, ... }:
+{ inputs, config, pkgs, stable-pkgs, scheme, vimUtils, lib, ... }:
 with scheme;
 let
   theme = ''
@@ -14,7 +14,6 @@ in
 {
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-unwrapped;
     plugins = with pkgs.vimPlugins; [
       {
         plugin = nvim-lspconfig;
@@ -31,9 +30,8 @@ in
         type = "lua";
         config = dotfile "plugins/gitsigns.lua";
       }
-      nvim-ts-rainbow
       {
-        plugin = (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars));
+        plugin = nvim-treesitter.withAllGrammars;
         type = "lua";
         config = dotfile "plugins/treesitter.lua";
 
@@ -110,6 +108,7 @@ in
       python310Packages.autopep8
       python310Packages.flake8
       yapf
+      git
     ];
     withPython3 = true;
     withNodeJs = true;

@@ -4,7 +4,7 @@ let
 in
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
-  nixpkgs.overlays = [ inputs.neovim.overlay inputs.emacs-overlay.overlay stable ];
+  nixpkgs.overlays = [ inputs.emacs-overlay.overlay stable ];
   users.users.david = {
     isNormalUser = true;
     home = "/home/david";
