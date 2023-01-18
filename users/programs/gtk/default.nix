@@ -1,42 +1,42 @@
-{inputs, config, pkgs, scheme, ... }:
-    with scheme.withHashtag;
+{ inputs, config, pkgs, scheme, ... }:
+with scheme.withHashtag;
 let
-    theme = builtins.toFile "base16.scss" ''
-        $base00: ${base00};
-        $base01: ${base01};
-        $base02: ${base02};
-        $base03: ${base03};
-        $base04: ${base04};
-        $base05: ${base05};
-        $base06: ${base06};
-        $base07: ${base07};
-        $base0D: ${base08};
-        $base0E: ${base09};
-        $base0C: ${base0A};
-        $base0A: ${base0B};
-        $base09: ${base0C};
-        $base0B: ${base0D};
-        $base08: ${base0E};
-        $base0F: ${base0F};
+  theme = builtins.toFile "base16.scss" ''
+    $base00: ${base00};
+    $base01: ${base01};
+    $base02: ${base02};
+    $base03: ${base03};
+    $base04: ${base04};
+    $base05: ${base05};
+    $base06: ${base06};
+    $base07: ${base07};
+    $base0D: ${base08};
+    $base0E: ${base09};
+    $base0C: ${base0A};
+    $base0A: ${base0B};
+    $base09: ${base0C};
+    $base0B: ${base0D};
+    $base08: ${base0E};
+    $base0F: ${base0F};
+  '';
+  base16gtk = pkgs.stdenv.mkDerivation {
+    name = "base16gtk";
+    src = ./.;
+    nativeBuildInputs = [ pkgs.sass ];
+    propagatedUserEnvPkgs = [ pkgs.gtk-engine-murrine ];
+
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out/share/themes/base16/gtk-2.0
+      mkdir -p $out/share/themes/base16/gtk-3.0
+      mkdir -p $out/share/themes/base16/gtk-4.0
+      cp ${theme} gtk-3.0/base16.scss
+      sass gtk-3.0/gtk.scss $out/share/themes/base16/gtk-3.0/gtk.css
+      sass gtk-4.0/gtk.scss $out/share/themes/base16/gtk-4.0/gtk.css
+      runHook postInstall
     '';
-    base16gtk = pkgs.stdenv.mkDerivation {
-      name = "base16gtk";
-      src = ./.;
-      nativeBuildInputs = [ pkgs.sass ];
-      propagatedUserEnvPkgs = [ pkgs.gtk-engine-murrine ];
 
-      installPhase = ''
-        runHook preInstall
-        mkdir -p $out/share/themes/base16/gtk-2.0
-        mkdir -p $out/share/themes/base16/gtk-3.0
-        mkdir -p $out/share/themes/base16/gtk-4.0
-        cp ${theme} gtk-3.0/base16.scss
-        sass gtk-3.0/gtk.scss $out/share/themes/base16/gtk-3.0/gtk.css
-        sass gtk-4.0/gtk.scss $out/share/themes/base16/gtk-4.0/gtk.css
-        runHook postInstall
-      '';
-
-    };
+  };
 in
 {
   gtk = {
@@ -59,7 +59,7 @@ in
     platformTheme = "gtk";
     style = {
       package = pkgs.adwaita-qt;
-      name = "adwaita-dark";
+      name = "gtk2";
     };
   };
 }

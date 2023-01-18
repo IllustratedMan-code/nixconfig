@@ -112,12 +112,15 @@
   };
 
   environment.systemPackages = with pkgs; [
+    wireshark
+    termshark
     gnome-icon-theme
     papirus-icon-theme
     vim
     wget
     firefox
     git
+    git-lfs
     kitty
     feh
     gcc
@@ -150,7 +153,9 @@
     xdg-utils
     exfat
   ];
+  programs.wireshark.enable = true;
   programs.zsh.enable = true;
+  programs.light.enable = true;
   # fonts
   fonts.enableDefaultFonts = true;
   fonts.fonts = with pkgs; [

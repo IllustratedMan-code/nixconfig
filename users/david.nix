@@ -38,7 +38,7 @@ in
 
 
   xdg.mimeApps = {
-    enable = false;
+    enable = true;
     associations.added = {
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
       "application/x-shellscript" = [ "emacs.desktop" "emacsclient.desktop" ];
@@ -79,6 +79,8 @@ in
   #    package = pkgs.nordic;
   #  };
   #};
+
+
   home.packages = with pkgs; [
     inputs.eww.packages.x86_64-linux.eww-wayland
     hyprpaper
