@@ -4,7 +4,7 @@ let
   theme = ''
     * {
       al: #00000000;
-      bg: ${base00};
+      bg: ${base01};
       se: ${base0C};
       fg: ${base06};
       ac: ${base0C};

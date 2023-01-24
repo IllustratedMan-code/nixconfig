@@ -62,4 +62,8 @@ in
       name = "gtk2";
     };
   };
+
+  systemd.user.sessionVariables = {
+    GTK_THEME = "base16";
+  };
 }

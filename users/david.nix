@@ -90,6 +90,7 @@ in
     gum
     sass
     stable.zathura
+    obsidian
   ];
 
 }

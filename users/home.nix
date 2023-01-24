@@ -17,7 +17,7 @@
   home.packages = with pkgs; [
     element-desktop-wayland
     krita
-    gnome.nautilus
+    cinnamon.nemo
     google-chrome-beta
     tree-sitter
     kate
@@ -39,7 +39,7 @@
     inkscape
     xournalpp
     libreoffice
-    godot
+    godot_4
     onlyoffice-bin
     libxpdf
     soundfont-fluid
@@ -50,8 +50,7 @@
     imagemagick
     sshfs-fuse
     dunst
-    polybar
-    rofi
+    rofi-wayland
     flameshot
     zip
     go

@@ -7,40 +7,25 @@ let
     }
     window#waybar {
       background-color: ${base01};
-      border-radius: 10px;
+      border-radius: 20px;
     }
     #tray {
       color: transparent;
-      margin-right: 5px;
-      margin-left: 5px;
-    }
-    #tray:hover {
-      background: red;
     }
     #workspaces {
-      margin-right: 5px;
-      margin-left: 5px;
       font-size: 150%;
     }
-    #battery {
-      margin-right: 5px;
-      margin-left: 5px;
+    #battery, #wireplumber, #backlight, #workspaces, #tray {
+      margin-right: 10px;
+      margin-left: 10px;
     }
-    #wireplumber {
-      margin-right: 5px;
-      margin-left: 5px;
-    }
-    #backlight {
-      margin-right: 5px;
-      margin-left: 5px;
-    }
-
   '';
 in
 {
-  home.packages = with pkgs; [ helvum ];
+  home.packages = with pkgs; [ stable.helvum ];
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     settings = [{
       position = "top";
       layer = "top";
@@ -87,14 +72,8 @@ in
         "format" = "Volume: {volume}%";
         "format-muted" = ".";
         "on-click" = "helvum";
-        "format-icons" = [ "🔈" ];
       };
 
-      "backlight" = {
-        "device" = "intel_backlight";
-        "format" = "{icon}: {percent}%";
-        "format-icons" = [ "🔅" "🔆" ];
-      };
 
       #exclusive = false;
     }];

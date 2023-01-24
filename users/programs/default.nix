@@ -9,7 +9,6 @@ in
     ./hyprland.nix
     ./eww.nix
     ./zathura.nix
-    ./polybar.nix
     ./rofi.nix
     ./nvim
     ./dunst.nix

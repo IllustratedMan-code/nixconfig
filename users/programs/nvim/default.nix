@@ -15,6 +15,7 @@ in
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      editorconfig-vim
       {
         plugin = nvim-lspconfig;
         type = "lua";

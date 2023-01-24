@@ -11,6 +11,8 @@
   nix.package = pkgs.nixUnstable;
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.settings.auto-optimise-store = true;
+  nix.settings.substituters = [ "https://nix-community.cachix.org" ];
+  nix.settings.trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -106,7 +108,6 @@
     packageOverrides = pkgs: rec {
       polybar = pkgs.polybar.override {
         pulseSupport = true;
-        i3GapsSupport = true;
       };
     };
   };
@@ -178,6 +179,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
   services.dbus.enable = true;
   xdg.portal = {
@@ -191,6 +193,9 @@
   services.avahi.nssmdns = true;
   services.flatpak.enable = true;
   virtualisation.docker.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.guest.enable = true;
+
   hardware.opentabletdriver.enable = true;
   hardware.opentabletdriver.daemon.enable = true;
   services.gvfs.enable = true;
