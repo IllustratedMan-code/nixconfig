@@ -22,7 +22,7 @@ let
   '';
 in
 {
-  home.packages = with pkgs; [ stable.helvum ];
+  home.packages = with pkgs; [ stable.helvum sqlite ];
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -69,9 +69,10 @@ in
       };
 
       "wireplumber" = {
-        "format" = "Volume: {volume}%";
+        "format" = "Volume: {icon}";
         "format-muted" = ".";
         "on-click" = "helvum";
+        "format-icons" = [ "-" "----" "------" ];
       };
 
 
