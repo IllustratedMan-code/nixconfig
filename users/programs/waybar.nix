@@ -4,6 +4,7 @@ let
   theme = ''
     * {
       color: ${base0A};
+      font-family: "JetBrainsMono Nerd Font Mono";
     }
     window#waybar {
       background-color: ${base01};
@@ -12,10 +13,8 @@ let
     #tray {
       color: transparent;
     }
-    #workspaces {
+    #battery, #wireplumber, #backlight, #workspaces, #tray, #clock {
       font-size: 150%;
-    }
-    #battery, #wireplumber, #backlight, #workspaces, #tray {
       margin-right: 10px;
       margin-left: 10px;
     }
@@ -29,7 +28,7 @@ in
     settings = [{
       position = "top";
       layer = "top";
-      height = 20;
+      height = 36;
       margin-top = 5;
       margin-right = 17;
       margin-left = 17;
@@ -69,10 +68,37 @@ in
       };
 
       "wireplumber" = {
-        "format" = "Volume: {icon}";
-        "format-muted" = ".";
+        "format" = "{icon}";
+        "format-muted" = "";
         "on-click" = "helvum";
-        "format-icons" = [ "-" "----" "------" ];
+        "format-icons" = [
+          " ━┅┅┅┅┅┅┅┅┅"
+          " ━━┅┅┅┅┅┅┅┅"
+          " ━━━┅┅┅┅┅┅┅"
+          " ━━━━┅┅┅┅┅┅"
+          " ━━━━━┅┅┅┅┅"
+          " ━━━━━━┅┅┅┅"
+          " ━━━━━━━┅┅┅"
+          " ━━━━━━━━┅┅"
+          " ━━━━━━━━━┅"
+          " ━━━━━━━━━━"
+        ];
+      };
+      "backlight" = {
+        "format" = "{icon}";
+        "format-icons" = [
+          " ━┅┅┅┅┅┅┅┅┅"
+          " ━━┅┅┅┅┅┅┅┅"
+          " ━━━┅┅┅┅┅┅┅"
+          " ━━━━┅┅┅┅┅┅"
+          " ━━━━━┅┅┅┅┅"
+          " ━━━━━━┅┅┅┅"
+          " ━━━━━━━┅┅┅"
+          " ━━━━━━━━┅┅"
+          " ━━━━━━━━━┅"
+          " ━━━━━━━━━━"
+        ];
+
       };
 
 
