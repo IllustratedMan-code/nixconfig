@@ -13,7 +13,7 @@ let
     #tray {
       color: transparent;
     }
-    #battery, #wireplumber, #backlight, #workspaces, #tray, #clock {
+    #battery, #pulseaudio, #backlight, #workspaces, #tray, #clock {
       font-size: 150%;
       margin-right: 10px;
       margin-left: 10px;
@@ -34,7 +34,7 @@ in
       margin-left = 17;
       modules-right = [ "tray" "clock" "battery" ];
       modules-center = [ "wlr/workspaces" ];
-      modules-left = [ "backlight" "wireplumber" ];
+      modules-left = [ "backlight" "pulseaudio" ];
       "wlr/workspaces" = {
         format = "{icon}";
         on-click = "activate";
@@ -67,22 +67,24 @@ in
         };
       };
 
-      "wireplumber" = {
+      "pulseaudio" = {
         "format" = "{icon}";
         "format-muted" = "";
         "on-click" = "helvum";
-        "format-icons" = [
-          " ━┅┅┅┅┅┅┅┅┅"
-          " ━━┅┅┅┅┅┅┅┅"
-          " ━━━┅┅┅┅┅┅┅"
-          " ━━━━┅┅┅┅┅┅"
-          " ━━━━━┅┅┅┅┅"
-          " ━━━━━━┅┅┅┅"
-          " ━━━━━━━┅┅┅"
-          " ━━━━━━━━┅┅"
-          " ━━━━━━━━━┅"
-          " ━━━━━━━━━━"
-        ];
+        "format-icons" = {
+          "default" = [
+            " ━┅┅┅┅┅┅┅┅┅"
+            " ━━┅┅┅┅┅┅┅┅"
+            " ━━━┅┅┅┅┅┅┅"
+            " ━━━━┅┅┅┅┅┅"
+            " ━━━━━┅┅┅┅┅"
+            " ━━━━━━┅┅┅┅"
+            " ━━━━━━━┅┅┅"
+            " ━━━━━━━━┅┅"
+            " ━━━━━━━━━┅"
+            " ━━━━━━━━━━"
+          ];
+        };
       };
       "backlight" = {
         "format" = "{icon}";
