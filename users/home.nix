@@ -38,7 +38,7 @@
     shared-mime-info
     inkscape
     xournalpp
-    libreoffice
+    stable.libreoffice
     godot_4
     onlyoffice-bin
     libxpdf
