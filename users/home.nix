@@ -56,5 +56,7 @@
     go
     gnuplot
     obsidian
+    anki
+    markdown-anki-decks
   ];
 }
