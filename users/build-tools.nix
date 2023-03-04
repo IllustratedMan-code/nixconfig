@@ -7,6 +7,10 @@ let
     matplotlib
     numpy
     pygments
+    python-lsp-server
+    ipython
+    jupyter
+    ipykernel
   ]);
 in
 {

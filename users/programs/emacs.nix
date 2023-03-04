@@ -46,14 +46,14 @@ let
       (base2      '("${base02}" "#2e2e2e" "brightblack"  ))
       (base3      '("${base01}" "#262626" "brightblack"  ))
       (base4      '("${base02}" "#3f3f3f" "brightblack"  ))
-      (base5      '("${base01}" "#525252" "brightblack"  ))
+      (base5      '("${base07}" "#525252" "brightblack"  ))
       (base6      '("${base05}" "#6b6b6b" "brightblack"  ))
       (base7      '("${base04}" "#979797" "brightblack"  ))
       (base8      '("${base08}" "#dfdfdf" "white"        ))
       (fg         '("${base06}" "#ECECEC" "white"        ))
       (fg-alt     '("${base05}" "#bfbfbf" "brightwhite"  ))
 
-      (grey       base4)
+      (grey       '("${base03}" "#3f3f3f" "brightblack"  ))
       (red        '("${base08}" "#ff6655" "red"          )) ;; Base1611
       (orange     '("${base09}" "#dd8844" "brightred"    )) ;; Base1612
       (green      '("${base0B}" "#99bb66" "green"        )) ;; Base1614
@@ -71,8 +71,8 @@ let
       (vertical-bar   (doom-darken base1 0.2))
       (selection      dark-blue)
       (builtin        blue)
-      (comments       (if doom-base16-brighter-comments dark-cyan (doom-lighten base5 0.2)))
-      (doc-comments   (doom-lighten (if doom-base16-brighter-comments dark-cyan base5) 0.25))
+      (comments       grey)
+      (doc-comments   grey)
       (constants      blue)
       (functions      cyan)
       (keywords       blue)
@@ -82,10 +82,7 @@ let
       (strings        green)
       (variables      base7)
       (numbers        magenta)
-      (region         (pcase doom-base16-region-highlight
-                        (`frost teal)
-                        (`snowstorm base7)
-                        (_ base4)))
+      (region         base4)
       (error          red)
       (warning        yellow)
       (success        green)
@@ -100,23 +97,15 @@ let
         (when doom-base16-padded-modeline
           (if (integerp doom-base16-padded-modeline) doom-base16-padded-modeline 4)))
 
-      (region-fg
-        (when (memq doom-base16-region-highlight '(frost snowstorm))
-          base0))
+      (region-fg base0)
 
       (modeline-fg     nil)
       (modeline-fg-alt base6)
 
-      (modeline-bg
-        (if -modeline-bright
-            (doom-blend bg base5 0.2)
-          `(,(doom-darken (car bg) 0.1) ,@(cdr base2))))
-      (modeline-bg-l
-        (if -modeline-bright
-            (doom-blend bg base5 0.2)
-          base1))
-      (modeline-bg-inactive   `(,(doom-darken (car bg) 0.1)   ,@(cdr base2)))
-      (modeline-bg-inactive-l `(,(doom-darken (car bg) 0.025) ,@(cdr base2))))
+      (modeline-bg bg)
+      (modeline-bg-l bg)
+      (modeline-bg-inactive   bg)
+      (modeline-bg-inactive-l bg))
 
 
       ;;;; Base theme face overrides
@@ -149,15 +138,15 @@ let
       ;;;; elscreen
       (elscreen-tab-other-screen-face :background "#353a42" :foreground "#1e2022")
       ;;;; highlight-symbol
-      (highlight-symbol-face :background (doom-lighten base4 0.1) :distant-foreground fg-alt)
+      (highlight-symbol-face :background base4 :distant-foreground fg-alt)
       ;;;; highlight-thing
-      (highlight-thing :background (doom-lighten base4 0.1) :distant-foreground fg-alt)
+      (highlight-thing :background base4 :distant-foreground fg-alt)
       ;;;; ivy
       ((ivy-current-match &override) :foreground region-fg :weight 'semi-bold)
       ;;;; markdown-mode
       (markdown-markup-face :foreground base5)
       (markdown-header-face :inherit 'bold :foreground red)
-      ((markdown-code-face &override) :background (doom-lighten bg-alt 0.05))
+      ((markdown-code-face &override) :background bg-alt)
       ;;;; mic-paren
       ((paren-face-match &override) :foreground bg :background teal :weight 'ultra-bold)
       ((paren-face-mismatch &override) :foreground base7 :background red :weight 'ultra-bold)
@@ -173,7 +162,7 @@ let
         :background modeline-bg-inactive-l
         :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive-l)))
       ;;;; vimish-fold
-      ((vimish-fold-overlay &override) :inherit 'font-lock-comment-face :background base3 :weight 'light)
+      ((vimish-fold-overlay &override) :inherit 'font-lock-comment-face :background base2 :weight 'light)
       ((vimish-fold-fringe &override)  :foreground teal))
 
       ;;;; Base theme variable overrides-
@@ -194,12 +183,13 @@ in
   programs.emacs = {
     enable = true;
     package = emacspkg;
-    extraPackages = (epkgs: [ epkgs.vterm ]);
+    extraPackages = (epkgs: [ epkgs.vterm epkgs.melpaPackages.pdf-tools ]);
   };
   home.packages = with pkgs; [
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
     hunspell
     hunspellDicts.en_US
+
   ];
   services.emacs.enable = true;
   services.emacs.package = emacspkg;

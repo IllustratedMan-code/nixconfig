@@ -8,16 +8,17 @@
     [
     ];
   # nixos unstable
-  nix.package = pkgs.nixUnstable;
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.settings.auto-optimise-store = true;
   nix.settings.substituters = [
     "https://nix-community.cachix.org"
-    "https://hyperland.cachix.org"
+    "https://hyprland.cachix.org"
+    "https://tweag-jupyter.cachix.org"
   ];
   nix.settings.trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    "tweag-jupyter.cachix.org-1:UtNH4Zs6hVUFpFBTLaA4ejYavPo5EFFqgd7G7FxGW9g="
   ];
   nix.gc = {
     automatic = true;
@@ -25,6 +26,7 @@
     options = "--delete-older-than 30d";
   };
   # Use the systemd-boot EFI boot loader.
+  boot.kernelModules = [ "wacom" ];
   boot.loader = {
     grub = {
       enable = true;
@@ -55,6 +57,7 @@
 
   # needed for some apps
   hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = [ pkgs.libvdpau-va-gl pkgs.vaapiVdpau ];
 
   # disables DHCP
   networking.useDHCP = false;
@@ -107,6 +110,9 @@
   environment.gnome.excludePackages = [ pkgs.gnome.cheese pkgs.gnome-photos pkgs.gnome.gnome-music pkgs.gnome.gnome-terminal pkgs.gnome.gedit pkgs.epiphany pkgs.evince pkgs.gnome.gnome-characters pkgs.gnome.totem pkgs.gnome.tali pkgs.gnome.iagno pkgs.gnome.hitori pkgs.gnome.atomix pkgs.gnome-tour pkgs.gnome.geary ];
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
+    SUBSYSTEM=="input", ATTRS{idVendor}=="8087", ATTRS{idProduct}=="0029", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="8087", ATTRS{idProduct}=="0029", MODE="0666"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="8087", ATTRS{idProduct}=="0029", MODE="0666"
   '';
 
   hardware.pulseaudio.enable = false;
@@ -159,7 +165,9 @@
     gum
     xdg-utils
     exfat
+    dotnetCorePackages.sdk_7_0
   ];
+  environment.sessionVariables.DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_7_0}";
   programs.wireshark.enable = true;
   programs.zsh.enable = true;
   programs.light.enable = true;
@@ -190,8 +198,8 @@
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    #extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    #wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
   #services.printing.enable = true;
   #services.printing.drivers = [ pkgs.hplip ];

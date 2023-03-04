@@ -55,5 +55,6 @@
     zip
     go
     gnuplot
+    obsidian
   ];
 }

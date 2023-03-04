@@ -1,13 +1,12 @@
+$variant: "dark";
+$accent: "green";
 
-
-$variant: 'dark';
-$accent: 'green';
-@import 'base16.scss';
-@import 'nord';
-@import 'colors';
-@import 'elementary-colors';
-@import 'colors-public';
-@import 'drawing';
-@import 'common';
-@import 'widgets';
-@import 'apps';
+@import "base16.scss";
+@import "nord";
+@import "colors";
+@import "elementary-colors";
+@import "colors-public";
+@import "drawing";
+@import "common";
+@import "widgets";
+@import "apps";

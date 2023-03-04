@@ -1,0 +1,32 @@
+%check,
+check {
+  border-radius: 3px;
+  margin: 2px;
+  color: $fg_color;
+
+  &:checked {
+    -gtk-icon-source: image(-gtk-recolor(url("assets/check-symbolic.svg")), -gtk-recolor(url("assets/check-symbolic.symbolic.png")));
+  }
+
+  &:indeterminate {
+    -gtk-icon-source: image(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
+  }
+}
+
+%radio,
+radio {
+  border-radius: 100%;
+  margin: 3px;
+  color: $fg_color;
+  -gtk-icon-source: image(-gtk-recolor(url("assets/radio-symbolic.svg")), -gtk-recolor(url("assets/radio-symbolic.png")));
+
+  &:checked {
+    color: $fg_color;
+    -gtk-icon-source: image(-gtk-recolor(url("assets/radio-checked-symbolic.svg")), -gtk-recolor(url("assets/radio-checked-symbolic.png")));
+  }
+
+  &:indeterminate {
+    color: $red;
+    -gtk-icon-source: image(-gtk-recolor(url("assets/dash-symbolic.svg")), -gtk-recolor(url("assets/dash-symbolic.symbolic.png")));
+  }
+}

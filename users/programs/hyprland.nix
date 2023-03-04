@@ -29,7 +29,10 @@ in
   xdg.configFile."hypr/hyprland_config.conf".source = "${inputs.dotfiles}/hypr/hyprland.conf";
   xdg.configFile."hypr/colors.conf".text = theme;
   xdg.configFile."hypr/hyprpaper.conf".source = "${inputs.dotfiles}/hypr/hyprpaper.conf";
-  home.packages = with pkgs; [ wl-clipboard ];
+  xdg.configFile."hypr/otd-d".source = "${inputs.dotfiles}/hypr/otd-d";
+  xdg.configFile."hypr/otd-g".source = "${inputs.dotfiles}/hypr/otd-g";
+  home.packages = with pkgs;
+    [ wl-clipboard ];
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = ''

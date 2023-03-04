@@ -1,9 +1,11 @@
 {
   description = "NixOS configuration";
 
-  inputs = {
+  inputs = rec {
+
+    nix.url = github:nixos/nix;
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable-nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
+    stable-nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
     home-manager.url = "github:nix-community/home-manager";
     neovim.url = "github:nix-community/neovim-nightly-overlay";
     emacs-overlay.url = "github:nix-community/emacs-overlay";

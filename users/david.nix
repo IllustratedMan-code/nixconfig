@@ -90,7 +90,8 @@ in
     gum
     sass
     stable.zathura
-    obsidian
+    joplin
+    osu-lazer
   ];
 
 }

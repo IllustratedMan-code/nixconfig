@@ -9,12 +9,15 @@ let
   '';
 in
 {
+  # needed for electron apps
+  imports = [ ./overlays.nix ];
+
+  # hack for electron based apps
   environment.variables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     LIBVA_DRIVER_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-
   };
   environment.systemPackages = [ nvidia-offload ];
   hardware.nvidia.modesetting.enable = true;
@@ -27,7 +30,7 @@ in
 
     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
     nvidiaBusId = "PCI:1:0:0";
-    sync.allowExternalGpu = true;
+    allowExternalGpu = true;
   };
   services.xserver.screenSection = ''
     Option         "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"

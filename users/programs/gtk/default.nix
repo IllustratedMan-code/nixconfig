@@ -31,6 +31,7 @@ let
       mkdir -p $out/share/themes/base16/gtk-3.0
       mkdir -p $out/share/themes/base16/gtk-4.0
       cp ${theme} gtk-3.0/base16.scss
+      cp -r gtk-3.0/assets $out/share/themes/base16/gtk-3.0/assets
       sass gtk-3.0/gtk.scss $out/share/themes/base16/gtk-3.0/gtk.css
       sass gtk-4.0/gtk.scss $out/share/themes/base16/gtk-4.0/gtk.css
       runHook postInstall
@@ -56,10 +57,10 @@ in
   };
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme = "gnome";
     style = {
       package = pkgs.adwaita-qt;
-      name = "gtk2";
+      name = "Adwaita";
     };
   };
 
