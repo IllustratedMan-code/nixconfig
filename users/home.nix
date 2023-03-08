@@ -55,8 +55,8 @@
     zip
     go
     gnuplot
-    obsidian
-    anki
+    pkgs.stable.obsidian
+    anki-bin
     markdown-anki-decks
   ];
 }

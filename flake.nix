@@ -28,8 +28,8 @@
     let
       colorscheme = "everforest";
       system = "x86_64-linux";
-      stable-pkgs = import inputs.stable-nixpkgs { inherit system; overlays = [ ]; };
-      pkgs = import inputs.nixpkgs { inherit system; overlays = [ (final: prev: { stable = stable-pkgs; }) ]; };
+      stable-pkgs = import inputs.stable-nixpkgs { inherit system; config.allowUnfreePredicate = true; overlays = [ ]; };
+      pkgs = import inputs.nixpkgs { inherit system; config.allowUnfreePredicate = true; overlays = [ (final: prev: { stable = stable-pkgs; }) ]; };
       mkSystemConfig = hostname: extra_modules: nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs; };

@@ -25,6 +25,8 @@
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
+  # wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # Use the systemd-boot EFI boot loader.
   boot.kernelModules = [ "wacom" ];
   boot.loader = {
@@ -57,7 +59,7 @@
 
   # needed for some apps
   hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = [ pkgs.libvdpau-va-gl pkgs.vaapiVdpau ];
+  #hardware.opengl.extraPackages = [ pkgs.libvdpau-va-gl pkgs.vaapiVdpau ];
 
   # disables DHCP
   networking.useDHCP = false;

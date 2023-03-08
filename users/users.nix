@@ -1,6 +1,6 @@
 { config, lib, pkgs, specialArgs, inputs, ... }:
 let
-  stable = final: prev: { stable = import inputs.stable-nixpkgs { system = "${prev.system}"; }; };
+  stable = final: prev: { stable = import inputs.stable-nixpkgs { config.allowUnfree = true; system = "${prev.system}"; }; };
   waybar_overlay = self: super: {
     waybar = super.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
