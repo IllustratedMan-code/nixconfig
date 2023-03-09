@@ -11,6 +11,7 @@ let
     ipython
     jupyter
     ipykernel
+    plotly
   ]);
 in
 {
