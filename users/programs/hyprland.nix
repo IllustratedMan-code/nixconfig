@@ -24,6 +24,9 @@ in
 
   systemd.user.sessionVariables = {
     SCREENSHOTS = "$HOME/Pictures";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_SESSION_DESKTOP = "Hyprland";
   };
   imports = [ inputs.hyprland.homeManagerModules.default ];
   xdg.configFile."hypr/hyprland_config.conf".source = "${inputs.dotfiles}/hypr/hyprland.conf";
@@ -32,7 +35,7 @@ in
   xdg.configFile."hypr/otd-d".source = "${inputs.dotfiles}/hypr/otd-d";
   xdg.configFile."hypr/otd-g".source = "${inputs.dotfiles}/hypr/otd-g";
   home.packages = with pkgs;
-    [ wl-clipboard ];
+    [ wl-clipboard wf-recorder ];
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = ''

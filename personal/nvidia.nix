@@ -22,6 +22,14 @@ in
   environment.systemPackages = [ nvidia-offload ];
   hardware.nvidia.modesetting.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl = {
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
   hardware.nvidia.prime = {
     offload.enable = true;
 

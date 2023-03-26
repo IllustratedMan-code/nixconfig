@@ -11,6 +11,7 @@ let
     ipython
     jupyter
     ipykernel
+    scikit-learn
   ]);
 in
 {
@@ -18,5 +19,8 @@ in
     R-with-my-packages
     python-with-my-packages
     rustup
+    clang
+    bear
+    clang-tools
   ];
 }

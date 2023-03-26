@@ -1,7 +1,7 @@
 { inputs, config, pkgs, scheme, ... }:
 with scheme.withHashtag;
 let
-  emacspkg = pkgs.emacsUnstable;
+  emacspkg = pkgs.emacsPgtk;
   theme = ''
     (require 'doom-themes)
     (defgroup doom-base16-theme nil

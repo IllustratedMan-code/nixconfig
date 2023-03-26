@@ -15,6 +15,7 @@
     package = pkgs.firefox-wayland;
   };
   home.packages = with pkgs; [
+    traceroute
     element-desktop-wayland
     krita
     cinnamon.nemo
@@ -56,6 +57,7 @@
     go
     gnuplot
     pkgs.stable.obsidian
+    microsoft-edge
     anki-bin
     markdown-anki-decks
   ];
