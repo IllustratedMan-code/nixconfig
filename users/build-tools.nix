@@ -12,6 +12,7 @@ let
     jupyter
     ipykernel
     scikit-learn
+    plotly
   ]);
 in
 {
