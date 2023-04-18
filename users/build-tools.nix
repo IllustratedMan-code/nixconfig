@@ -13,6 +13,9 @@ let
     ipykernel
     scikit-learn
     plotly
+    nltk
+    networkx
+    graphviz
   ]);
 in
 {
@@ -23,5 +26,7 @@ in
     clang
     bear
     clang-tools
+    graphviz
+    graphviz
   ];
 }

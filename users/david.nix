@@ -41,7 +41,7 @@ in
     enable = true;
     associations.added = {
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
-      "application/x-shellscript" = [ "emacs.desktop" "emacsclient.desktop" ];
+      "application/x-shellscript" = [ "emacsclient.desktop" "emacs.desktop" ];
       "text/x-csrc" = [ "emacsclient.desktop" ];
       "application/x-7z-compressed" = [ "org.gnome.FileRoller.desktop" ];
       "application/zip" = [ "org.gnome.FileRoller.desktop" ];
@@ -72,26 +72,15 @@ in
     };
   };
 
-  #gtk = {
-  #  enable = true;
-  #  theme = {
-  #    name = "Nordic";
-  #    package = pkgs.nordic;
-  #  };
-  #};
-
 
   home.packages = with pkgs; [
     inputs.eww.packages.x86_64-linux.eww-wayland
     hyprpaper
-    nyxt
     grim
     slurp
     gum
     sass
     stable.zathura
-    joplin
-    osu-lazer
   ];
 
 }

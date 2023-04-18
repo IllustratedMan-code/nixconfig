@@ -76,36 +76,16 @@
   services.xserver = {
     enable = true;
     dpi = 96;
-    desktopManager = {
-      xterm.enable = false;
-    };
 
     screenSection = ''Option "FlatPanelProperties" "Dithering=Disabled"'';
     displayManager = {
       defaultSession = "hyprland";
-      lightdm = {
-        #enable = true;
-        background = "${inputs.dotfiles}/i3/atp.png";
-        greeters.gtk = {
-          enable = true;
-          theme.name = "Nordic";
-          theme.package = pkgs.nordic;
-        };
-      };
       gdm.enable = true;
-    };
-
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
     };
     desktopManager = {
       gnome.enable = false;
-      xfce = {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      };
+      xterm.enable = false;
+      xfce.enable = true;
     };
   };
   #services.autorandr.enable = true;
@@ -175,8 +155,10 @@
   programs.light.enable = true;
   # fonts
   fonts.enableDefaultFonts = true;
+  fonts.fontDir.enable = true;
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
+    noto-fonts-emoji
     siji
     corefonts
     emacs-all-the-icons-fonts

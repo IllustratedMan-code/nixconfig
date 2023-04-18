@@ -114,6 +114,12 @@ in
     withPython3 = true;
     withNodeJs = true;
     extraConfig = dotfile "config.vim";
+
+  };
+
+  xdg.configFile."snippets" = {
+    source = "${inputs.dotfiles}/snippets";
+    recursive = true;
   };
   # sync snippets dir
 }

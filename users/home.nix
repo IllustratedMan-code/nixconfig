@@ -18,7 +18,9 @@
     traceroute
     element-desktop-wayland
     krita
-    cinnamon.nemo
+    cinnamon.nemo-with-extensions
+    cinnamon.nemo-fileroller
+
     google-chrome-beta
     tree-sitter
     kate
@@ -60,5 +62,6 @@
     microsoft-edge
     anki-bin
     markdown-anki-decks
+    nyxt
   ];
 }

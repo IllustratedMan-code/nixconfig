@@ -189,7 +189,7 @@ in
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
     hunspell
     hunspellDicts.en_US
-
+    sbcl
   ];
   services.emacs.enable = true;
   services.emacs.package = emacspkg;
