@@ -81,6 +81,7 @@ in
     gum
     sass
     stable.zathura
+    vscode.fhs
   ];
 
 }

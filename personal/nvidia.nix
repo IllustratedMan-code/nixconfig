@@ -9,6 +9,8 @@ let
   '';
 in
 {
+
+  programs.hyprland.nvidiaPatches = true;
   # needed for electron apps
   imports = [ ./overlays.nix ];
 

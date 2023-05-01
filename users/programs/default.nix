@@ -12,7 +12,6 @@ in
     ./rofi.nix
     ./nvim
     ./dunst.nix
-    ./i3.nix
     ./wallpapers
     ./gtk
     ./waybar.nix

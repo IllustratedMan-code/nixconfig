@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
-with pkgs;
-let
+with pkgs; let
   R-with-my-packages = rWrapper.override { packages = with rPackages; [ ggplot2 dplyr xts ]; };
   python-with-my-packages = pkgs.python3.withPackages (p: with p; [
     pandas
@@ -27,6 +26,8 @@ in
     bear
     clang-tools
     graphviz
-    graphviz
   ];
+  home.sessionVariables = {
+    QT_PLUGIN_PATH = with pkgs.qt5; "${qtbase}/${qtbase.qtPluginPrefix}";
+  };
 }

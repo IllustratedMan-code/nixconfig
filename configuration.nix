@@ -8,6 +8,7 @@
     [
     ];
   # nixos unstable
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.settings.auto-optimise-store = true;
   nix.settings.substituters = [
@@ -81,6 +82,7 @@
     displayManager = {
       defaultSession = "hyprland";
       gdm.enable = true;
+      #startx.enable = true;
     };
     desktopManager = {
       gnome.enable = false;
@@ -105,7 +107,6 @@
       };
     };
   };
-
   environment.systemPackages = with pkgs; [
     wireshark
     termshark
@@ -122,6 +123,7 @@
     nodejs
     unzip
     socat
+    config.boot.kernelPackages.perf
 
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
     hunspell
@@ -191,8 +193,8 @@
   services.avahi.nssmdns = true;
   services.flatpak.enable = true;
   virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.guest.enable = true;
+  #virtualisation.virtualbox.host.enable = true;
+  #virtualisation.virtualbox.guest.enable = true;
 
   hardware.opentabletdriver.enable = true;
   hardware.opentabletdriver.daemon.enable = true;

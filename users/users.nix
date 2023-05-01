@@ -25,6 +25,13 @@ in
     description = "David Lewis";
     extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" "wireshark" ];
   };
+  users.users.maggie = {
+    isNormalUser = true;
+    home = "/home/maggie";
+    shell = pkgs.zsh;
+    description = "Maggie Yegerlehner";
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" "wireshark" ];
+  };
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = specialArgs // { scheme = config.scheme; };

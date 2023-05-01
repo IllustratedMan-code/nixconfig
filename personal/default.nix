@@ -1,7 +1,6 @@
 { config, pkgs, inputs, ... }:
 {
-  imports = [ ./nvidia.nix ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ./nvidia-2.nix ];
   boot.loader.grub.useOSProber = true;
-  programs.hyprland.nvidiaPatches = true;
   systemd.network.wait-online.anyInterface = true;
 }
