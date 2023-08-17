@@ -19,6 +19,9 @@ let
     $base0E = ${base0E}
     $base0F = ${base0F}
   '';
+  current_monitor = pkgs.writeShellScriptBin "current_monitor" ''
+    hyprctl monitors | grep "focused: yes" -B 11 | awk 'NR==1 {print $2}'
+  '';
 in
 {
 
@@ -35,7 +38,7 @@ in
   xdg.configFile."hypr/otd-d".source = "${inputs.dotfiles}/hypr/otd-d";
   xdg.configFile."hypr/otd-g".source = "${inputs.dotfiles}/hypr/otd-g";
   home.packages = with pkgs;
-    [ wl-clipboard wf-recorder ];
+    [ wl-clipboard wf-recorder current_monitor ];
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = ''

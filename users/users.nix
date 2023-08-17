@@ -4,6 +4,9 @@ let
   waybar_overlay = self: super: {
     waybar = super.waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      postPatch = ''
+        sed -i -e 's/zext_workspace_handle_v1_activate(workspace_handle_);/const std::string command = "hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());/g' src/modules/wlr/workspace_manager.cpp
+      '';
     });
   };
 in
@@ -23,13 +26,6 @@ in
     home = "/home/david";
     shell = pkgs.zsh;
     description = "David Lewis";
-    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" "wireshark" ];
-  };
-  users.users.maggie = {
-    isNormalUser = true;
-    home = "/home/maggie";
-    shell = pkgs.zsh;
-    description = "Maggie Yegerlehner";
     extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" "wireshark" ];
   };
   home-manager.useGlobalPkgs = true;

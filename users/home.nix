@@ -63,5 +63,7 @@
     anki-bin
     markdown-anki-decks
     nyxt
+    bat
+    komikku
   ];
 }

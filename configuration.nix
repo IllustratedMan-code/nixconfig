@@ -28,12 +28,12 @@
   };
   # wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   # Use the systemd-boot EFI boot loader.
   boot.kernelModules = [ "wacom" ];
   boot.loader = {
     grub = {
       enable = true;
-      version = 2;
       efiSupport = true;
       device = "nodev";
       splashImage = "${inputs.dotfiles}/i3/atp.png";
@@ -72,7 +72,11 @@
   services.acpid.enable = true;
   networking.dhcpcd.enable = false;
 
+  #secrets
+  services.gnome.gnome-keyring.enable = true;
+
   # window manager config
+  programs.hyprland.enable = true;
   nixpkgs.config.allowUnfree = true;
   services.xserver = {
     enable = true;

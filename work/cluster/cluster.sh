@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 export BORDER="rounded"
 
-address="lew2mz@bmiclusterp.chmcres.cchmc.org"
+address="lewt2p@bmiclusterp.chmcres.cchmc.org"
 
 gum style 'Cluster actions'
 action=$(gum choose "connect" "copy to" "copy from")
 if [ "$action" == "connect" ]; then
-    ssh $address
+    ssh -t $address  tmux new -A -s lewt2p
 elif [ "$action" == "copy from" ]; then
     gum style "enter cluster path"
     cluster_path=$(gum input)

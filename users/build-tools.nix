@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 with pkgs; let
-  R-with-my-packages = rWrapper.override { packages = with rPackages; [ ggplot2 dplyr xts ]; };
+  R-with-my-packages = rWrapper.override { packages = with rPackages; [ ggplot2 dplyr xts tidyverse styler ]; };
   python-with-my-packages = pkgs.python3.withPackages (p: with p; [
     pandas
     matplotlib
@@ -26,6 +26,8 @@ in
     bear
     clang-tools
     graphviz
+    nodePackages.typescript
+    nodePackages.typescript-language-server
   ];
   home.sessionVariables = {
     QT_PLUGIN_PATH = with pkgs.qt5; "${qtbase}/${qtbase.qtPluginPrefix}";

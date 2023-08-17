@@ -1,13 +1,13 @@
 { inputs, config, pkgs, scheme, ... }:
 with scheme.withHashtag;
 let
-  in
+in
 {
   programs.zsh = {
     enable = true;
     initExtra = builtins.readFile "${inputs.dotfiles}/.zshrc";
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     autocd = true;
     defaultKeymap = "viins";
     oh-my-zsh = {
@@ -30,9 +30,9 @@ let
   programs.fzf = {
     enable = true;
   };
-  home.packages = with pkgs; [wl-clipboard];
+  home.packages = with pkgs; [ wl-clipboard ];
 }
 
-  #home.file.".zshrc" = {
-  #  source = "${inputs.dotfiles}/.zshrc";
-  #};
+#home.file.".zshrc" = {
+#  source = "${inputs.dotfiles}/.zshrc";
+#};

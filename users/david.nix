@@ -82,6 +82,7 @@ in
     sass
     stable.zathura
     vscode.fhs
+    blender
   ];
 
 }

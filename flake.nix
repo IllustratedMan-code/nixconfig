@@ -5,7 +5,7 @@
 
     nix.url = github:nixos/nix;
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable-nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    stable-nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     home-manager.url = "github:nix-community/home-manager";
     neovim.url = "github:nix-community/neovim-nightly-overlay";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
@@ -26,10 +26,18 @@
 
   outputs = inputs@{ self, nixpkgs, ... }:
     let
-      colorscheme = "everforest";
+      colorscheme = "gruvbox-dark-medium";
       system = "x86_64-linux";
-      stable-pkgs = import inputs.stable-nixpkgs { inherit system; config.allowUnfreePredicate = true; overlays = [ ]; };
-      pkgs = import inputs.nixpkgs { inherit system; config.allowUnfreePredicate = true; overlays = [ (final: prev: { stable = stable-pkgs; }) ]; };
+      stable-pkgs = import inputs.stable-nixpkgs { inherit system; config.allowUnfree = true; overlays = [ ]; };
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [
+          (final: prev: { stable = stable-pkgs; })
+          inputs.hyprland.overlays.default
+          inputs.emacs-overlay.overlays.default
+        ];
+      };
       mkSystemConfig = hostname: extra_modules: nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs; };
@@ -37,7 +45,16 @@
           inputs.base16.nixosModule
           { scheme = "${inputs.base16-schemes}/${colorscheme}.yaml"; }
           ./configuration.nix
-          { networking.hostName = hostname; }
+          {
+            networking.hostName = hostname;
+            nixpkgs.overlays = [
+
+              (final: prev: { stable = stable-pkgs; })
+              inputs.hyprland.overlays.default
+              inputs.emacs-overlay.overlays.default
+            ];
+
+          }
           ./users/users.nix
           inputs.hyprland.nixosModules.default
           { programs.hyprland = { enable = true; }; }

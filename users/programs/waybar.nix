@@ -2,10 +2,6 @@
 with scheme.withHashtag;
 let
   theme = ''
-    * {
-      color: ${base0A};
-      font-family: "JetBrainsMono Nerd Font Mono";
-    }
     window#waybar {
       background-color: ${base01};
       border-radius: 20px;
@@ -13,17 +9,33 @@ let
     #tray {
       color: transparent;
     }
-    #battery, #pulseaudio, #backlight, #workspaces, #tray, #clock {
+    #battery, #pulseaudio, #backlight, #workspaces, #tray, #clock, #custom-pomodoro, #window {
       font-size: 150%;
       margin-right: 10px;
       margin-left: 10px;
+      color: ${base05}
+    }
+    #battery.critical {
+      color: ${base08};
+    }
+    #workspaces button.urgent {
+      color: ${base08};
+    }
+    #workspaces button:hover {
+      background: transparent;
+      color: ${base06}
+    }
+    * {
+      font-family: "JetBrainsMono Nerd Font Mono";
     }
   '';
+
 in
 {
   home.packages = with pkgs; [ stable.helvum sqlite ];
   programs.waybar = {
     enable = true;
+    package = pkgs.waybar;
     systemd.enable = true;
     settings = [{
       position = "top";
@@ -39,9 +51,19 @@ in
         format = "{icon}";
         on-click = "activate";
         format-icons = {
+          "1" = "";
+          "2" = "";
+          "3" = "";
+          "4" = "";
           "urgent" = "";
           "active" = "";
           "default" = "";
+        };
+        "persistent_workspaces" = {
+          "1" = "[]";
+          "2" = "[]";
+          "3" = "[]";
+          "4" = "[]";
         };
         "sort-by-number" = true;
       };
@@ -52,7 +74,8 @@ in
           "critical" = 15;
         };
         "format" = "{icon}";
-        "format-icons" = [ "🌑" "🌘" "🌗" "🌖" "🌕" ];
+        "format-icons" = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+        "format-charging" = "{icon}󱐋";
         "max-length" = 25;
       };
 
@@ -87,23 +110,27 @@ in
         };
       };
       "backlight" = {
+        "on-scroll-up" = "light -A 5";
+        "on-scroll-down" = "light -U 5";
         "format" = "{icon}";
         "format-icons" = [
-          " ━┅┅┅┅┅┅┅┅┅"
-          " ━━┅┅┅┅┅┅┅┅"
-          " ━━━┅┅┅┅┅┅┅"
-          " ━━━━┅┅┅┅┅┅"
-          " ━━━━━┅┅┅┅┅"
-          " ━━━━━━┅┅┅┅"
-          " ━━━━━━━┅┅┅"
-          " ━━━━━━━━┅┅"
-          " ━━━━━━━━━┅"
-          " ━━━━━━━━━━"
+          "󱩎 ━┅┅┅┅┅┅┅┅┅"
+          "󱩏 ━━┅┅┅┅┅┅┅┅"
+          "󱩐 ━━━┅┅┅┅┅┅┅"
+          "󱩑 ━━━━┅┅┅┅┅┅"
+          "󱩒 ━━━━━┅┅┅┅┅"
+          "󱩓 ━━━━━━┅┅┅┅"
+          "󱩔 ━━━━━━━┅┅┅"
+          "󱩕 ━━━━━━━━┅┅"
+          "󱩖 ━━━━━━━━━┅"
+          "󰛨 ━━━━━━━━━━"
         ];
-
       };
 
-
+      "custom/pomodoro" = {
+        "exec" = "${inputs.dotfiles}/polybar/pomodoro.sh";
+        "restart-interval" = 1;
+      };
       #exclusive = false;
     }];
     style = theme;
