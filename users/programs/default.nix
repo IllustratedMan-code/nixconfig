@@ -18,5 +18,7 @@ in
     ./zsh.nix
     ./shellPrograms
     ./ardour.nix
+    ./latex
+    ./sioyek.nix
   ];
 }

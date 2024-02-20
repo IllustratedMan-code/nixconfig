@@ -15,6 +15,7 @@
     package = pkgs.firefox-wayland;
   };
   home.packages = with pkgs; [
+    nix-ld
     traceroute
     element-desktop-wayland
     krita
@@ -65,5 +66,10 @@
     nyxt
     bat
     komikku
+    openbabel
+    avogadro
+    element
+    alacritty
+    calibre
   ];
 }

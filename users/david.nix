@@ -83,6 +83,7 @@ in
     stable.zathura
     vscode.fhs
     blender
+    sioyek
   ];
 
 }

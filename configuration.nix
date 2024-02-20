@@ -111,6 +111,7 @@
       };
     };
   };
+  programs.nix-ld.enable = true;
   environment.systemPackages = with pkgs; [
     wireshark
     termshark
@@ -191,8 +192,8 @@
     #wlr.enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-  #services.printing.enable = true;
-  #services.printing.drivers = [ pkgs.hplip ];
+  services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplip ];
   services.avahi.enable = true;
   services.avahi.nssmdns = true;
   services.flatpak.enable = true;
