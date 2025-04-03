@@ -1,10 +1,17 @@
 # This file should only contain a basic list of system packages
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    neovim
     git
     ripgrep
     firefox
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+
 }

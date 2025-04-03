@@ -1,0 +1,54 @@
+{ inputs
+, config
+, pkgs
+, lib
+, ...
+}:
+let
+  makeConfig = path:
+    let
+      fullpath = "${config.home.homeDirectory}/nixconfig/config/users/homemanager/hyprland/${path}";
+    in
+    ({
+      "hypr/${path}".source = config.lib.file.mkOutOfStoreSymlink fullpath;
+    });
+  trace = arg: builtins.trace arg arg;
+in
+{
+  imports = [
+    ./waybar
+    ./rofi
+  ];
+
+  options.hyprland = {
+    configs = lib.mkOption {
+      default = [ "main.conf" ];
+    };
+    
+
+  };
+
+  config =
+    let
+      configfiles = trace (builtins.foldl' (x: y: x // y) { } (builtins.map makeConfig config.hyprland.configs));
+      sourcelines = builtins.foldl' (x: y: "${x}\n${y}") "" (builtins.map (x: "source=${x}") config.hyprland.configs);
+    in
+    {
+      hyprland.configs = [ "main.conf" "kitty.conf" "emacs.conf"];
+      xdg.configFile = configfiles;
+      home.packages = with pkgs; [
+        hyprpicker
+        nwg-displays
+        wl-clipboard
+      ];
+      wayland.windowManager.hyprland = {
+        enable = true;
+        extraConfig = ''
+          $mod = SUPER # Sets "Windows" key as main modifier
+          $modshift = $mod + SHIFT
+          ${sourcelines}
+        '';
+        xwayland.enable = true;
+      };
+    };
+}

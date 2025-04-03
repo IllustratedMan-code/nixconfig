@@ -5,22 +5,25 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.kernelParams = ["i915.force_probe=a7a1"];
+  boot.kernelParams = [ "i915.force_probe=a7a1" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/37a1dcf8-c31e-4800-8af0-58dc8f413876";
+    {
+      device = "/dev/disk/by-uuid/37a1dcf8-c31e-4800-8af0-58dc8f413876";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2EDA-EE7B";
+    {
+      device = "/dev/disk/by-uuid/2EDA-EE7B";
       fsType = "vfat";
     };
 
