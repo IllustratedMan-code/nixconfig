@@ -1,8 +1,9 @@
-{ config
-, pkgs
-, inputs
-, specialArgs
-, ...
+{
+  config,
+  pkgs,
+  inputs,
+  specialArgs,
+  ...
 }:
 {
 

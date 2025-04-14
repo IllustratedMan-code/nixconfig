@@ -13,6 +13,7 @@ in
     ./zsh
     ./kitty
     ./hyprland
+    ./tmux
     ./utilities/cluster-connect
   ];
   programs.direnv.enable = true;

@@ -1,11 +1,13 @@
-{ inputs
-, config
-, pkgs
-, lib
-, ...
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 let
-  makeConfig = path:
+  makeConfig =
+    path:
     let
       fullpath = "${config.home.homeDirectory}/nixconfig/config/users/homemanager/hyprland/${path}";
     in
@@ -24,28 +26,40 @@ in
     configs = lib.mkOption {
       default = [ "main.conf" ];
     };
-    
 
   };
 
   config =
     let
-      configfiles = trace (builtins.foldl' (x: y: x // y) { } (builtins.map makeConfig config.hyprland.configs));
-      sourcelines = builtins.foldl' (x: y: "${x}\n${y}") "" (builtins.map (x: "source=${x}") config.hyprland.configs);
+      configfiles = trace (
+        builtins.foldl' (x: y: x // y) { } (builtins.map makeConfig config.hyprland.configs)
+      );
+      sourcelines = builtins.foldl' (x: y: "${x}\n${y}") "" (
+        builtins.map (x: "source=${x}") config.hyprland.configs
+      );
     in
     {
-      hyprland.configs = [ "main.conf" "kitty.conf" "emacs.conf"];
+
+      hyprland.configs = [
+        "main.conf"
+        "kitty.conf"
+        "emacs.conf"
+      ];
       xdg.configFile = configfiles;
       home.packages = with pkgs; [
         hyprpicker
         nwg-displays
         wl-clipboard
+        hyprpolkitagent
+        networkmanagerapplet
       ];
       wayland.windowManager.hyprland = {
         enable = true;
         extraConfig = ''
           $mod = SUPER # Sets "Windows" key as main modifier
           $modshift = $mod + SHIFT
+          exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+          exec-once = nm-applet
           ${sourcelines}
         '';
         xwayland.enable = true;

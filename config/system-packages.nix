@@ -5,6 +5,7 @@
     git
     ripgrep
     firefox
+    wl-clipboard
   ];
 
   programs.neovim = {

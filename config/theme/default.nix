@@ -1,8 +1,9 @@
-{ config
-, pkgs
-, inputs
-, colorscheme
-, ...
+{
+  config,
+  pkgs,
+  inputs,
+  colorscheme,
+  ...
 }:
 let
 in
