@@ -9,8 +9,11 @@
 (setq backup-by-copying t)
 
 
-(use-package userkeymap
-	:load-path "keymap/")
+;(use-package userkeymap
+;	:load-path "keymap/")
+
+
+(use-package niximports)
 
 (use-package treesit-auto
 	:config

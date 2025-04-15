@@ -1,15 +1,14 @@
-{
-  inputs,
-  config,
-  pkgs,
-  ...
+{ inputs
+, config
+, pkgs
+, ...
 }:
 let
 in
 {
   imports = [
     ./keymap
-		./emacslib.nix
+    ./emacslib.nix
   ];
   home.sessionVariables = {
     emacsconfig = "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs";
@@ -31,7 +30,7 @@ in
         general
         treesit-auto
         markdown-mode
-				projectile
+        projectile
       ])
     );
   };
@@ -39,6 +38,6 @@ in
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs/init.el";
   #home.file.".emacs.d/keymap/userkeymap.el".source =
   #  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs/keymap/userkeymap.el";
-	
-	
+
+
 }

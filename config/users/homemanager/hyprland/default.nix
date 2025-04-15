@@ -1,9 +1,8 @@
-{
-  inputs,
-  config,
-  pkgs,
-  lib,
-  ...
+{ inputs
+, config
+, pkgs
+, lib
+, ...
 }:
 let
   makeConfig =
@@ -31,7 +30,7 @@ in
 
   config =
     let
-      configfiles = trace (
+      configfiles = (
         builtins.foldl' (x: y: x // y) { } (builtins.map makeConfig config.hyprland.configs)
       );
       sourcelines = builtins.foldl' (x: y: "${x}\n${y}") "" (

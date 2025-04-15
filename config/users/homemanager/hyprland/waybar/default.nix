@@ -65,9 +65,9 @@ in
           "clock"
           "battery"
         ];
-        modules-center = [];
+        modules-center = [ ];
         modules-left = [
-					"hyprland/workspaces" 
+          "hyprland/workspaces"
           #"backlight"
           #"pulseaudio"
         ];

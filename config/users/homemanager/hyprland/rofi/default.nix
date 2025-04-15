@@ -21,7 +21,7 @@ in
   xdg.configFile."rofi/theme.rasi".source = ./theme.rasi;
   xdg.configFile."rofi/config.rasi".source = ./config.rasi;
   xdg.configFile."rofi/colors.rasi".text = theme;
-  hyprland.configs = ["rofi/rofi-hyprland.conf"];
+  hyprland.configs = [ "rofi/rofi-hyprland.conf" ];
   # programs.rofi = {
   #   enable = true;
   #   package = pkgs.rofi-wayland;
