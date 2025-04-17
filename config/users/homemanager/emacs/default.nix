@@ -9,6 +9,7 @@ in
   imports = [
     ./keymap
     ./emacslib.nix
+    ./languages
   ];
   home.sessionVariables = {
     emacsconfig = "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs";
@@ -19,8 +20,6 @@ in
     extraPackages = (
       epkgs:
       (with epkgs; [
-        nix-mode
-        nix-ts-mode
         vterm
         treesit-grammars.with-all-grammars
         use-package
@@ -31,13 +30,12 @@ in
         treesit-auto
         markdown-mode
         projectile
+				ivy
+        counsel
+        company
       ])
     );
   };
   home.file.".emacs.d/init.el".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs/init.el";
-  #home.file.".emacs.d/keymap/userkeymap.el".source =
-  #  config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs/keymap/userkeymap.el";
-
-
 }

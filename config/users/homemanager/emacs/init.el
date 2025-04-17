@@ -9,17 +9,7 @@
 (setq backup-by-copying t)
 
 
-;(use-package userkeymap
-;	:load-path "keymap/")
-
-
 (use-package niximports)
-
-(use-package treesit-auto
-	:config
-	(treesit-auto-add-to-auto-mode-alist)
-	(global-treesit-auto-mode))
-
 
 (setq inhibit-startup-screen t)
 (menu-bar-mode -1)
@@ -36,10 +26,17 @@
 	:init (setq markdown-command "multimarkdown")
 	)
 
-(use-package nix-ts-mode
-	:mode "\\.nix\\'")
-
-
 (use-package projectile
 	:after general
 	)
+
+(use-package ivy
+	:init (ivy-mode 1))
+(use-package counsel
+	:after ivy
+	:init (counsel-mode 1))
+
+(use-package company
+	:config
+	(add-hook 'after-init-hook 'global-company-mode)
+ )
