@@ -8,7 +8,8 @@ let
 in
 {
   
-  emacsLib.useFiles = [ "keymap/userkeymap.el" ];
+  emacsLib.useFiles = [ "keymap/+keymap.el" ];
+  home.packages = with pkgs;[fzf silver-searcher ripgrep];
   programs.emacs.extraPackages = (
     epkgs:
     (with epkgs; [
@@ -16,6 +17,8 @@ in
       evil-owl
       evil
       evil-collection
+      ace-window
+      avy
     ])
   );
 }

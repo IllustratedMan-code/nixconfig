@@ -1,4 +1,18 @@
 (eval-when-compile (require 'use-package))
+(eval-when-compile (require 'general))
+
+
+(general-create-definer local-leader-definer
+		:prefix "SPC m"
+		:states '(normal visual)
+)
+
+(general-create-definer leader-definer
+		:prefix "SPC"
+		:states '(normal visual)
+		:keymaps 'override
+)
+
 (add-to-list 'load-path "/home/david/.config/emacs/")
 
 (make-directory "~/.emacs.d/autosaves" t)
@@ -21,14 +35,6 @@
 (setq-default indent-tabs-mode t)
 
 
-(use-package markdown-mode
-	:mode ("README\\.md\\'". gfm-mode)
-	:init (setq markdown-command "multimarkdown")
-	)
-
-(use-package projectile
-	:after general
-	)
 
 (use-package ivy
 	:init (ivy-mode 1))

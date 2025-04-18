@@ -1,0 +1,2 @@
+
+(add-hook 'python-base-mode #'lsp-deferred)

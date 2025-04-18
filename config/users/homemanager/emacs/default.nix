@@ -1,9 +1,11 @@
-{ inputs
-, config
-, pkgs
-, ...
+{
+  inputs,
+  config,
+  pkgs,
+  ...
 }:
 let
+
 in
 {
   imports = [
@@ -29,8 +31,7 @@ in
         general
         treesit-auto
         markdown-mode
-        projectile
-				ivy
+        ivy
         counsel
         company
       ])

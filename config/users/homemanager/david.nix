@@ -14,6 +14,7 @@ in
     ./hyprland
     ./tmux
     ./utilities/cluster-connect
+    ./typst
   ];
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
