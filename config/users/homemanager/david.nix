@@ -15,6 +15,7 @@ in
     ./tmux
     ./utilities/cluster-connect
     ./typst
+    ./R
   ];
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;

@@ -38,5 +38,8 @@ in
     );
   };
   home.file.".emacs.d/init.el".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs/init.el";
+    config.emacsLib.makeSymlink "init.el";
+  home.file.".emacs.d/early-init.el".source =
+    config.emacsLib.makeSymlink "early-init.el";
+  emacsLib.useFiles = [ "languages/languages.el" ];
 }

@@ -4,7 +4,7 @@
 , ...
 }:
 {
-  imports = [ ./nix ./markdown ./python ./org ./typst];
+  imports = [ ./nix ./markdown ./python ./org ./typst ./R];
   emacsLib.useFiles = [ "languages/languages.el" ];
   programs.emacs.extraPackages = (
     epkgs:

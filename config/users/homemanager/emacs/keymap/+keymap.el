@@ -62,9 +62,20 @@
 	:keymaps 'override
 	)
 
+(defun org-project-todos ()
+		"Show only TODO entries from the current project."
+		(interactive)
+		(require 'org)
+		(let ((org-agenda-files
+		       (directory-files-recursively
+			(project-root (project-current t))
+			"\\.org$")))
+			(org-todo-list)))
+
 (project-definer
 	"" '(:ignore t :which-key "project")
 	"s" '("switch project" . project-switch-project)
+	"t" '("project todos" . org-project-todos)
  )
 
 
@@ -108,6 +119,7 @@
 		"f" '("Describe Function" . describe-function)
 		"v" '("Describe Variable" . describe-variable)
 		"k" '("Describe Keybinding" . describe-key)
+		"F" '("Describe Face" . describe-face)
 )
 
 (provide '+keymap)

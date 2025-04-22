@@ -1,0 +1,32 @@
+
+* Emacs Config
+
+This is the emacs configuration for my nixos configuration.
+
+* emacsLib.nix
+
+~emacsLib.nix~ is a nix module that makes adding new files to the emacs configuration
+easier within a nix context. Currently, it makes an out-of-store symlink and creates
+a use-package configuration. This way, the config can be easily edited without reloading
+the nix config.
+
+This is not exactly portable however, so need to add a way to disable
+the out-of-store symlinking when config in the file is stable.
+
+
+** TODO fix bad namespace
+~emacsLib~ is probably not the best namespace to use for this as it breaks with
+nixos convention. Maybe ~emacs.lib~ would be better.
+
+
+** TODO load order within emacsLib includeFiles.
+There needs to be a way to control the load order of the various
+files.  I want to do it by directory, i.e. ~languages.el~ loads before
+all the files in ~languages~.  Managing load order within the
+directory is not necessary I think. This way, there is a parent-child
+relationship, but not really a sibling relationship.
+
+* languages
+
+Languages are seperately defined in 
+

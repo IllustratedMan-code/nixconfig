@@ -15,5 +15,12 @@
 (setq-default eglot-workspace-configuration
 							'(:tinymist (:formatterMode "typstyle")))
 
+(use-package ox-typst
+	:after org
+	:config
+	(setq org-typst-from-latex-environment #'org-typst-from-latex-with-pandoc)
+	(setq org-typst-from-latex-fragment #'org-typst-from-latex-with-pandoc)
+	)
+
 ;;(add-hook 'typst-ts-mode-hook 'eglot-ensure)
 (provide '+typst)

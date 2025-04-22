@@ -22,5 +22,10 @@
 	
 
 
+(with-eval-after-load 'eglot
+  (with-eval-after-load 'typst-ts-mode
+    (add-to-list 'eglot-server-programs
+                `((python-ts-mode) .
+                   ,(eglot-alternatives `("pyright"))))))
 
 (provide '+python)
