@@ -6,6 +6,7 @@
     epkgs:
     (with epkgs; [
       org-modern
+      org-present
     ])
   );
 }

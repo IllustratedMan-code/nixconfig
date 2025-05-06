@@ -5,6 +5,7 @@
 , ...
 }:
 {
+  home.packages = with pkgs; [pdftk];
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -23,5 +24,7 @@
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixconfig";
     };
+
+    #extraConfig = builtins.readFile ./zshrc.sh;
   };
 }

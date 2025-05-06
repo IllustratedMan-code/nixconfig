@@ -5,7 +5,7 @@
     epkgs:
     (with epkgs; [
       typst-ts-mode
-      ox-typst
+      #ox-typst
     ])
   );
   home.packages = with pkgs; [

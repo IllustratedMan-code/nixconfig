@@ -47,7 +47,7 @@
  
 
 (leader-definer
-		"l" '("Previous Buffer" . evil-switch-to-windows-last-buffer)
+		"l" '("Last Buffer" . evil-switch-to-windows-last-buffer)
 		"f" '(:ignore t :which-key "find")
 		"ff" '("file" . find-file)
 		"fc" '("config" . (lambda ()
@@ -82,13 +82,14 @@
 
 
 (general-create-definer window-definer
-		;; local leader
 		:prefix "SPC w"
 		:states '(normal visual)
 		:keymaps 'override
 		)
 
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+(custom-set-faces
+ '(aw-leading-char-face ((t (:inherit font-lock-keyword-face )))))
 (window-definer
 	"" '(:ignore t :which-key "window")
 	"a" '("ace" . ace-window)
@@ -109,7 +110,6 @@
 )
 
 (general-create-definer help-definer
-		;; local leader
 		:prefix "SPC h"
 		:states '(normal visual)
 		:keymaps 'override
@@ -120,7 +120,21 @@
 		"v" '("Describe Variable" . describe-variable)
 		"k" '("Describe Keybinding" . describe-key)
 		"F" '("Describe Face" . describe-face)
-)
+		)
+
+(general-create-definer buffer-definer
+  :prefix "SPC b"
+  :states '(normal visual)
+  :keymaps 'override
+  )
+
+(buffer-definer
+ "" '(:ignore t :which-key "buffer")
+ "s" '("Switch Buffer" . switch-to-buffer)
+ "p" '("Previous Buffer" . previous-buffer )
+ "n" '("Next Buffer" . next-buffer )
+ )
+  
 
 (provide '+keymap)
 

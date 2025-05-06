@@ -34,12 +34,15 @@ in
         ivy
         counsel
         company
+        git-gutter
       ])
     );
   };
+  home.packages = with pkgs; [ sshfs ];
   home.file.".emacs.d/init.el".source =
     config.emacsLib.makeSymlink "init.el";
   home.file.".emacs.d/early-init.el".source =
     config.emacsLib.makeSymlink "early-init.el";
+  
   emacsLib.useFiles = [ "languages/languages.el" ];
 }

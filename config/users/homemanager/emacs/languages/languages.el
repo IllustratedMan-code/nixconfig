@@ -12,4 +12,8 @@
 
 (use-package lsp-ivy)
 
+(with-eval-after-load 'company
+  (setq ispell-alternate-dictionary (expand-file-name "~/.emacs.d/ispell/wordlist.txt"))
+  (add-to-list 'company-backends 'company-ispell))
+
 (provide 'languages)

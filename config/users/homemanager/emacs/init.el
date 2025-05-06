@@ -37,7 +37,10 @@
 (use-package niximports)
 
 (use-package ivy
-	:init (ivy-mode 1))
+  :init
+  (ivy-mode 1)
+  (setq ivy-use-selectable-prompt t)
+  )
 (use-package counsel
 	:after ivy
 	:init (counsel-mode 1))
@@ -46,3 +49,6 @@
 	:config
 	(add-hook 'after-init-hook 'global-company-mode)
  )
+
+(use-package git-gutter
+  :init (global-git-gutter-mode +1))

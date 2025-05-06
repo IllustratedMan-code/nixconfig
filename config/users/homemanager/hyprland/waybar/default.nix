@@ -1,7 +1,8 @@
-{ inputs
-, config
-, pkgs
-, ...
+{
+  inputs,
+  config,
+  pkgs,
+  ...
 }:
 with config.lib.stylix.colors.withHashtag;
 let
@@ -39,6 +40,11 @@ let
     * {
       font-family: "JetBrainsMono Nerd Font Mono";
     }
+
+    tooltip {
+      background-color: ${base01};
+    }
+          
   '';
 
 in
@@ -113,15 +119,27 @@ in
           "format-charging" = "{icon}󱐋";
           "max-length" = 25;
         };
-
         "clock" = {
-          "calendar-weeks-pos" = "right";
-          "today-format" = "<span color='#ff6699'><b><u>{}</u></b></span>";
-          "format-calendar" = "<span color='#ecc6d9'><b>{}</b></span>";
-          "format-calendar-weeks" = "<span color='#99ffdd'><b>W{:%U}</b></span>";
-          "format-calendar-weekdays" = "<span color='#ffcc66'><b>{}</b></span>";
-          "on-scroll" = {
-            "calendar" = 1;
+          "format" = "{:%B %d %H:%M}";
+          "format-alt" = "{:%A, %B %d, %Y (%R)} ";
+          "tooltip-format" = "<tt><small>{calendar}</small></tt>";
+          "calendar" = {
+            "mode" = "month";
+            "mode-mon-col" = 3;
+            "weeks-pos" = "right";
+            "on-scroll" = 1;
+            "format" = {
+              "months" = "<span color='${base0D}'><b>{}</b></span>";
+              "days" = "<span color='${base05}'><b>{}</b></span>";
+              #"weeks" = "<span color='${base0C}'><b>W{}</b></span>";
+              "weekdays" = "<span color='${base0C}'><b>{}</b></span>";
+              "today" = "<span color='${base0E}'><b>{}</b></span>";
+            };
+          };
+          "actions" = {
+            "on-click-right" = "mode";
+            "on-scroll-up" = "shift_up";
+            "on-scroll-down" = "shift_down";
           };
         };
 

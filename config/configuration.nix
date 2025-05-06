@@ -2,13 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   # enable flakes
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+  #unfree apps
+  nixpkgs.config.allowUnfree = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -24,6 +27,9 @@
   #services.desktopManager.plasma6.enable = true;
   #programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
   services.xserver.desktopManager.gnome.enable = true;
+  programs.kdeconnect = {
+    enable = true;
+  };
   programs.hyprland.enable = true;
 
   # collect garbage
