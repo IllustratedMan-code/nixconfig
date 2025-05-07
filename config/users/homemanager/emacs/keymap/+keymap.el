@@ -83,7 +83,7 @@
 
 (general-create-definer window-definer
 		:prefix "SPC w"
-		:states '(normal visual)
+		:states '(normal visual motion)
 		:keymaps 'override
 		)
 

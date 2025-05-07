@@ -1,0 +1,6 @@
+* Modeline Customization
+
+The modeline is simplified to be a lot like the helix modeline. I just find it to be
+a bit more pleasant.
+
+

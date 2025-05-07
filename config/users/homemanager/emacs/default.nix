@@ -12,6 +12,7 @@ in
     ./keymap
     ./emacslib.nix
     ./languages
+    ./modeline
   ];
   home.sessionVariables = {
     emacsconfig = "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs";
@@ -35,6 +36,8 @@ in
         counsel
         company
         git-gutter
+        treemacs
+        treemacs-evil
       ])
     );
   };

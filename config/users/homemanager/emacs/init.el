@@ -20,8 +20,8 @@
 
 (general-create-definer leader-definer
 		:prefix "SPC"
-		:states '(normal visual)
-		:keymaps 'override
+		:states '(normal visual motion)
+		:keymaps '(override)
 )
 
 (add-to-list 'load-path "/home/david/.config/emacs/")
@@ -52,3 +52,14 @@
 
 (use-package git-gutter
   :init (global-git-gutter-mode +1))
+
+(use-package treemacs
+  :commands (treemacs)
+  :general
+  (leader-definer
+    "t" '( "filetree" . treemacs)))
+
+(use-package treemacs-evil
+  :after treemacs
+  )
+
