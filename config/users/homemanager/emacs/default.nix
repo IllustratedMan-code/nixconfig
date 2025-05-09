@@ -13,6 +13,7 @@ in
     ./emacslib.nix
     ./languages
     ./modeline
+    ./remote
   ];
   home.sessionVariables = {
     emacsconfig = "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs";

@@ -27,6 +27,7 @@
 		"s" '("Run Code Block" . org-babel-execute-src-block)
 		"T" '("Tangle" . org-babel-tangle)
 		"a" '("Run All Code Blocks" . org-babel-execute-buffer)
+		"i" '("Insert Item" . org-insert-item)
 		))
 
 
