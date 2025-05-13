@@ -17,6 +17,7 @@ in
     ./typst
     ./R
     ./discord
+    ./sioyek
   ];
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;

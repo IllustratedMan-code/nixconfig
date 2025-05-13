@@ -42,7 +42,7 @@
 
 (use-package apheleia
 	:defer t
-	:hook (markdown-mode . apheleia-mode)
+	:hook (gfm-mode . apheleia-mode)
 	:config
 	(add-to-list 'apheleia-mode-alist '(gfm-mode . prettier-markdown))
 	:general

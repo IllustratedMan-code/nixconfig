@@ -14,6 +14,20 @@ let
       "hypr/${path}".source = config.lib.file.mkOutOfStoreSymlink fullpath;
     });
   trace = arg: builtins.trace arg arg;
+  screenshot = with pkgs; writeShellApplication {
+    name = "screenshot";
+    text = ''
+         if [[ $# -ge 1 ]]; then
+            dir="$1"
+         else
+            dir="$HOME/Pictures"
+         fi
+
+         echo "$dir" > "$HOME/.screenshots"
+    '';
+  };
+
+
 in
 {
   imports = [
@@ -46,11 +60,15 @@ in
       ];
       xdg.configFile = configfiles;
       home.packages = with pkgs; [
+        screenshot
         hyprpicker
         nwg-displays
         wl-clipboard
         hyprpolkitagent
         networkmanagerapplet
+        grim
+        slurp
+        pavucontrol
       ];
       wayland.windowManager.hyprland = {
         enable = true;

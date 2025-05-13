@@ -7,6 +7,7 @@
     (with epkgs; [
       org-modern
       org-present
+      evil-org
     ])
   );
 }

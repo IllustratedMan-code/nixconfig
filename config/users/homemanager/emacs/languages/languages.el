@@ -14,6 +14,7 @@
 
 (with-eval-after-load 'company
   (setq ispell-alternate-dictionary (expand-file-name "~/.emacs.d/ispell/wordlist.txt"))
-  (add-to-list 'company-backends 'company-ispell))
+  (add-to-list 'company-backends 'company-ispell t)
+  )
 
 (provide 'languages)

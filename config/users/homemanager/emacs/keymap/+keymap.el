@@ -48,13 +48,21 @@
  
 
 (leader-definer
-		"l" '("Last Buffer" . evil-switch-to-windows-last-buffer)
-		"f" '(:ignore t :which-key "find")
-		"ff" '("file" . find-file)
-		"fc" '("config" . (lambda ()
-						(interactive)
-						(find-file "~/nixconfig/config/users/homemanager/emacs")))
-		";" '("comment" . comment-or-uncomment-region)
+  "SPC" '("M-x" . counsel-M-x)
+  "a" '("Org Agenda" . org-agenda)
+  "l" '("Last Buffer" . evil-switch-to-windows-last-buffer)
+  "f" '(:ignore t :which-key "find")
+  "ff" '("file" . find-file)
+  "fc" '("config" . (lambda ()
+		      (interactive)
+		      (find-file "~/nixconfig/config/users/homemanager/emacs")))
+  "fp" '("config" . (lambda ()
+		      (interactive)
+		      (find-file "~/planner")))
+  "fw" '("wiki" . (lambda ()
+		    (interactive)
+		    (find-file "~/wiki")))
+  ";" '("comment" . comment-or-uncomment-region)
 		)
 
 (general-create-definer project-definer
@@ -91,24 +99,24 @@
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 (custom-set-faces
  '(aw-leading-char-face ((t (:inherit font-lock-keyword-face )))))
+
+(winner-mode 1)
 (window-definer
 	"" '(:ignore t :which-key "window")
 	"a" '("ace" . ace-window)
-		"h" '("move left" . windmove-left)
-		"l" '("move left" . windmove-right)
-		"k" '("move left" . windmove-up)
-		"j" '("move left" . windmove-down)
-		"s" '("split horizontally" . split-window-below)
-		"v" '("split vertically" . split-window-right)
-		"d" '("delete window" . delete-window)
-		"m" '("delete other windows" . delete-other-windows)
-		"=" '("balance windows" . balance-windows)
+	"u" '("Undo Window Change" . winner-undo)
+	"r" '("Redo Window Change" . winner-redo)
+	"h" '("move left" . windmove-left)
+	"l" '("move left" . windmove-right)
+	"k" '("move left" . windmove-up)
+	"j" '("move left" . windmove-down)
+	"s" '("split horizontally" . split-window-below)
+	"v" '("split vertically" . split-window-right)
+	"d" '("delete window" . delete-window)
+	"m" '("delete other windows" . delete-other-windows)
+	"=" '("balance windows" . balance-windows)
 )
 
-(local-leader-definer
-		"" '(:ignore t :which-key "local leader")
-		"l" '("Previous Buffer" . previous-buffer)
-)
 
 (general-create-definer help-definer
 		:prefix "SPC h"
@@ -134,6 +142,8 @@
  "s" '("Switch Buffer" . switch-to-buffer)
  "p" '("Previous Buffer" . previous-buffer )
  "n" '("Next Buffer" . next-buffer )
+ "k" '("Kill Buffer" . kill-buffer )
+ "d" '("Kill Buffer and Window" . kill-buffer-and-window)
  )
   
 
