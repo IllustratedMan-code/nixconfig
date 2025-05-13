@@ -14,11 +14,14 @@
 (use-package org
   :defer t
   :config
-
-  (setq org-agenda-files
-	(seq-remove
-	 (lambda (file) (string-match-p "/old-classes/" file))
-	 (directory-files-recursively (expand-file-name "~/planner/") "\\.org$")))
+  (defun +org/update-agenda-files ()
+    """Update the list of files in the org agenda."""
+    (setq org-agenda-files
+	    (seq-remove
+	    (lambda (file) (string-match-p "/old-classes/" file))
+	    (directory-files-recursively (expand-file-name "~/planner/") "\\.org$")))
+    )
+  (+org/update-agenda-files)
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-preserve-indentation t)
   (add-to-list 'org-babel-default-header-args '(:exports . "both"))
