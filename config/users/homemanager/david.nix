@@ -16,6 +16,7 @@ in
     ./utilities/cluster-connect
     ./typst
     ./R
+    ./python
     ./discord
     ./sioyek
   ];
@@ -26,5 +27,6 @@ in
     anki-bin
     pdftk
     chromium
+    pkgs.unstable.blender
   ];
 }

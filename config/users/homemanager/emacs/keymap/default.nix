@@ -19,6 +19,7 @@ in
       evil-collection
       ace-window
       avy
+      darkroom
     ])
   );
 }

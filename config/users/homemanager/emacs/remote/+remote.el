@@ -5,8 +5,7 @@
 
 (cl-defmacro +remote/add-connection-hook (hook fun &key (append nil) (local nil) machine user protocol)
   "Add function to hook that runs only if connection matches criteria"
-  `(with-eval-after-load tramp
-     (add-hook ,hook
+     `(add-hook ,hook
 	    (lambda ()
 	       (let ((tramp-string (tramp-dissect-file-name default-directory)))
 	       (when (and (tramp-tramp-file-p default-directory)
@@ -46,27 +45,32 @@
 (+remote/add-connection-hook
  'ess-mode-hook
  #'(lambda ()
-     (setq-local inferior-ess-r-program (format "/users/%s/.envs/R.sh" bmicluster_USER))
-     (setq-local eglot-server-programs ((ess-r-mode . ((format "/users/%s/.envs/R.sh" bmicluster_USER)))))
+     (add-to-list 'tramp-remote-path (format "/users/%s/.envs" bmicluster_USER)) 
+     (setq inferior-ess-r-program "R-with-job.sh")
+     (with-eval-after-load 'eglot
+	(setq-local
+	eglot-server-programs
+	`((ess-r-mode . (,(format "/users/%s/.envs/R.sh" bmicluster_USER) "--slave" "-e" "languageserver::run()")))))
    )
  :machine bmicluster_ADDRESS
  :user bmicluster_USER
  )
 
-(+remote/add-connection-hook
- 'python-ts-mode-hook
- #'(setq-local eglot-server-programs
-	       ((python-ts-mode .
-				((format "/users/%s/.envs/python.sh" bmicluster_USER))))))
+;; (+remote/add-connection-hook
+;;  'python-ts-mode-hook
+;;  #'(setq-local eglot-server-programs
+;; 	       ((python-ts-mode .
+;; 				((format "/users/%s/.envs/python.sh" bmicluster_USER))))))
 
 ;; alternate method for setting global variables in remote.   
-;; (connection-local-set-profile-variables
-;;  'bmicluster-ess
-;;  `((inferior-ess-r-program . ,(format "/users/%s/.envs/R.sh" bmicluster_USER))
-;;    (eglot-server-programs . ((ess-r-mode . (,(format "/users/%s/.envs/R.sh" bmicluster_USER) "--slave" "-e" "languageserver::run()"))))))
+(connection-local-set-profile-variables
+ 'bmicluster-ess
+ `((tramp-remote-path . (,(format "/users/%s/.envs" bmicluster_USER) tramp-default-remote-path))
+   (inferior-ess-r-program . "R-with-job.sh"))
+ )
 
-;; (connection-local-set-profiles
-;;  `(:application tramp :user ,bmicluster_USER :machine ,bmicluster_ADDRESS)
-;;  'bmicluster-ess)
+(connection-local-set-profiles
+ `(:application tramp :user ,bmicluster_USER :machine ,bmicluster_ADDRESS)
+ 'bmicluster-ess)
 
-(provide +remote)
+(provide '+remote)

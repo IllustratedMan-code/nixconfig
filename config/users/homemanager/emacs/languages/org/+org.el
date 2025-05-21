@@ -16,6 +16,7 @@
   :config
   (defun +org/update-agenda-files ()
     """Update the list of files in the org agenda."""
+    (interactive)
     (setq org-agenda-files
 	    (seq-remove
 	    (lambda (file) (string-match-p "/old-classes/" file))
@@ -33,6 +34,7 @@
 	  (:noweb . "no")
 	  (:hlines . "no")
 	  (:tangle . "no")))
+  (setq org-log-done 'time)
   :general
   (local-leader-definer
     :keymaps 'org-mode-map

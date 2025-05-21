@@ -7,6 +7,7 @@
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     stylix.url = "github:danth/stylix/release-24.11";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    plover-flake.url = "github:openstenoproject/plover-flake";
   };
 
   outputs =

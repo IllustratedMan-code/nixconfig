@@ -24,7 +24,7 @@ let
         cp ${wallpaper}.svg $out/wallpaper.svg
       '';
     };
-  wallpaper = wallpaper_maker "atp";
+  wallpaper = wallpaper_maker "ycombinator";
 in
 {
   stylix.enable = true;
