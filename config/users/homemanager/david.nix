@@ -28,5 +28,7 @@ in
     pdftk
     chromium
     pkgs.unstable.blender
+    inkscape
+    gimp
   ];
 }
