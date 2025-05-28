@@ -9,7 +9,13 @@
   :hook ((org-mode . evil-org-mode)
 	 (org-agenda-mode . evil-org-agenda-set-keys))
   :config
-  (require 'evil-org-agenda))
+  (require 'evil-org-agenda)
+  (general-auto-unbind-keys)
+  :general-config
+  (general-define-key :keymaps 'org-mode-map
+		      :states '(insert normal)
+		      "C-RET" '("org insert item" . org-insert-item))
+  )
 
 (use-package org
   :defer t
@@ -36,6 +42,9 @@
 	  (:tangle . "no")))
   (setq org-log-done 'time)
   :general
+  (general-define-key :keymaps 'org-mode-map
+		      :states '(insert normal)
+		      "C-<return>" '("org insert item" . org-insert-item))
   (local-leader-definer
     :keymaps 'org-mode-map
     "d" '("Timestamp" . org-timestamp)

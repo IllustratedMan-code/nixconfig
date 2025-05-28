@@ -44,6 +44,7 @@
 		(activate-mark)
 		(goto-char pt))
 	(setf (alist-get ?v avy-dispatch-alist) 'avy-action-mark-to-char)
+	(setq avy-timeout-seconds 0.2)
 	)
  
 
@@ -54,7 +55,11 @@
   "l" '("Last Buffer" . evil-switch-to-windows-last-buffer)
   "f" '(:ignore t :which-key "find")
   "ff" '("file" . find-file)
-  "fc" '("config" . (lambda ()
+  "fc" '(:ignore t :which-key "config")
+  "fcn" '("nix config" . (lambda ()
+		      (interactive)
+		      (find-file "~/nixconfig/")))
+  "fce" '("emacs config" . (lambda ()
 		      (interactive)
 		      (find-file "~/nixconfig/config/users/homemanager/emacs")))
   "fp" '("config" . (lambda ()
