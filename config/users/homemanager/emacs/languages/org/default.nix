@@ -8,6 +8,8 @@
       org-modern
       org-present
       evil-org
+      org-roam
+      org-roam-ui
     ])
   );
 }

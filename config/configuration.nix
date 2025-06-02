@@ -48,9 +48,6 @@
     jack.enable = true;
   };
 
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-  ];
   # enable shell
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;

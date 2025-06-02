@@ -36,8 +36,7 @@ in
     size = 16;
   };
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    jetbrains-mono
+    nerd-fonts.jetbrains-mono
   ];
 
   stylix.fonts = {
@@ -45,8 +44,8 @@ in
     sansSerif = config.stylix.fonts.monospace;
     emoji = config.stylix.fonts.monospace;
     monospace = {
-      name = "JetBrainsMono";
-      package = pkgs.jetbrains-mono;
+      name = "JetBrainsMono Nerd Font Mono";
+      package = pkgs.nerd-fonts.jetbrains-mono;
     };
 
   };
