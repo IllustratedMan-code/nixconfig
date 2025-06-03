@@ -3,6 +3,6 @@
 configuration {
   show-icons:         true;
   icon-theme:         "Papirus";
-display-drun:                   "> ";
+  display-drun:  "> ";
 }
 @theme "theme"

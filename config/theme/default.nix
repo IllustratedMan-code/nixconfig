@@ -17,14 +17,14 @@ let
       ];
       installPhase = ''
         sed -i 's/white/${base01}/g' ${wallpaper}.svg
-        sed -i 's/black/${base0D}/g' ${wallpaper}.svg
+        sed -i 's/black/${base0B}/g' ${wallpaper}.svg
         convert ${wallpaper}.svg ${wallpaper}.png
         mkdir $out
         cp ${wallpaper}.png $out/wallpaper.png
         cp ${wallpaper}.svg $out/wallpaper.svg
       '';
     };
-  wallpaper = wallpaper_maker "ycombinator";
+  wallpaper = wallpaper_maker "atp";
 in
 {
   stylix.enable = true;

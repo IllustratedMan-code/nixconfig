@@ -12,7 +12,10 @@ with config.lib.stylix.colors.withHashtag; {
     dark = "Papirus";
     package = pkgs.papirus-icon-theme;
   };
-  stylix.targets.qt.enable = true;
+  stylix.targets.qt= {
+    enable=true;
+    platform="qtct";
+  };
   stylix.targets.gtk = {
     extraCss = ''
      tooltip, tooltip.background {

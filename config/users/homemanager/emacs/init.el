@@ -33,6 +33,8 @@
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 (setq backup-by-copying t)
 
+(setq custom-file (locate-user-emacs-file "custom.el"))
+
 
 (use-package niximports)
 
@@ -63,28 +65,3 @@
   :after treemacs
   )
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   '("/home/david/planner/non-classes/lisp/grammars.org"
-     "/home/david/planner/non-classes/lisp/lisp.org"
-     "/home/david/planner/weirauchlab/HPV/README.org"
-     "/home/david/planner/weirauchlab/PU1/PU1-meeting-1.org"
-     "/home/david/planner/weirauchlab/PU1/README.org"
-     "/home/david/planner/weirauchlab/PU1/questions.org"
-     "/home/david/planner/weirauchlab/TF-meetings/TF-meeting-1.org"
-     "/home/david/planner/weirauchlab/comp-meetings/comp-meeting-1.org"
-     "/home/david/planner/weirauchlab/comp-meetings/comp-meeting-2.org"
-     "/home/david/planner/weirauchlab/pipeline-meetings/pipeline-meetings-1.org"
-     "/home/david/planner/weirauchlab/wet-lab-meetings/wet-lab-meeting-1.org"
-     "/home/david/planner/agenda.org")))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(aw-leading-char-face ((t (:inherit font-lock-keyword-face))))
- '(markdown-code-face ((t (:background "#374247" :extend t)))))

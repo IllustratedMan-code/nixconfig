@@ -1,5 +1,4 @@
 {
-  inputs,
   config,
   pkgs,
   ...
@@ -38,7 +37,7 @@ let
       color: ${base0B}
     }
     * {
-      font-family: "JetBrainsMono Nerd Font Mono";
+      font-family: ${config.stylix.fonts.monospace.name};
     }
 
     tooltip {

@@ -100,12 +100,15 @@
   (local-leader-definer
     :keymaps 'org-mode-map
     "d" '("Timestamp" . org-timestamp)
-    "t" '("Insert Structure Template" . org-insert-structure-template)
-    "s" '("Run Code Block" . org-babel-execute-src-block)
-    "T" '("Tangle" . org-babel-tangle)
-    "a" '("Run All Code Blocks" . org-babel-execute-buffer)
+    "s" '("Insert Structure Template" . org-insert-structure-template)
+    "b" '(:ignore t :which-key "babel")
+    "br" '("Run Code Block" . org-babel-execute-src-block)
+    "ba" '("Run All Code Blocks" . org-babel-execute-buffer)
+    "bt" '("Tangle" . org-babel-tangle)
     "i" '("Insert Item" . org-insert-item)
     "o" '("Open" . org-open-at-point)
+    "t" '("toggle todo" . org-todo)
+    "n" '("add note" . org-add-note)
     ))
 
 

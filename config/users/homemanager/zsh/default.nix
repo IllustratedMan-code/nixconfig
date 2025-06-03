@@ -1,11 +1,25 @@
-{ inputs
-, config
-, pkgs
-, scheme
+{ 
+ pkgs
 , ...
 }:
+let
+  fzf-preview = pkgs.lib.mkShellApplication {
+    runtimeInputs = with pkgs; [
+      file
+      bat
+    ];
+    name = "fzf-preview";
+    text = ''
+    ${builtins.readFile ./fzf-preview.sh}
+    '';
+  };
+in
 {
-  home.packages = with pkgs; [pdftk];
+  home.packages = with pkgs; [pdftk
+
+                             ];
+  programs.bat.enable = true;
+  programs.fzf.enable = true;
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -24,7 +38,6 @@
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixconfig";
     };
-
-    #extraConfig = builtins.readFile ./zshrc.sh;
+    initContent = pkgs.lib.mkAfter (builtins.readFile ./zshrc.sh);
   };
 }
