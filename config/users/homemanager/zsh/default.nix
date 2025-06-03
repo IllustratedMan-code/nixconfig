@@ -3,7 +3,7 @@
 , ...
 }:
 let
-  fzf-preview = pkgs.lib.mkShellApplication {
+  fzf-preview = pkgs.writeShellApplication {
     runtimeInputs = with pkgs; [
       file
       bat
@@ -16,7 +16,7 @@ let
 in
 {
   home.packages = with pkgs; [pdftk
-
+                              fzf-preview
                              ];
   programs.bat.enable = true;
   programs.fzf.enable = true;
@@ -37,6 +37,8 @@ in
     };
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixconfig";
+      fzfp = "fzf --style full --preview 'fzf-preview {}'";
+      bfzf = "bat $(fzf)";
     };
     initContent = pkgs.lib.mkAfter (builtins.readFile ./zshrc.sh);
   };
