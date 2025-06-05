@@ -5,7 +5,7 @@
   ...
 }:
 let
-
+  configPath = "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs";
 in
 {
   imports = [
@@ -14,9 +14,10 @@ in
     ./languages
     ./modeline
     ./remote
+    ./snippets
   ];
   home.sessionVariables = {
-    emacsconfig = "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs";
+    emacsconfig = configPath;
   };
   programs.emacs = {
     enable = true;
@@ -45,8 +46,10 @@ in
   home.packages = with pkgs; [ sshfs ];
   home.file.".emacs.d/init.el".source =
     config.emacsLib.makeSymlink "init.el";
-  home.file.".emacs.d/early-init.el".source =
-    config.emacsLib.makeSymlink "early-init.el";
+  home.file.".emacs.d/early-init.el".text = ''
+    ${builtins.readFile ./early-init.el}
+    (setq-default emacs-config "${configPath}")
+    '';
   
   emacsLib.useFiles = [ "languages/languages.el" ];
 }

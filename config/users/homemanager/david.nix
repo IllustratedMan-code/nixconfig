@@ -30,5 +30,6 @@ in
     pkgs.unstable.blender
     inkscape
     gimp
+    zotero
   ];
 }

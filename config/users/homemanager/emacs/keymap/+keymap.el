@@ -135,6 +135,7 @@
 		"v" '("Describe Variable" . describe-variable)
 		"k" '("Describe Keybinding" . describe-key)
 		"F" '("Describe Face" . describe-face)
+		"m" '("Describe Mode" . describe-mode)
 		)
 
 (general-create-definer buffer-definer

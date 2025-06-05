@@ -3,12 +3,13 @@
   imports = [
     inputs.plover-flake.homeManagerModules.plover
   ];
-
+  home.packages = [pkgs.ibus];
   programs.plover = {
     enable = true;
     package = inputs.plover-flake.packages.${pkgs.system}.plover.withPlugins (
       ps: with ps; [
         plover-lapwing-aio
+        plover-uinput
       ]);
   };
 }

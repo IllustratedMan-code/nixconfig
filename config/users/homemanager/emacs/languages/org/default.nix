@@ -10,6 +10,7 @@
       evil-org
       org-roam
       org-roam-ui
+      org-download
     ])
   );
 }

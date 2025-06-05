@@ -42,19 +42,19 @@
   )
 
 
-(+remote/add-connection-hook
- 'ess-mode-hook
- #'(lambda ()
-     (add-to-list 'tramp-remote-path (format "/users/%s/.envs" bmicluster_USER)) 
-     (setq inferior-ess-r-program "R-with-job.sh")
-     (with-eval-after-load 'eglot
-	(setq-local
-	eglot-server-programs
-	`((ess-r-mode . (,(format "/users/%s/.envs/R.sh" bmicluster_USER) "--slave" "-e" "languageserver::run()")))))
-   )
- :machine bmicluster_ADDRESS
- :user bmicluster_USER
- )
+;; (+remote/add-connection-hook
+;;  'ess-mode-hook
+;;  #'(lambda ()
+;;      (add-to-list 'tramp-remote-path (format "/users/%s/.envs" bmicluster_USER)) 
+;;      (setq inferior-ess-r-program "R-with-job.sh")
+;;      (with-eval-after-load 'eglot
+;; 	(setq-local
+;; 	eglot-server-programs
+;; 	`((ess-r-mode . (,(format "/users/%s/.envs/R.sh" bmicluster_USER) "--slave" "-e" "languageserver::run()")))))
+;;    )
+;;  :machine bmicluster_ADDRESS
+;;  :user bmicluster_USER
+;;  )
 
 ;; (+remote/add-connection-hook
 ;;  'python-ts-mode-hook

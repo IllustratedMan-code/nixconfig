@@ -5,11 +5,40 @@
   (org-agenda-finalize . org-modern-agenda)
   )
 
+(use-package org-roam-ui
+  :after org-roam base16-stylix-theme
+  :config
+  (setq org-roam-ui-sync-theme nil) ; need to disable for custom theme to work
+  (setq org-roam-ui-custom-theme
+    `((bg . ,(plist-get base16-stylix-theme-colors :base00))
+      (bg-alt . ,(plist-get base16-stylix-theme-colors :base01))
+      (fg . ,(plist-get base16-stylix-theme-colors :base05))
+      (fg-alt . ,(plist-get base16-stylix-theme-colors  :base06))
+      (red . ,(plist-get base16-stylix-theme-colors  :base08))
+      (cyan . ,(plist-get base16-stylix-theme-colors  :base0C))
+      (blue . ,(plist-get base16-stylix-theme-colors  :base0D))
+      (orange . ,(plist-get base16-stylix-theme-colors  :base09))
+      (violet . ,(plist-get base16-stylix-theme-colors  :base0A))
+      (magenta . ,(plist-get base16-stylix-theme-colors  :base0E))
+      (base0 . ,(plist-get base16-stylix-theme-colors :base00))
+      (base1 . ,(plist-get base16-stylix-theme-colors :base01))
+      (base2 . ,(plist-get base16-stylix-theme-colors :base02))
+      (base3 . ,(plist-get base16-stylix-theme-colors :base03))
+      (base4 . ,(plist-get base16-stylix-theme-colors :base04))
+      (base5 . ,(plist-get base16-stylix-theme-colors :base05))
+      (base6 . ,(plist-get base16-stylix-theme-colors :base06))
+      (base7 . ,(plist-get base16-stylix-theme-colors :base07))
+      (base8 . ,(plist-get base16-stylix-theme-colors :base08))
+      )))
+
+
 (use-package org-roam
   :config
-  (setq org-roam-directory (file-truename "~/Documents/roam-wiki"))
+  (setq org-roam-directory (file-truename "~/Documents/roam-wiki/nodes/"))
+  (setq org-roam-dailies-directory (expand-file-name "dailies" org-roam-directory))
   (setq org-roam-db-location (file-truename "~/Documents/roam-wiki/roamdb.db"))
   (org-roam-db-autosync-mode)
+  (setq-default org-cite-global-bibliography (list (file-truename "~/Documents/roam-wiki/citations.json")))
   (defun +org-roam-select-node-by-tag (&optional tag)
     "Prompt for a TAG (or use TAG if supplied), then select an Org-roam node with that tag."
     (interactive)
@@ -37,7 +66,16 @@
 			(format "Nodes tagged %s: " tag)
 			candidates nil t)))
 	(org-roam-node-visit
-	(org-roam-node-from-id (cdr (assoc selected candidates))))))
+	 (org-roam-node-from-id (cdr (assoc selected candidates))))))
+  (setq-default org-roam-capture-templates
+		'(("d" "default" plain
+		   "%?"
+		   :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}")
+		   :unnarrowed t)
+		  ("t" "todo" plain
+		   "#+filetags: TODO\n%?"
+		   :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}")
+		   :unnarrowed t)))
   :general-config
   (leader-definer
     :states '(normal visual)
@@ -52,14 +90,26 @@
 				)))
     "rt" '("Search Nodes by Tag" . +org-roam-select-node-by-tag)
     "rT" '("Search Incomplete Nodes" . (lambda () (interactive) (+org-roam-select-node-by-tag "TODO")))
+    "rv" '("view network" . org-roam-ui-open)
+    "rz" '("Zoom in" . org-roam-ui-node-zoom)
+    "rd" '("Daily Today" . org-roam-dailies-goto-today)
+    "rD" '("Daily At Date" . org-roam-dailies-goto-date)
     )
   )
-
+(use-package org-download
+  :after org
+  :general-config
+  (local-leader-definer
+    "p" '("paste image" . org-download-clipboard)
+    )
+  )
+  
 
 
 (use-package evil-org
   :hook ((org-mode . evil-org-mode)
-	 (org-agenda-mode . evil-org-agenda-set-keys))
+	 (org-agenda-mode . evil-org-agenda-set-keys)
+	 )
   :config
   (require 'evil-org-agenda)
   (general-auto-unbind-keys)
@@ -68,6 +118,7 @@
 		      :states '(insert normal)
 		      "C-RET" '("org insert item" . org-insert-item))
   )
+
 
 (use-package org
   :defer t
@@ -109,8 +160,12 @@
     "o" '("Open" . org-open-at-point)
     "t" '("toggle todo" . org-todo)
     "n" '("add note" . org-add-note)
+    "D" '("Deadline" . org-deadline)
     ))
 
-
+(with-eval-after-load 'org
+  (add-hook 'org-mode-hook
+	    (lambda () (add-hook 'after-save-hook
+				 (lambda () (org-update-statistics-cookies 'entire-buffer)) nil 'local ))))
 
 (provide '+org)

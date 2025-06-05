@@ -35,6 +35,20 @@
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
 
+;; Unicode hack to allow plover to input things into it
+;; For some reason, plover just inputs a C-S-u and a unicode hex rather than
+;; actually inserting the relevant character
+(defun +insert-unicode-hex (hex)
+  "Insert a Unicode character by hexadecimal code, padding to 4+ digits if needed."
+  (interactive "sUnicode hex (e.g. 22): ")
+  (let* ((padded (format "%04x" (string-to-number hex 16)))
+         (char (decode-char 'ucs (string-to-number padded 16))))
+    (if char
+        (insert-char char)
+      (message "Invalid Unicode codepoint: %s" hex))))
+
+(global-set-key (kbd "C-S-u") '+insert-unicode-hex)
+
 
 (use-package niximports)
 
