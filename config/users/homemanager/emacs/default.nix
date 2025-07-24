@@ -25,6 +25,8 @@ in
     extraPackages = (
       epkgs:
       (with epkgs; [
+        titlecase
+        direnv
         vterm
         treesit-grammars.with-all-grammars
         use-package

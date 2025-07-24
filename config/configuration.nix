@@ -48,6 +48,11 @@
     jack.enable = true;
   };
 
+  #bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
+
   # enable shell
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
@@ -56,7 +61,7 @@
 
   # asterisk keyboard integration with javelin steno
   services.udev.extraRules = ''
-  SUBSYSTEM=="hidraw", ATTRS{idVendor}=="9000", ATTRS{idProduct}=="400d", MODE="0666" 
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="9000", ATTRS{idProduct}=="400d", MODE="0666" 
   '';
 
 }

@@ -19,7 +19,8 @@ in
       evil-collection
       ace-window
       avy
-      darkroom
+      darkroom # need to rewrite
+      magit
     ])
   );
 }

@@ -100,6 +100,7 @@
   :after org
   :general-config
   (local-leader-definer
+    :keymaps 'org-mode-map
     "p" '("paste image" . org-download-clipboard)
     )
   )

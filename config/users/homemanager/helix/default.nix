@@ -1,7 +1,6 @@
 { inputs
 , config
 , pkgs
-, scheme
 , ...
 }:
 {
@@ -11,7 +10,9 @@
   ];
   programs.helix = {
     enable = true;
+    package = pkgs.unstable.helix;
     settings = {
+      theme = pkgs.lib.mkForce "everforest_dark";
       editor.cursor-shape = {
         normal = "block";
         insert = "bar";

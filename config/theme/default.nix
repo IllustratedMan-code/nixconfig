@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
 with config.lib.stylix.colors.withHashtag;
@@ -27,26 +28,43 @@ let
   wallpaper = wallpaper_maker "atp";
 in
 {
-  stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${colorscheme}.yaml";
-  stylix.image = "${wallpaper}/wallpaper.png";
-  stylix.cursor = {
-    package = pkgs.graphite-cursors;
-    name = "graphite-dark";
-    size = 16;
+  options.theme = lib.mkOption {
+    default = "everforest";
   };
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
 
-  stylix.fonts = {
-    serif = config.stylix.fonts.monospace;
-    sansSerif = config.stylix.fonts.monospace;
-    emoji = config.stylix.fonts.monospace;
-    monospace = {
-      name = "JetBrainsMono Nerd Font Mono";
-      package = pkgs.nerd-fonts.jetbrains-mono;
+  config = {
+    home-manager.sharedModules = [
+      {
+        options.theme = lib.mkOption {
+          default = "everforest";
+        };
+      }
+    ];
+
+    home-manager.extraSpecialArgs = {
+      inherit (config) theme;
     };
+    stylix.enable = true;
+    stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.theme}.yaml";
+    stylix.image = "${wallpaper}/wallpaper.png";
+    stylix.cursor = {
+        package = pkgs.graphite-cursors;
+        name = "graphite-dark";
+        size = 16;
+    };
+    fonts.packages = with pkgs; [
+        nerd-fonts.jetbrains-mono
+    ];
 
+    stylix.fonts = {
+        serif = config.stylix.fonts.monospace;
+        sansSerif = config.stylix.fonts.monospace;
+        emoji = config.stylix.fonts.monospace;
+        monospace = {
+        name = "JetBrainsMono Nerd Font Mono";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        };
+
+    };
   };
 }

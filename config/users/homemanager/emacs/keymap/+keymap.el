@@ -9,6 +9,13 @@
   :config
   (evil-mode 1))
 
+(use-package magit
+  :after evil-collection
+  :general
+  (leader-definer
+    "g" '("git" . magit-status))
+  )
+
 (use-package evil-owl
 	:after evil
   :config

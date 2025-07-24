@@ -7,6 +7,7 @@ let
 in
 {
   imports = [
+    ./slack
     ./emacs
     ./helix
     ./zsh
@@ -19,6 +20,8 @@ in
     ./python
     ./discord
     ./sioyek
+    ./C++
+    ./teams
   ];
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;

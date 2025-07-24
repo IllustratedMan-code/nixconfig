@@ -60,6 +60,8 @@ in
       ];
       xdg.configFile = configfiles;
       home.packages = with pkgs; [
+        wl-screenrec
+        wf-recorder
         screenshot
         hyprpicker
         nwg-displays

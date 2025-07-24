@@ -43,6 +43,10 @@ let
     tooltip {
       background-color: ${base01};
     }
+    #custom-recording {
+      color: ${base08};
+      font-size: 150%;
+    }
           
   '';
 
@@ -73,9 +77,16 @@ in
         modules-center = [ ];
         modules-left = [
           "hyprland/workspaces"
-          #"backlight"
+          "custom/recording"
           #"pulseaudio"
         ];
+        "custom/recording"= {
+          "format"= "";
+          "tooltip"="click to stop recording";
+          "exec" = "pgrep wl-screenrec && echo 'recording'";
+          "interval" = 2;
+          "on-click" = "pkill wl-screenrec";
+        };
         "hyprland/workspaces" = {
           format = "{icon}";
           on-click = "activate";

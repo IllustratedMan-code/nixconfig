@@ -3,7 +3,7 @@ pkgs
 , ...
 }:
 {
-  imports = [ ./nix ./markdown ./python ./org ./typst ./R ./spelling];
+  imports = [ ./nix ./markdown ./python ./org ./typst ./R ./spelling ./nextflow ./elisp];
   emacsLib.useFiles = [ "languages/languages.el" ];
   home.packages = with pkgs; [
     (aspellWithDicts (dicts: with dicts; [en en-computers en-science]))
