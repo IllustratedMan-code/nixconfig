@@ -3,10 +3,11 @@ let
   browser = pkgs.lib.getExe pkgs.chromium;
 in
 {
-  xdg.desktopEntries.slack = {
+  xdg.desktopEntries.outlook = {
     name = "Outlook";
-    exec = "${browser} --app=https://outlook.office365.com/mail/";
+    genericName = "mail";
+    exec = "${browser} --app=https://outlook.office365.com/mail/ --ozone-platform=wayland";
     type = "Application";
-    icon = "outlook";
+    icon = "ms-outlook";
   };
 }

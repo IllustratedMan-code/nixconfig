@@ -5,7 +5,7 @@ in
 {
   xdg.desktopEntries.slack = {
     name = "Slack";
-    exec = "${browser} --app=https://app.slack.com/client";
+    exec = "${browser} --app=https://app.slack.com/client --ozone-platform=wayland";
     type = "Application";
     icon = "slack";
   };

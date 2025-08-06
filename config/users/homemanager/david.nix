@@ -7,6 +7,8 @@ let
 in
 {
   imports = [
+    ./variables
+    ./outlook
     ./slack
     ./emacs
     ./helix
@@ -15,6 +17,7 @@ in
     ./hyprland
     ./tmux
     ./utilities/cluster-connect
+    ./utilities/update-repos
     ./typst
     ./R
     ./python
@@ -34,5 +37,6 @@ in
     inkscape
     gimp
     zotero
+    libreoffice
   ];
 }

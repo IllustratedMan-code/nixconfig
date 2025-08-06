@@ -16,7 +16,7 @@ in
     ./remote
     ./snippets
   ];
-  home.sessionVariables = {
+  systemd.user.sessionVariables = {
     emacsconfig = configPath;
   };
   programs.emacs = {

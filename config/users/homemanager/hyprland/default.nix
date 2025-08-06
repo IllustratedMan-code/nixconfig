@@ -33,6 +33,7 @@ in
   imports = [
     ./waybar
     ./rofi
+    ./mako
   ];
 
   options.hyprland = {
@@ -74,6 +75,7 @@ in
       ];
       wayland.windowManager.hyprland = {
         enable = true;
+        systemd.variables = ["--all"];
         extraConfig = ''
           $mod = SUPER # Sets "Windows" key as main modifier
           $modshift = $mod + SHIFT

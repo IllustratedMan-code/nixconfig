@@ -34,11 +34,11 @@
 
 (use-package org-roam
   :config
-  (setq org-roam-directory (file-truename "~/Documents/roam-wiki/nodes/"))
-  (setq org-roam-dailies-directory (expand-file-name "dailies" org-roam-directory))
-  (setq org-roam-db-location (file-truename "~/Documents/roam-wiki/roamdb.db"))
+  (setq org-roam-directory (file-truename (file-name-concat (getenv "roam") "nodes")))
+  (setq org-roam-dailies-directory (file-name-concat org-roam-directory "dailies"))
+  (setq org-roam-db-location (file-truename (file-name-concat org-roam-directory "roamdb.db")))
   (org-roam-db-autosync-mode)
-  (setq-default org-cite-global-bibliography (list (file-truename "~/Documents/roam-wiki/citations.json")))
+  (setq-default org-cite-global-bibliography (list (file-truename (file-name-concat org-roam-directory "citations.json"))))
   (defun +org-roam-select-node-by-tag (&optional tag)
     "Prompt for a TAG (or use TAG if supplied), then select an Org-roam node with that tag."
     (interactive)
@@ -130,7 +130,7 @@
     (setq org-agenda-files
 	    (seq-remove
 	    (lambda (file) (string-match-p "/old-classes/" file))
-	    (directory-files-recursively (expand-file-name "~/planner/") "\\.org$")))
+	    (directory-files-recursively (expand-file-name (getenv "planner")) "\\.org$")))
     )
   (+org/update-agenda-files)
   (setq org-confirm-babel-evaluate nil)
@@ -160,6 +160,7 @@
     "i" '("Insert Item" . org-insert-item)
     "o" '("Open" . org-open-at-point)
     "t" '("toggle todo" . org-todo)
+    "T" '("toggle checkbox" . org-toggle-checkbox)
     "n" '("add note" . org-add-note)
     "D" '("Deadline" . org-deadline)
     ))
