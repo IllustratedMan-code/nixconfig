@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-
+set +e
 update(){
     cd "$1"
     git add .
