@@ -11,6 +11,7 @@ with config.lib.stylix.colors.withHashtag;
     border-color=${base01}
     text-color=${base05}
     progress-color=${base02}
+    default-timeout=30000
 
     [urgency=low]
     background-color=${base00}
@@ -21,5 +22,8 @@ with config.lib.stylix.colors.withHashtag;
     background-color=${base00}
     border-color=${base08}
     text-color=${base05}
+
+    [mode=hide]
+    invisible=1
   '';
 }

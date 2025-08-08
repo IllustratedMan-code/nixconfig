@@ -7,6 +7,7 @@ let
 in
 {
   imports = [
+    ./vscode
     ./variables
     ./outlook
     ./slack

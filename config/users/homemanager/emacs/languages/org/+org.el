@@ -145,6 +145,20 @@
 	  (:hlines . "no")
 	  (:tangle . "no")))
   (setq org-log-done 'time)
+  (setq org-agenda-custom-commands
+  '(("d" "Only deadline entries in init.org sorted by time" agenda ""
+     ((org-agenda-entry-types '(:deadline))
+      (org-agenda-span 'year)
+      (org-agenda-include-diary nil)
+      (org-agenda-show-all-dates nil)))))
+  (setq org-agenda-breadcrumbs-separator "/")
+  (setq org-agenda-prefix-format
+	'((agenda . " %i %-12:c%?-12t% s")
+	  ;(todo . "%i %?(if (org-get-outline-path) \"\n\t\" \"\")")
+	  (todo . "%i%-20c%?(if (org-get-outline-path) \"\n  \" \"\") %?-18:b")
+	 (tags . " %i %-12:c")
+	 (search . " %i %-12:c")))
+ 
   :general
   (general-define-key :keymaps 'org-mode-map
 		      :states '(insert normal)
@@ -163,6 +177,7 @@
     "T" '("toggle checkbox" . org-toggle-checkbox)
     "n" '("add note" . org-add-note)
     "D" '("Deadline" . org-deadline)
+    "p" '("Set property" . org-set-property)
     ))
 
 (with-eval-after-load 'org

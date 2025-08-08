@@ -34,6 +34,7 @@ in
     ./waybar
     ./rofi
     ./mako
+    ./swayosd
   ];
 
   options.hyprland = {
@@ -58,6 +59,7 @@ in
         "main.conf"
         "kitty.conf"
         "emacs.conf"
+        "blueman.conf"
       ];
       xdg.configFile = configfiles;
       home.packages = with pkgs; [
