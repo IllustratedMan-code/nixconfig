@@ -1,0 +1,14 @@
+# key: help
+# name: makehelp
+# expand-env: ((yas-indent-line 'nil))
+# --
+help: ## show this help
+`"\t"`@sed -ne "s/^##\\(.*\\)/\\1/p" $(MAKEFILE_LIST)
+`"\t"`@printf "────────────────────────\`tput bold\`\`tput setaf 2\` Make Commands \`tput sgr0\`────────────────────────────────\\n"
+`"\t"`@sed -ne "/@sed/!s/\\(^[^#?=]*:\\).*##\\(.*\\)/\`tput setaf 2\`\`tput bold\`\\1\`tput sgr0\`\\2/p" $(MAKEFILE_LIST)
+`"\t"`@printf "────────────────────────\`tput bold\`\`tput setaf 4\` Make Variables \`tput sgr0\`───────────────────────────────\\n"
+`"\t"`@sed -ne "/@sed/!s/\\(.*\\)?=\\(.*\\)##\\(.*\\)/\`tput setaf 4\`\`tput bold\`\\1:\`tput setaf 5\`\\2\`tput sgr0\`\\3/p" $(MAKEFILE_LIST)
+`"\t"`@printf "───────────────────────────────────────────────────────────────────────\\n"
+
+# remove if you want another default.
+.DEFAULT_GOAL := help
