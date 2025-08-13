@@ -1,0 +1,11 @@
+[package]
+name = "assignments"
+version = "1.0.0"
+entrypoint = "main.typ"
+authors = ["David Lewis"]
+license = "MIT-0"
+description = "General purpose template for assignments."
+
+[template]
+path = "./"
+entrypoint = "main.typ"

@@ -1,7 +1,7 @@
 # key: assignment
 # name: assignment template
 # --
-#import "./main.typ": conf
+#import "@local/assignments:1.0.0": conf
 #show: doc => conf(title: "${1}", doc)
 
 $0
