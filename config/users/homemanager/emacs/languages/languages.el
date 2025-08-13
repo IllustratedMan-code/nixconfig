@@ -13,8 +13,13 @@
 (use-package lsp-ivy)
 
 (with-eval-after-load 'company
-  (setq ispell-alternate-dictionary (expand-file-name "~/.emacs.d/ispell/wordlist.txt"))
-  (add-to-list 'company-backends 'company-ispell t)
-  )
-
+  (setq-default ispell-alternate-dictionary (expand-file-name "~/.emacs.d/ispell/all-words.txt"))
+  (setq company-minimum-prefix-length 1)
+  (setq company-backends '(
+			   (company-capf
+			    company-dabbrev-code
+			    company-dabbrev
+			    company-files
+			    company-keywords
+			    company-yasnippet))))
 (provide 'languages)

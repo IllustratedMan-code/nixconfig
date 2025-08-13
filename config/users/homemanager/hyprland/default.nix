@@ -60,6 +60,7 @@ in
         "kitty.conf"
         "emacs.conf"
         "blueman.conf"
+        "home-monitors.conf"
       ];
       xdg.configFile = configfiles;
       home.packages = with pkgs; [
