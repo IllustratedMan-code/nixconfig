@@ -7,6 +7,7 @@ let
 in
 {
   imports = [
+    ./neovim
     ./vscode
     ./variables
     ./outlook

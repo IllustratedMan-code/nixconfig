@@ -15,11 +15,14 @@
 (with-eval-after-load 'company
   (setq-default ispell-alternate-dictionary (expand-file-name "~/.emacs.d/ispell/all-words.txt"))
   (setq company-minimum-prefix-length 1)
+  (setq lsp-completion-provider :none) ;; needed to prevent capf from stealing all the completions
   (setq company-backends '(
-			   (company-capf
+			   (company-yasnippet
+			    company-capf
+			    company-keywords
 			    company-dabbrev-code
 			    company-dabbrev
 			    company-files
-			    company-keywords
-			    company-yasnippet))))
+			    ))))
+
 (provide 'languages)
