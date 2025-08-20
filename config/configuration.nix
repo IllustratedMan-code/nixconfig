@@ -64,4 +64,10 @@
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="9000", ATTRS{idProduct}=="400d", MODE="0666" 
   '';
 
+  ## drawing tablets (no bluetooth support)
+  hardware.opentabletdriver.enable = true;
+
+  ## corsair rgb keyboard (hopefully dropping this soon)
+  hardware.ckb-next.enable = true;
+  
 }
