@@ -24,26 +24,38 @@
         inputs.emacs-overlay.overlays.default
         (final: prev: { unstable = unstable-pkgs; })
       ];
+
+      modules = [
+        (
+          { config, pkgs, ... }:
+          {
+            nixpkgs.overlays = pkgoverlays;
+          }
+        )
+        inputs.stylix.nixosModules.stylix
+        ./config
+      ];
+      specialArgs = {
+        inherit system;
+        inherit inputs;
+        inherit colorscheme;
+      };
     in
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      nixosConfigurations."iso" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        inherit specialArgs;
+        modules =
+          [
+            (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+          ];
+      };
       nixosConfigurations."davidnix" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit system;
-          inherit colorscheme;
-        };
-        modules = [
-          (
-            { config, pkgs, ... }:
-            {
-              nixpkgs.overlays = pkgoverlays;
-            }
-          )
-          inputs.stylix.nixosModules.stylix
-          ./config
-        ];
+        inherit specialArgs;
+        inherit modules;
       };
+      packages.${system}.iso = self.nixosConfigurations.iso.config.system.build.isoImage;
     };
 }
