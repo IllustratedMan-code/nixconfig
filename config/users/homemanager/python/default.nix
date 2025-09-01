@@ -1,12 +1,20 @@
 {pkgs, ...}:
-{
-  home.packages = with pkgs; [
-    (python3.withPackages (python-pkgs: with python-pkgs; [
+let
+  mypy = (pkgs.python3.withPackages (python-pkgs: with python-pkgs; [
       seaborn
       numpy
       matplotlib
       pandas
       polars
-    ]))
+      ipython
+  ]));
+  pycalc = pkgs.writeShellScriptBin "pycalc" ''
+     ipython --quick --no-banner -i ${./pycalc.py};
+  '';
+in
+{
+  home.packages = [
+    mypy
+    pycalc
   ];
 }

@@ -54,7 +54,12 @@
       nixosConfigurations."davidnix" = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit specialArgs;
-        inherit modules;
+        modules =  modules ++ [ .config/hardware-configuration.nix ];
+      };
+      nixosConfigurations."davidnixusb" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        inherit specialArgs;
+        modules =  modules ++ [ .config/usb-hardware-config.nix ];
       };
       packages.${system}.iso = self.nixosConfigurations.iso.config.system.build.isoImage;
     };
