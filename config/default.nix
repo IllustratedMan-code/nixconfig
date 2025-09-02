@@ -11,5 +11,6 @@
     ./cache.nix
     ./theme
     ./vaapi.nix
+    ./laptop.nix
   ];
 }
