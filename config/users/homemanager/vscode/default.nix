@@ -1,4 +1,5 @@
-{pkgs, ...}:
+{ pkgs, config, ... }:
+with config.lib.stylix.colors.withHashtag;
 {
   programs.vscode = {
     enable = true;
@@ -12,6 +13,14 @@
       "chat.commandCenter.enabled" = false;
       "window.commandCenter" = false;
       "workbench.layoutControl.enabled" = false;
+
+      "quarto.cells.background.color" = "useTheme";
+      "workbench.colorCustomizations" = {
+        "[Stylix]" = {
+          "textCodeBlock.background" = "${base01}";
+          "notebook.selectedCellBackground" = "${base01}";
+        };
+      };
     };
   };
 }

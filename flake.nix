@@ -61,6 +61,12 @@
         inherit specialArgs;
         modules =  modules ++ [ ./config/usb-hardware-config.nix ];
       };
+
+      nixosConfigurations."stixos" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        inherit specialArgs;
+        modules = ./config/steammachine;
+      };
       packages.${system}.iso = self.nixosConfigurations.iso.config.system.build.isoImage;
     };
 }
