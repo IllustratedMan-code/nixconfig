@@ -27,6 +27,7 @@ in
     ./sioyek
     ./C++
     ./teams
+    ./quarto
   ];
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
