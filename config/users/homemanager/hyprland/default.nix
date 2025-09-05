@@ -86,6 +86,9 @@ in
           exec-once = nm-applet
           ${sourcelines}
         '';
+        plugins = [
+          pkgs.hyprlandPlugins.hyprscrolling
+        ];
         xwayland.enable = true;
       };
     };
