@@ -8,6 +8,8 @@ in
         [
           tidyverse
           languageserver
+          RSQLite
+          DBI
         ];
     }
     )

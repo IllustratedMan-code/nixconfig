@@ -13,7 +13,9 @@ with config.lib.stylix.colors.withHashtag;
       "chat.commandCenter.enabled" = false;
       "window.commandCenter" = false;
       "workbench.layoutControl.enabled" = false;
+      "keyboard.dispatch" = "keyCode"; # use os-wide rebinding
 
+      # quarto stuff
       "quarto.cells.background.color" = "useTheme";
       "workbench.colorCustomizations" = {
         "[Stylix]" = {

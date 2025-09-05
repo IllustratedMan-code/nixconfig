@@ -54,7 +54,7 @@
       nixosConfigurations."davidnix" = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit specialArgs;
-        modules =  modules ++ [ ./config/hardware-configuration.nix ];
+        modules =  modules ++ [ ./config/hardware-configuration.nix ./config/steammachine/steam.nix];
       };
       nixosConfigurations."davidnixusb" = nixpkgs.lib.nixosSystem {
         inherit system;
