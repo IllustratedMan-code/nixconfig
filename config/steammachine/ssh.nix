@@ -11,4 +11,5 @@
       PermitRootLogin = "yes"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
     };
   };
+  services.avahi.enable = true;
 }
