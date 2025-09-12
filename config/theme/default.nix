@@ -36,7 +36,7 @@ in
     home-manager.sharedModules = [
       {
         options.theme = lib.mkOption {
-          default = "everforest";
+          default = config.theme;
         };
       }
     ];

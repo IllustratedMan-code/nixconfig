@@ -13,7 +13,6 @@
   outputs =
     inputs@{ self, nixpkgs, ... }:
     let
-      colorscheme = "everforest";
       system = "x86_64-linux";
       unstable-pkgs = import inputs.unstable-nixpkgs {
         inherit system;
@@ -38,7 +37,6 @@
       specialArgs = {
         inherit system;
         inherit inputs;
-        inherit colorscheme;
       };
     in
     {

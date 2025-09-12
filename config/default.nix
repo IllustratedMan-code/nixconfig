@@ -12,5 +12,6 @@
     ./theme
     ./vaapi.nix
     ./laptop.nix
+    ./theme/theme_specializations.nix
   ];
 }

@@ -1,15 +1,32 @@
-{ 
-pkgs
-, ...
+{
+  pkgs,
+  ...
 }:
 {
-  imports = [ ./nix ./markdown ./python ./org ./typst ./R ./spelling ./nextflow ./elisp];
+  imports = [
+    ./nix
+    ./markdown
+    ./python
+    ./org
+    ./typst
+    ./R
+    ./spelling
+    ./nextflow
+    ./elisp
+    ./rust
+  ];
   emacsLib.useFiles = [ "languages/languages.el" ];
   home.packages = with pkgs; [
-    (aspellWithDicts (dicts: with dicts; [en en-computers en-science]))
+    (aspellWithDicts (
+      dicts: with dicts; [
+        en
+        en-computers
+        en-science
+      ]
+    ))
     aspellDicts.en-computers
-   # aspell
-   # aspellDicts.en-computers
+    # aspell
+    # aspellDicts.en-computers
   ];
   programs.emacs.extraPackages = (
     epkgs:
