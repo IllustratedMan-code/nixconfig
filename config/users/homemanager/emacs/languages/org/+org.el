@@ -182,7 +182,7 @@
 
 (with-eval-after-load 'org
   (add-hook 'org-mode-hook
-	    (lambda () (add-hook 'after-save-hook
+	    (lambda () (add-hook 'before-save-hook
 				 (lambda () (org-update-statistics-cookies 'entire-buffer)) nil 'local ))))
 
 (provide '+org)

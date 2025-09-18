@@ -61,7 +61,8 @@
 
   # asterisk keyboard integration with javelin steno
   services.udev.extraRules = ''
-    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="9000", ATTRS{idProduct}=="400d", MODE="0666" 
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="9000", ATTRS{idProduct}=="400d", MODE="0666"
+    SUBSYSTEM=="input", ATTRS{name}=="8Bitdo SN30 Pro", ENV{ID_INPUT_JOYSTICK}="1", TAG+="uaccess"
   '';
 
   ## drawing tablets (no bluetooth support)
@@ -69,5 +70,5 @@
 
   ## corsair rgb keyboard (hopefully dropping this soon)
   hardware.ckb-next.enable = true;
-  
+
 }

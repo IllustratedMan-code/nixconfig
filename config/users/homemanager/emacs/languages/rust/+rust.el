@@ -1,2 +1,4 @@
 
-(add-hook 'rust-mode-hook 'eglot-ensure)
+(add-hook 'rust-ts-mode-hook 'eglot-ensure)
+
+(provide '+rust)

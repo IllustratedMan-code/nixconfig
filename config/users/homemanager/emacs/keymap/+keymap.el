@@ -10,7 +10,6 @@
   (evil-mode 1))
 
 (use-package magit
-  :after evil-collection
   :general
   (leader-definer
     "g" '("git" . magit-status))
@@ -66,6 +65,9 @@
   "fcn" '("nix config" . (lambda ()
 		      (interactive)
 		      (find-file (getenv "nixconfig"))))
+  "fch" '("home manager config" . (lambda ()
+		      (interactive)
+		      (find-file (file-name-concat (getenv "nixconfig") "config/users/homemanager"))))
   "fce" '("emacs config" . (lambda ()
 		      (interactive)
 		      (find-file (getenv "emacsconfig"))))

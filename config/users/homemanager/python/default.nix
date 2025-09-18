@@ -7,6 +7,7 @@ let
       pandas
       polars
       ipython
+      scipy
   ]));
   pycalc = pkgs.writeShellScriptBin "pycalc" ''
      ipython --quick --no-banner -i ${./pycalc.py};
