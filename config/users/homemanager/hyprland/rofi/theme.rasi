@@ -4,13 +4,13 @@ window {
     transparency:                   "real";
     background-color:               @bg;
     text-color:                     @fg;
-	border:							2px;
-	border-color:					@bg;
-    border-radius:                  0px 0px 10px 10px;
-	width:							30%;
+	border:							0px 2px 2px 2px;
+	border-color:					@fg;
+    border-radius:                  0px 0px 0px 0px;
+	width:							600px;
     location:                       north;
     x-offset:                       0;
-    y-offset:                       0;
+    y-offset:                       -2;
 }
 
 prompt {

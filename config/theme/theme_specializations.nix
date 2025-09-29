@@ -2,7 +2,7 @@
 {
   specialisation = {
     light.configuration = {
-      config.theme = "catppuccin-latte";
+      config.theme = "gruvbox-light";
     };
   };
 }

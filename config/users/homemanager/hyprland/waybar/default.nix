@@ -8,6 +8,7 @@ let
   theme = ''
     window#waybar {
       background-color: ${base00};
+      border-bottom: 0.1rem solid ${base05};
     }
     #tray {
       color: transparent;
@@ -22,8 +23,8 @@ let
       color: ${base08};
     }
     #workspaces button.active {
-      border-bottom: 0.1rem solid ${base05};
-      background: ${base02};
+      border: 0.1rem solid ${base05};
+      /* background: ${base02}; */
       border-radius: 0.1rem;
     }
     #workspaces button.urgent {

@@ -17,7 +17,7 @@ let
         pkgs.imagemagick
       ];
       installPhase = ''
-        sed -i 's/white/${base01}/g' ${wallpaper}.svg
+        sed -i 's/white/${base00}/g' ${wallpaper}.svg
         sed -i 's/black/${base0B}/g' ${wallpaper}.svg
         convert ${wallpaper}.svg ${wallpaper}.png
         mkdir $out
@@ -48,13 +48,15 @@ in
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.theme}.yaml";
     stylix.image = "${wallpaper}/wallpaper.png";
     stylix.cursor = {
-        package = pkgs.graphite-cursors;
-        name = "graphite-dark";
+        package = pkgs.gruppled-white-cursors;
+        name = "gruppled_white";
         size = 16;
     };
     fonts.packages = with pkgs; [
-        nerd-fonts.jetbrains-mono
+      nerd-fonts.jetbrains-mono
+      dejavu_fonts
     ];
+    fonts.fontconfig.enable = true;
 
     stylix.fonts = {
         serif = config.stylix.fonts.monospace;

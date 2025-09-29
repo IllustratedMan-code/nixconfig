@@ -4,6 +4,8 @@
   pkgs,
   ...
 }:
+
+with config.lib.stylix.colors.withHashtag;
 let
   configPath = "${config.home.homeDirectory}/nixconfig/config/users/homemanager/emacs";
 in
@@ -50,6 +52,8 @@ in
     config.emacsLib.makeSymlink "init.el";
   home.file.".emacs.d/early-init.el".text = ''
     ${builtins.readFile ./early-init.el}
+    (add-to-list 'default-frame-alist '(foreground-color . "${base05}"))
+    (add-to-list 'default-frame-alist '(background-color . "${base00}"))
     (setq-default emacs-config "${configPath}")
     '';
   

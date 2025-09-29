@@ -7,6 +7,8 @@ let
 in
 {
   imports = [
+    ./starship
+    ./nushell
     ./neovim
     ./vscode
     ./variables
@@ -41,5 +43,6 @@ in
     gimp
     zotero
     libreoffice
+    sqlitebrowser
   ];
 }

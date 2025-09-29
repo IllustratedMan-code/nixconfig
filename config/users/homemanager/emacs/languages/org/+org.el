@@ -38,7 +38,7 @@
   (setq org-roam-dailies-directory (file-name-concat org-roam-directory "dailies"))
   (setq org-roam-db-location (file-truename (file-name-concat org-roam-directory "roamdb.db")))
   (org-roam-db-autosync-mode)
-  (setq-default org-cite-global-bibliography (list (file-truename (file-name-concat org-roam-directory "citations.json"))))
+  (setq-default org-cite-global-bibliography (list (file-truename (file-name-concat org-roam-directory "../citations.json"))))
   (defun +org-roam-select-node-by-tag (&optional tag)
     "Prompt for a TAG (or use TAG if supplied), then select an Org-roam node with that tag."
     (interactive)
@@ -101,7 +101,7 @@
   :general-config
   (local-leader-definer
     :keymaps 'org-mode-map
-    "p" '("paste image" . org-download-clipboard)
+    "P" '("paste image" . org-download-clipboard)
     )
   )
   
@@ -171,7 +171,8 @@
     "br" '("Run Code Block" . org-babel-execute-src-block)
     "ba" '("Run All Code Blocks" . org-babel-execute-buffer)
     "bt" '("Tangle" . org-babel-tangle)
-    "i" '("Insert Item" . org-insert-item)
+    "ii" '("Insert Item" . org-insert-item)
+    "il" '("Insert Item" . org-insert-link)
     "o" '("Open" . org-open-at-point)
     "t" '("toggle todo" . org-todo)
     "T" '("toggle checkbox" . org-toggle-checkbox)

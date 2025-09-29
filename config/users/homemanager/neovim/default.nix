@@ -10,6 +10,7 @@
       nvim-lspconfig
       nvim-treesitter.withAllGrammars
       mini-nvim
+      firenvim
     ];
     extraConfig = ''
     '';
@@ -19,4 +20,5 @@
   };
   xdg.configFile."nvim/lua/main.lua".source = ./main.lua;
   xdg.configFile."nvim/lua/keymap.lua".source = ./keymap.lua;
+  xdg.configFile."nvim/lua/lsp.lua".source = ./keymap.lua;
 }

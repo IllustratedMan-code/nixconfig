@@ -55,7 +55,7 @@
 
   # enable shell
   programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.nushell;
 
   system.stateVersion = "24.11"; # DONTCHANGE
 
