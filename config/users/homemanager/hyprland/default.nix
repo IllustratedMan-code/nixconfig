@@ -86,7 +86,9 @@ in
         "home-monitors.conf"
       ];
       xdg.configFile = configfiles;
+      #programs.hyprpanel.enable = true;
       home.packages = with pkgs; [
+        #hyprpanel
         wl-screenrec
         wf-recorder
         screenshot

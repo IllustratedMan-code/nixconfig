@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 export BORDER="rounded"
 
-address="lew4xi@bmiclusterp.chmcres.cchmc.org"
+address="cchmc-cluster"
 
 gum style 'Cluster actions'
-action=$(gum choose "connect" "copy to" "copy from")
+action=$(gum choose "connect" "copy to" "copy from", "write ssh config")
 if [ "$action" == "connect" ]; then
     ssh -t $address  tmux new -A -s lewt2p
 elif [ "$action" == "copy from" ]; then
@@ -19,4 +19,9 @@ elif [ "$action" == "copy to" ]; then
     gum style "enter cluster path"
     cluster_path=$(gum input --value="~/$local_path")
     gum confirm && gum spin --spinner points --title "copying..." -- scp "$local_path" "$address:$cluster_path"
+elif [ "$action" == "write ssh config" ]; then
+    { echo "Host cchmc-cluster";
+      echo "  HostName bmiclusterp1.chmcres.cchmc.org";
+      echo "  User lew4xi";
+      echo "  ProxyJump lew4xi@ssh.research.cchmc.org"; } >> ~/.ssh/config
 fi

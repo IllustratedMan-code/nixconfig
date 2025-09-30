@@ -2,7 +2,7 @@
 {
   specialisation = {
     light.configuration = {
-      config.theme = "gruvbox-light";
+      config.theme = "cupcake";
     };
   };
 }
