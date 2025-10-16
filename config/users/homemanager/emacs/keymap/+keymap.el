@@ -100,6 +100,7 @@
 	"" '(:ignore t :which-key "project")
 	"s" '("switch project" . project-switch-project)
 	"t" '("project todos" . org-project-todos)
+	"f" '("find file in project" . project-find-file)
  )
 
 

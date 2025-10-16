@@ -19,7 +19,7 @@
 	      '(:tinymist (:formatterMode "typstyle")))
 
 
-(add-to-list 'load-path "/home/david/Documents/tempProjects/ox-typst/")
+(add-to-list 'load-path "/home/david/Documents/ox-typst/")
 (use-package ox-typst
   :after org
   :config

@@ -18,6 +18,9 @@
 
   networking.hostName = "davidnix";
   networking.networkmanager.enable = true;
+  # may need to set MTU packet size on spectrum wifi networks
+  # No idea really what is going on with it. Could be a dns issue
+  # try nslookup google.com (pkgs.bind)
 
   time.timeZone = "America/New_York";
 

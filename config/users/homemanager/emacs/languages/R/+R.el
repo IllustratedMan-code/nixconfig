@@ -1,9 +1,7 @@
 (use-package ess :defer t)
 
-(with-eval-after-load 'org
-	(org-babel-do-load-languages
-	 'org-babel-load-languages
-	 '((R . t))))
+(with-eval-after-load '+org
+  (+add-babel-languages '((R . t))))
 
 (eglot-add ess-r
 	   ("R" "--slave" "-e" "languageserver::run()")

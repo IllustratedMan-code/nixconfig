@@ -5,6 +5,14 @@
   (org-agenda-finalize . org-modern-agenda)
   )
 
+(defun +insert-file-name-no-ext-and-create-dir ()
+  (interactive)
+  (let ((filename  (file-name-sans-extension (buffer-name))))
+    (insert filename)
+    (mkdir filename)
+  ))
+
+
 (use-package org-roam-ui
   :after org-roam base16-stylix-theme
   :config
@@ -184,6 +192,16 @@
 (with-eval-after-load 'org
   (add-hook 'org-mode-hook
 	    (lambda () (add-hook 'before-save-hook
-				 (lambda () (org-update-statistics-cookies 'entire-buffer)) nil 'local ))))
+				 (lambda () (org-update-statistics-cookies 'entire-buffer)) nil 'local )))
+  (add-hook 'org-mode-hook
+	    'turn-on-flyspell)
+  )
+
+(defun +add-babel-languages (l)
+    (with-eval-after-load 'org
+	    (org-babel-do-load-languages
+	    'org-babel-load-languages
+	    (append org-babel-load-languages l))))
+
 
 (provide '+org)

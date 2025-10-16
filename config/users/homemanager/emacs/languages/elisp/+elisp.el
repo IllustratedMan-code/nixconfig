@@ -16,4 +16,7 @@
       "f" '("eval defun" . eval-defun)
 	    ))
 
+(with-eval-after-load '+org
+  (+add-babel-languages '((emacs-lisp . t))))
+
 (provide '+elisp)

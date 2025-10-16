@@ -4,6 +4,7 @@
 }:
 {
   imports = [
+    ./gnuplot
     ./nix
     ./markdown
     ./python
