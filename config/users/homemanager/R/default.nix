@@ -5,6 +5,11 @@ let
     languageserver
     RSQLite
     DBI
+    rsconnect
+    devtools
+    usethis
+    shiny
+
   ];
 in
 {

@@ -25,7 +25,7 @@
   :config
   (setq org-typst-from-latex-environment #'org-typst-from-latex-with-pandoc)
   (setq org-typst-from-latex-fragment #'org-typst-from-latex-with-pandoc)
-  (setq org-typst-default-header "#heading([#context{document.title}])")
+  (setq org-typst-default-header "#import \"@local/assignments:1.0.0\": conf\n#show: doc => conf(title: context{document.title}, doc)")
   )
 
 ;;(add-hook 'typst-ts-mode-hook 'eglot-ensure)

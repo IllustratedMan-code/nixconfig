@@ -1,4 +1,4 @@
-#import "@preview/titleize:0.1.0": titlecase
+#import "@preview/decasify:0.10.1": titlecase
 #let author(name, affiliation: none, email: none) = (name: name, affiliation: affiliation, email: email)
 
 #let csvtable(csvdata) = {
@@ -82,6 +82,10 @@
 ) = {
   set text(top-edge: 0.7em, bottom-edge: -0.3em) if doublespaced == true
   set par(leading: 1em) if doublespaced == true
+    show link: it => {
+        set text(blue)
+        underline(it)
+  }
   if title != none {
     title = titlecase(title)
   }

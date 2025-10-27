@@ -44,5 +44,6 @@ in
     zotero
     libreoffice
     sqlitebrowser
+    trashy
   ];
 }
