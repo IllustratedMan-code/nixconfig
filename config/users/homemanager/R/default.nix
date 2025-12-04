@@ -9,6 +9,8 @@ let
     devtools
     usethis
     shiny
+    maps
+    mapproj
 
   ];
 in

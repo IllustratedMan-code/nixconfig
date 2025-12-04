@@ -84,7 +84,7 @@
   set par(leading: 1em) if doublespaced == true
     show link: it => {
         set text(blue)
-        underline(it)
+        it
   }
   if title != none {
     title = titlecase(title)

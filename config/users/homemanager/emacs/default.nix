@@ -17,6 +17,7 @@ in
     ./modeline
     ./remote
     ./snippets
+    ./ui
   ];
   systemd.user.sessionVariables = {
     emacsconfig = configPath;

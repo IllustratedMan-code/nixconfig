@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 let
   symlink-path =
     path: "${config.home.homeDirectory}/nixconfig/config/users/homemanager/nushell/${path}";
@@ -16,6 +16,9 @@ in
         fzfp = "fzf --style full --preview 'fzf-preview {}'";
         bfzf = "bat (fzf)";
       };
+      plugins = with pkgs.nushellPlugins; [
+        polars
+      ];
     };
   };
 

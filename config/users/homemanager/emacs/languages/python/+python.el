@@ -28,4 +28,7 @@
                 `((python-ts-mode) .
                    ,(eglot-alternatives `("pyright"))))))
 
+(with-eval-after-load '+org
+  (+add-babel-languages '((python . t))))
+
 (provide '+python)

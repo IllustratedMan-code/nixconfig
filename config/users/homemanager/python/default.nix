@@ -8,10 +8,29 @@ let
       polars
       ipython
       scipy
+      openpyxl
+      tqdm
+      numba
+      kittymplib
   ]));
   pycalc = pkgs.writeShellScriptBin "pycalc" ''
-     ipython --quick --no-banner -i ${./pycalc.py};
+     ipython --quick --no-banner -i ${./pycalc.ipy};
   '';
+  kittymplib = pkgs.python3Packages.buildPythonPackage rec {
+      name = "ipython-icat";
+      version = "v0.3.1";
+      format = "pyproject";
+      propagatedBuildInputs = with pkgs.python3Packages; [setuptools ipython pillow matplotlib];
+
+      src = pkgs.fetchFromGitHub {
+      	 owner = "Kabilan108";
+	       repo = "${name}";
+	       rev = "${version}";
+	       sha256 = "ksSrPTmYyvjKtu+vecCdwS+wvAW146xJ6RkxDcVvL90=";
+      };
+
+    };
+
 in
 {
   home.packages = [

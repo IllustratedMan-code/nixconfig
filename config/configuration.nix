@@ -27,6 +27,8 @@
   services.xserver.enable = true;
 
   services.xserver.displayManager.gdm.enable = true;
+  #services.displayManager.sddm.wayland.enable = true;
+  #services.displayManager.sddm.enable = true;
   #services.desktopManager.plasma6.enable = true;
   #programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
   services.xserver.desktopManager.gnome.enable = true;
@@ -58,7 +60,7 @@
 
   # enable shell
   programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.nushell;
+  users.defaultUserShell = pkgs.zsh;
 
   system.stateVersion = "24.11"; # DONTCHANGE
 

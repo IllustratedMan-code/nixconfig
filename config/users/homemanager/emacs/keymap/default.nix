@@ -19,7 +19,7 @@ in
       evil-collection
       ace-window
       avy
-      darkroom # need to rewrite
+      writeroom-mode
       magit
     ])
   );

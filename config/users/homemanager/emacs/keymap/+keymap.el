@@ -56,7 +56,7 @@
 
 (leader-definer
   "SPC" '("M-x" . counsel-M-x)
-  "z" '("Zen Mode" . darkroom-tentative-mode)
+  "z" '("Zen Mode" . writeroom-mode)
   "a" '("Org Agenda" . org-agenda)
   "l" '("Last Buffer" . evil-switch-to-windows-last-buffer)
   "f" '(:ignore t :which-key "find")

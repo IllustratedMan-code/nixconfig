@@ -11,6 +11,9 @@
       org-roam
       org-roam-ui
       org-download
+      citeproc
+      org-fragtog
+      org-appear
     ])
   );
 }

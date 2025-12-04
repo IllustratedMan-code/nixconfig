@@ -189,12 +189,35 @@
     "p" '("Set property" . org-set-property)
     ))
 
+
+(use-package org-appear
+  :hook
+  (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autoemphasis 't)
+  (setq org-appear-autolinks 't)
+  (setq org-appear-autosubmarkers 't)
+  (setq org-appear-autoentities 't)
+  (setq org-appear-autokeywords 't)
+  (setq org-appear-inside-latex 't)
+  )
+
 (with-eval-after-load 'org
   (add-hook 'org-mode-hook
 	    (lambda () (add-hook 'before-save-hook
 				 (lambda () (org-update-statistics-cookies 'entire-buffer)) nil 'local )))
   (add-hook 'org-mode-hook
 	    'turn-on-flyspell)
+  (add-hook 'org-mode-hook 'org-fragtog-mode)
+  (add-hook 'org-mode-hook
+	    (lambda () (auto-fill-mode t)))
+  (setq org-cite-csl-styles-dir (expand-file-name "~/Zotero/styles/"))
+  (setq org-pretty-entities 't)
+  (setq org-cite-export-processors
+	'((apa . (csl "apa.csl"))
+	  (acs . (csl "american-chemical-society"))
+	  (t . (csl "american-medical-association.csl"))))
+	  
   )
 
 (defun +add-babel-languages (l)

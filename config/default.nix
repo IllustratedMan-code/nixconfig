@@ -5,6 +5,7 @@
 }:
 {
   imports = [
+    ./wine.nix
     ./configuration.nix
     ./system-packages.nix
     ./users

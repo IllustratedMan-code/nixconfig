@@ -19,13 +19,13 @@
 	      '(:tinymist (:formatterMode "typstyle")))
 
 
-(add-to-list 'load-path "/home/david/Documents/ox-typst/")
+(add-to-list 'load-path "/home/david/Documents/Personal-Projects/ox-typst/")
 (use-package ox-typst
   :after org
   :config
   (setq org-typst-from-latex-environment #'org-typst-from-latex-with-pandoc)
   (setq org-typst-from-latex-fragment #'org-typst-from-latex-with-pandoc)
-  (setq org-typst-default-header "#import \"@local/assignments:1.0.0\": conf\n#show: doc => conf(title: context{document.title}, doc)")
+  (setq org-typst-default-header "#import \"@local/assignments:1.0.0\": conf\n#show: doc => conf(title: context{document.title}, date: context{if document.date == auto {datetime.today().display(\"[month repr:long] [day], [year]\")} else {document.date.display(\"[month repr:long] [day], [year]\")}}, doc)")
   )
 
 ;;(add-hook 'typst-ts-mode-hook 'eglot-ensure)

@@ -4,6 +4,7 @@
 }:
 {
   imports = [
+    ./nushell
     ./gnuplot
     ./nix
     ./markdown
@@ -15,6 +16,7 @@
     ./nextflow
     ./elisp
     ./rust
+    ./plantuml
   ];
   emacsLib.useFiles = [ "languages/languages.el" ];
   home.packages = with pkgs; [

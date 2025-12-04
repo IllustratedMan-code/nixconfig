@@ -5,6 +5,7 @@ config
 }:
 with config.lib.stylix.colors.withHashtag; {
   imports = [
+    ./utility-modules
   ];
   stylix.iconTheme = {
     enable = true;
