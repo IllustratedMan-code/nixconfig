@@ -55,6 +55,7 @@ in
     fonts.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
       dejavu_fonts
+      corefonts
     ];
     fonts.fontconfig.enable = true;
 

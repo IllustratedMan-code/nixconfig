@@ -76,7 +76,8 @@
   subtitle: none,
   date: none,
   authors: (author([David Lewis], email: "lewis3d7@mail.uc.edu"),),
-  titlepage: true,
+    titlepage: true,
+    fulltitlepage: false,
   doublespaced: false,
   doc,
 ) = {
@@ -242,9 +243,14 @@
     breakable: false,
   )
   show heading.where(level: 3): it => underline(it)
-  {
-    set align(center)
-    if titlepage and title != none {
+    {
+    let alignment = center
+    set align(alignment)
+        if titlepage and title != none {
+            if fulltitlepage{
+                alignment = center + horizon
+            }
+        set align(alignment )
       [
         #text(17pt, weight: "bold", title) \
         #if subtitle != none [
@@ -252,7 +258,6 @@
         ]
         #text(12pt, weight: "bold", date)
       ]
-
 
       let count = authors.len()
       let ncols = calc.min(count, 3)
@@ -277,7 +282,10 @@
           v(16pt, weak: true)
         }
       }
-      v(40pt, weak: true)
+            v(40pt, weak: true)
+            if fulltitlepage{
+                pagebreak()
+            }
     }
   }
   doc

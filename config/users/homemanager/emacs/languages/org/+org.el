@@ -140,6 +140,9 @@
 	    (lambda (file) (string-match-p "/old-classes/" file))
 	    (directory-files-recursively (expand-file-name (getenv "planner")) "\\.org$")))
     )
+  (defun +org/escape-char ()
+    (interactive)
+    (insert-char (char-from-name "ZERO WIDTH SPACE")))
   (+org/update-agenda-files)
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-preserve-indentation t)
@@ -187,6 +190,7 @@
     "n" '("add note" . org-add-note)
     "D" '("Deadline" . org-deadline)
     "p" '("Set property" . org-set-property)
+    "e" '("excape character" . +org/escape-char)
     ))
 
 
@@ -208,11 +212,16 @@
 				 (lambda () (org-update-statistics-cookies 'entire-buffer)) nil 'local )))
   (add-hook 'org-mode-hook
 	    'turn-on-flyspell)
+  (add-hook 'org-mode-hook
+	    'glyphless-display-mode)
   (add-hook 'org-mode-hook 'org-fragtog-mode)
   (add-hook 'org-mode-hook
 	    (lambda () (auto-fill-mode t)))
   (setq org-cite-csl-styles-dir (expand-file-name "~/Zotero/styles/"))
   (setq org-pretty-entities 't)
+  (setq org-startup-with-latex-preview 't)
+  (setq org-hide-emphasis-markers)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
   (setq org-cite-export-processors
 	'((apa . (csl "apa.csl"))
 	  (acs . (csl "american-chemical-society"))
