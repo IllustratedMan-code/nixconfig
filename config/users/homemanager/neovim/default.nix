@@ -1,6 +1,6 @@
 {pkgs, config, ...}:
 let
-  trace = arg: builtins.trace arg arg;
+  symlink = config.pathUtils.symlink "neovim";
 in
 {
   imports = [../utility-modules];
@@ -22,7 +22,7 @@ in
     require("main")
     '';
   };
-  xdg.configFile."nvim/lua/main.lua".source = ./main.lua;
-  xdg.configFile."nvim/lua/keymap.lua".source = ./keymap.lua;
-  xdg.configFile."nvim/lua/lsp.lua".source = config.pathUtils.symlink ./lsp.lua;
+  xdg.configFile."nvim/lua/main.lua".source = symlink ./main.lua;
+  xdg.configFile."nvim/lua/keymap.lua".source = symlink ./keymap.lua;
+  xdg.configFile."nvim/lua/lsp.lua".source = symlink ./lsp.lua;
 }

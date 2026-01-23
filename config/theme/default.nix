@@ -48,9 +48,9 @@ in
     stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${config.theme}.yaml";
     stylix.image = "${wallpaper}/wallpaper.png";
     stylix.cursor = {
-        package = pkgs.gruppled-white-cursors;
-        name = "gruppled_white";
-        size = 16;
+      package = pkgs.gruppled-white-cursors;
+      name = "gruppled_white";
+      size = 16;
     };
     fonts.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
@@ -60,13 +60,16 @@ in
     fonts.fontconfig.enable = true;
 
     stylix.fonts = {
-        serif = config.stylix.fonts.monospace;
-        sansSerif = config.stylix.fonts.monospace;
-        emoji = config.stylix.fonts.monospace;
-        monospace = {
+      serif = {
+        name = "JetBrainsMono Nerd Font Propo";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+      };
+      sansSerif = config.stylix.fonts.serif;
+      emoji = config.stylix.fonts.serif;
+      monospace = {
         name = "JetBrainsMono Nerd Font Mono";
         package = pkgs.nerd-fonts.jetbrains-mono;
-        };
+      };
 
     };
   };

@@ -7,7 +7,8 @@
   (setq evil-want-keybinding nil)
   (setq evil-undo-system 'undo-redo)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  )
 
 (use-package magit
   :general

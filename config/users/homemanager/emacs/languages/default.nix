@@ -17,6 +17,7 @@
     ./elisp
     ./rust
     ./plantuml
+    ./xppaut
   ];
   emacsLib.useFiles = [ "languages/languages.el" ];
   home.packages = with pkgs; [

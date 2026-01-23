@@ -5,6 +5,7 @@
 }:
 with config.lib.stylix.colors.withHashtag;
 let
+  symlink = config.pathUtils.symlink "hyprland/waybar";
   theme = ''
     window#waybar {
       background-color: ${base00};
@@ -38,7 +39,7 @@ let
       color: ${base0B}
     }
     * {
-      font-family: ${config.stylix.fonts.monospace.name};
+      font-family: ${config.stylix.fonts.serif.name};
     }
 
     tooltip {
@@ -59,6 +60,7 @@ in
     helvum
     sqlite
   ];
+  xdg.configFile."waybar/scripts/pomodoro.sh".source = symlink ./pomodoro.sh;
   programs.waybar = {
     enable = true;
     package = pkgs.waybar;
@@ -75,17 +77,21 @@ in
           "clock"
           "battery"
         ];
-        modules-center = [ ];
+        modules-center = [ "custom/pomodoro" ];
         modules-left = [
           "hyprland/workspaces"
           "custom/recording"
           #"pulseaudio"
         ];
+        "custom/pomodoro" = {
+          "exec"= "~/.config/waybar/scripts/pomodoro.sh";
+          "interval" = 5;
+        };
         "custom/recording"= {
           "format"= "";
           "tooltip"="click to stop recording";
           "exec" = "pgrep wl-screenrec && echo 'recording'";
-          "interval" = 2;
+          "interval" = 1;
           "on-click" = "pkill wl-screenrec";
         };
         "hyprland/workspaces" = {

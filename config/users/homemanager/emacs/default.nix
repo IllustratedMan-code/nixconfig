@@ -45,6 +45,7 @@ in
         git-gutter
         treemacs
         treemacs-evil
+        f
       ])
     );
   };

@@ -1,8 +1,8 @@
 { lib, config, ... }:
 let
-  nixconfig = "${config.home.homeDirectory}/nixconfig";
+  homeconfig = "${config.home.homeDirectory}/nixconfig/config/users/homemanager";
   splitString = path: builtins.head (builtins.match "/nix/store/.*?(/.*)" (toString path));
-  resolvePath = path: (nixconfig + (toString path));
+  resolvePath = rel_to_home: path: (homeconfig + "/${rel_to_home}/" + (splitString (toString path)));
 in
 {
   options.pathUtils = {
@@ -11,7 +11,7 @@ in
       readOnly = true;
     };
     symlink = lib.mkOption {
-      default = path: config.lib.file.mkOutOfStoreSymlink (resolvePath path);
+      default = rel_to_home: path: config.lib.file.mkOutOfStoreSymlink (resolvePath rel_to_home path);
       readOnly = true;
     };
   };

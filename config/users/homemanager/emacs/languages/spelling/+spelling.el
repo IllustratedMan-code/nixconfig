@@ -7,5 +7,23 @@
 (with-eval-after-load 'ispell
   (setq-default ispell-alternate-dictionary (expand-file-name "~/.emacs.d/ispell/all-words.txt"))
   (when (file-exists-p "~/.aspell.en.pws")
-    
+
     ))
+
+(with-eval-after-load 'ispell
+  (setq ispell-personal-dictionary (f-join emacs-config "languages" "spelling" "dictionary.txt")))
+
+(defun +spelling/restart-flyspell-mode ()
+  (when flyspell-mode
+    (flyspell-mode-off)
+    (flyspell-mode-on)))
+
+(defun +spelling/add-word ()
+    (interactive)
+    (let ((word (word-at-point)))
+      (when word
+	(write-region word nil ispell-personal-dictionary)
+	(+spelling/restart-flyspell-mode)
+	)
+      ) 
+    )

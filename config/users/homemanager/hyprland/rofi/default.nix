@@ -17,7 +17,7 @@ let
   '';
 in
 {
-  home.packages = with pkgs; [ rofi-wayland ];
+  home.packages = with pkgs; [ rofi ];
   xdg.configFile."rofi/theme.rasi".source = ./theme.rasi;
   xdg.configFile."rofi/config.rasi".source = ./config.rasi;
   xdg.configFile."rofi/colors.rasi".text = theme;

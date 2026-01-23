@@ -12,6 +12,8 @@ let
       tqdm
       numba
       kittymplib
+      beautifulsoup4
+      css-inline
   ]));
   pycalc = pkgs.writeShellScriptBin "pycalc" ''
      ipython --quick --no-banner -i ${./pycalc.ipy};

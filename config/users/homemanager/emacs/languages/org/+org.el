@@ -119,6 +119,7 @@
   :hook ((org-mode . evil-org-mode)
 	 (org-agenda-mode . evil-org-agenda-set-keys)
 	 )
+  :after evil
   :config
   (require 'evil-org-agenda)
   (general-auto-unbind-keys)
@@ -220,7 +221,7 @@
   (setq org-cite-csl-styles-dir (expand-file-name "~/Zotero/styles/"))
   (setq org-pretty-entities 't)
   (setq org-startup-with-latex-preview 't)
-  (setq org-hide-emphasis-markers)
+  (setq org-hide-emphasis-markers 't)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
   (setq org-cite-export-processors
 	'((apa . (csl "apa.csl"))
@@ -234,6 +235,34 @@
 	    (org-babel-do-load-languages
 	    'org-babel-load-languages
 	    (append org-babel-load-languages l))))
+
+(use-package org-pomodoro
+  :commands (org-pomodoro)
+  :config
+  (setq
+   org-pomodoro-length 25
+   org-pomodoro-short-break-length 5
+   org-pomodoro-finished-sound (f-join emacs-config "languages" "org" "pomodoro-ding.wav")
+   org-pomodoro-short-break-sound (f-join emacs-config "languages" "org" "pomodoro-ding.wav")
+   org-pomodoro-long-break-sound (f-join emacs-config "languages" "org" "pomodoro-ding.wav")
+
+   ))
+
+(defun +org-pomodoro-time ()
+  "Return the remaining pomodoro time"
+  (interactive)
+  (if (fboundp 'org-pomodoro-active-p)
+  (if (org-pomodoro-active-p)
+      (cl-case org-pomodoro-state
+        (:pomodoro
+           (format " %d minutes - %s" (/ (org-pomodoro-remaining-seconds) 60) org-clock-heading))
+        (:short-break
+         (format " %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+        (:long-break
+         (format " %d minutes" (/ (org-pomodoro-remaining-seconds) 60)))
+        (:overtime
+         (format " %d minutes" (/ (org-pomodoro-remaining-seconds) 60))))
+    "") ""))
 
 
 (provide '+org)

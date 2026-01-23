@@ -4,6 +4,7 @@
 
 { pkgs, ... }:
 {
+  programs.nix-ld.enable = true;
   # enable flakes
   nix.settings.experimental-features = [
     "nix-command"
@@ -18,6 +19,10 @@
 
   networking.hostName = "davidnix";
   networking.networkmanager.enable = true;
+  networking.networkmanager.plugins = [
+    pkgs.networkmanager-openvpn
+    pkgs.networkmanager-openconnect
+  ];
   # may need to set MTU packet size on spectrum wifi networks
   # No idea really what is going on with it. Could be a dns issue
   # try nslookup google.com (pkgs.bind)
@@ -26,12 +31,12 @@
 
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
   #services.displayManager.sddm.wayland.enable = true;
   #services.displayManager.sddm.enable = true;
   #services.desktopManager.plasma6.enable = true;
   #programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.seahorse.out}/libexec/seahorse/ssh-askpass";
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
   programs.kdeconnect = {
     enable = true;
   };
@@ -74,6 +79,8 @@
   hardware.opentabletdriver.enable = true;
 
   ## corsair rgb keyboard (hopefully dropping this soon)
-  hardware.ckb-next.enable = true;
+  ## won't build for 25.11
+  ## see https://github.com/nixos/nixpkgs/issues/444209
+  #hardware.ckb-next.enable = true;
 
 }

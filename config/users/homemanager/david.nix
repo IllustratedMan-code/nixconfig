@@ -22,6 +22,7 @@ in
     ./tmux
     ./utilities/cluster-connect
     ./utilities/update-repos
+    ./utilities/code-mail
     ./typst
     ./R
     ./python

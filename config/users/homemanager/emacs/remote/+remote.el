@@ -73,4 +73,14 @@
  `(:application tramp :user ,bmicluster_USER :machine ,bmicluster_ADDRESS)
  'bmicluster-ess)
 
+(connection-local-set-profile-variables
+ 'remote-direct-async-process
+ '((tramp-direct-async-process . t)))
+
+(connection-local-set-profiles
+ '(:application tramp :protocol "ssh")
+ 'remote-direct-async-process)
+
+
+
 (provide '+remote)

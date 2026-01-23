@@ -3,9 +3,9 @@
 
   inputs = {
     unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
-    stylix.url = "github:danth/stylix/release-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    stylix.url = "github:danth/stylix/release-25.11";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     plover-flake.url = "github:openstenoproject/plover-flake";
   };
@@ -40,24 +40,27 @@
       };
     in
     {
+      inherit self;
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
       nixosConfigurations."iso" = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit specialArgs;
-        modules =
-          [
-            (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-          ];
+        modules = [
+          (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+        ];
       };
       nixosConfigurations."davidnix" = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit specialArgs;
-        modules =  modules ++ [ ./config/hardware-configuration.nix ./config/steammachine/steam.nix];
+        modules = modules ++ [
+          ./config/hardware-configuration.nix
+          ./config/steammachine/steam.nix
+        ];
       };
       nixosConfigurations."davidnixusb" = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit specialArgs;
-        modules =  modules ++ [ ./config/usb-hardware-config.nix ];
+        modules = modules ++ [ ./config/usb-hardware-config.nix ];
       };
 
       nixosConfigurations."stixos" = nixpkgs.lib.nixosSystem {
