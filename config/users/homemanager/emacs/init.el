@@ -29,7 +29,7 @@
 (make-directory "~/.emacs.d/autosaves" t)
 (make-directory "~/.emacs.d/backups" t)
 (setq auto-save-file-name-transforms
-			`((".*" "~/.emacs.d/autosaves/" t)))
+			`(("~/.emacs.d/autosaves/" ".*" t)))
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 (setq backup-by-copying t)
 
@@ -82,3 +82,7 @@
 (use-package direnv
  :config
  (direnv-mode))
+
+(use-package hl-todo
+  :init
+  (global-hl-todo-mode 1))

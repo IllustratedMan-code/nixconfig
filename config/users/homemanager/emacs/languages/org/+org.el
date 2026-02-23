@@ -144,6 +144,14 @@
   (defun +org/escape-char ()
     (interactive)
     (insert-char (char-from-name "ZERO WIDTH SPACE")))
+
+  (defun +org-hide-done ()
+    (interactive)
+    (org-map-entries
+     '(org-toggle-tag "ARCHIVE" 'on )
+     "/+DONE" 'file 'archive 'comment))
+  (setq org-cycle-open-archived-trees nil)
+  (setq org-startup-folded 'nofold)
   (+org/update-agenda-files)
   (setq org-confirm-babel-evaluate nil)
   (setq org-src-preserve-indentation t)
@@ -192,6 +200,9 @@
     "D" '("Deadline" . org-deadline)
     "p" '("Set property" . org-set-property)
     "e" '("excape character" . +org/escape-char)
+    "h" '(:ignore t :which-key "hide")
+    "hd" '("Hide Done" . +org-hide-done)
+    "TAB" '("Force cycle" . org-cycle-force-archived)
     ))
 
 
@@ -263,6 +274,8 @@
         (:overtime
          (format " %d minutes" (/ (org-pomodoro-remaining-seconds) 60))))
     "") ""))
+
+
 
 
 (provide '+org)

@@ -7,6 +7,7 @@ let
 in
 {
   imports = [
+    ./video-editing
     ./starship
     ./nushell
     ./neovim

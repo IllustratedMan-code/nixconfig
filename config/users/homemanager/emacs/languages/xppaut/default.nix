@@ -2,6 +2,6 @@
 {
   emacsLib.useFiles = [
     "languages/xppaut/+xppaut.el"
-    "languages/xppaut/xpp.el"
+    "languages/xppaut/xpp-mode.el"
   ];
 }

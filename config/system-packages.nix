@@ -7,6 +7,7 @@
     firefox
     wl-clipboard
     zip
+    gnumake
   ];
 
   programs.neovim = {

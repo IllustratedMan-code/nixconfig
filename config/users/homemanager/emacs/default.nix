@@ -28,6 +28,7 @@ in
     extraPackages = (
       epkgs:
       (with epkgs; [
+        hl-todo
         titlecase
         direnv
         vterm
