@@ -199,7 +199,8 @@
     "n" '("add note" . org-add-note)
     "D" '("Deadline" . org-deadline)
     "p" '("Set property" . org-set-property)
-    "e" '("excape character" . +org/escape-char)
+    "e" '("escape character" . +org/escape-char)
+    "E" '("export" . org-export-dispatch)
     "h" '(:ignore t :which-key "hide")
     "hd" '("Hide Done" . +org-hide-done)
     "TAB" '("Force cycle" . org-cycle-force-archived)
@@ -257,7 +258,14 @@
    org-pomodoro-short-break-sound (f-join emacs-config "languages" "org" "pomodoro-ding.wav")
    org-pomodoro-long-break-sound (f-join emacs-config "languages" "org" "pomodoro-ding.wav")
 
-   ))
+   )
+  :general
+  (local-leader-definer
+    :keymaps 'org-mode-map
+    "P" '("pomodoro" . org-pomodoro)
+    )
+  
+  )
 
 (defun +org-pomodoro-time ()
   "Return the remaining pomodoro time"

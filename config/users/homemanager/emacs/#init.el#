@@ -91,6 +91,4 @@
   :init
   (global-flycheck-mode))
 
-(use-package smartparens
-  :config
-  (require 'smartparens-config))
+  

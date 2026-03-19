@@ -22,7 +22,7 @@ let
       name = "screenshot";
       text = ''
         if [[ $# -ge 1 ]]; then
-           dir="$1"
+           dir=$(realpath "$1")
         else
            dir="$HOME/Pictures"
         fi
@@ -30,6 +30,20 @@ let
         echo "$dir" > "$HOME/.screenshots"
       '';
     };
+  zoom =
+    with pkgs;
+    writeShellApplication {
+      name = "toggle-zoom";
+      text = ''
+      current=$(hyprctl getoption cursor:zoom_factor | awk '/float/ {print $2}')
+      if [ "$current" = "1.000000" ]; then
+      hyprctl keyword cursor:zoom_factor 1.5
+      else
+      hyprctl keyword cursor:zoom_factor 1
+      fi
+      '';
+    };
+  
 
 in
 {
@@ -92,6 +106,7 @@ in
         wl-screenrec
         wf-recorder
         screenshot
+        zoom
         hyprpicker
         nwg-displays
         wl-clipboard

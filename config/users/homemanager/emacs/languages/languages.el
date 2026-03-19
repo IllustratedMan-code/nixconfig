@@ -25,4 +25,26 @@
 			    company-files
 			    ))))
 
+(use-package smartparens
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode)
+  (defun +sp-wrap-interactive ()
+    (interactive)
+    (sp-wrap-with-pair (string (read-key "wrap with: ")))
+    )
+  :general-config
+  (leader-definer
+    :states '(normal visual)
+    :keymaps 'override
+    "s" '(:ignore t :which-key "smartparens")
+    "sw" '("wrap region" . +sp-wrap-interactive)
+    "ss" '("swap sexp" . sp-rewrap-sexp)
+    "sl" '("slurp forward" . sp-forward-slurp-sexp)
+    "sk" '("barf forward" . sp-forward-barf-sexp)
+    "sj" '("barf backward" . sp-backward-barf-sexp)
+    "sh" '("slurp backward" . sp-backward-barf-sexp)
+    )
+  )
+
 (provide 'languages)

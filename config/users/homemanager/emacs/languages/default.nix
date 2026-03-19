@@ -37,6 +37,7 @@
     (with epkgs; [
       lsp-mode
       lsp-ivy
+      smartparens
     ])
   );
 }

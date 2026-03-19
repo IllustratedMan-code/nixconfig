@@ -28,6 +28,7 @@ in
     extraPackages = (
       epkgs:
       (with epkgs; [
+        flycheck
         hl-todo
         titlecase
         direnv

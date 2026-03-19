@@ -48,5 +48,7 @@ in
     libreoffice
     sqlitebrowser
     trashy
+    lunar-client # minecraft
+    rnote
   ];
 }
