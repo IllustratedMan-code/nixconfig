@@ -83,4 +83,8 @@
   ## see https://github.com/nixos/nixpkgs/issues/444209
   #hardware.ckb-next.enable = true;
 
+
+  ## android apps
+  virtualisation.waydroid.enable = true;
+
 }

@@ -43,7 +43,7 @@
     "sl" '("slurp forward" . sp-forward-slurp-sexp)
     "sk" '("barf forward" . sp-forward-barf-sexp)
     "sj" '("barf backward" . sp-backward-barf-sexp)
-    "sh" '("slurp backward" . sp-backward-barf-sexp)
+    "sh" '("slurp backward" . sp-backward-slurp-sexp)
     )
   )
 
