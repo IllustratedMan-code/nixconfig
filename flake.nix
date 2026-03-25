@@ -8,6 +8,7 @@
     stylix.url = "github:danth/stylix/release-25.11";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     plover-flake.url = "github:openstenoproject/plover-flake";
+    project-jump.url = "github:IllustratedMan-code/project-jump";
   };
 
   outputs =

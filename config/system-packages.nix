@@ -1,5 +1,5 @@
 # This file should only contain a basic list of system packages
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, system, ... }:
 {
   environment.systemPackages = with pkgs; [
     git
@@ -8,6 +8,7 @@
     wl-clipboard
     zip
     gnumake
+    inputs.project-jump.packages.${system}.default
   ];
 
   programs.neovim = {
